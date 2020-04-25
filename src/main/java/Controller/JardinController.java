@@ -3,6 +3,7 @@ package Controller;
 import Model.Actores.Admin;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
+import Persistencia.Almacenamiento;
 import View.Login;
 import java.util.ArrayList;
 
@@ -25,21 +26,23 @@ public class JardinController {
     }
     
     public JardinController(){
-        ninnos = new ArrayList<>();
+        Almacenamiento.cargarRegistros();
         profesores = new ArrayList<>();
         admins = new ArrayList<>();
         superAdmin = new Admin();
         admins.add(superAdmin);
+        
+        /*
         Ninno jhoniercito = new Ninno("1452145","Jhoniercito","Cordoba","Registro Civil",
             2,1,1.1f,20f,"Brutico",'M','T',2000,7,3);
         Ninno alejito = new Ninno("1455236","Alejandro","Yarce","Registro Civil",
-            3,1,1.2f,25f,"Brutico",'M','M',1998,12,30);
+            3,1,1.2f,25f,"Brutico",'M','M',1998,12,30);*/
         Profesor diana = new Profesor("123456","Diana","Lopez","Cedula","1234","31487965214",
             "Programacion");
+        Ninno jhoniercito = getNinno("Jhoniercito");
+        Ninno alejito = getNinno("Alejandro");
         jhoniercito.setProfesor(diana);
         alejito.setProfesor(diana);
-        ninnos.add(jhoniercito);
-        ninnos.add(alejito);
         profesores.add(diana);
     }
     
@@ -74,10 +77,23 @@ public class JardinController {
         return null;
     }
     
+    
+
+    public static void setNinnos(ArrayList<Ninno> ninnos) {
+        JardinController.ninnos = ninnos;
+    }
+
+    public static void setProfesores(ArrayList<Profesor> profesores) {
+        JardinController.profesores = profesores;
+    }
+
+    public static void setAdmins(ArrayList<Admin> admins) {
+        JardinController.admins = admins;
+    }
+    
     public static void main(String[] args) {
         JardinController jardinController = new JardinController();
         Login login = new Login();
         login.setVisible(true);
     }
-    
 }

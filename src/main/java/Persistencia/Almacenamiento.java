@@ -20,6 +20,10 @@ import org.json.simple.parser.ParseException;
 public class Almacenamiento {
     
       
+    public static void cargarRegistros(){
+        JardinController.setNinnos(cargarNinnos(cargarInformacion("Ninnos")));
+    }
+    
     public static void almacenarNinnos(ArrayList<Ninno> ninnos){
         JSONArray jsonNinnos = new JSONArray();
         for(Ninno ninno: ninnos){
@@ -33,11 +37,11 @@ public class Almacenamiento {
             campos.put("talla", String.valueOf(ninno.getTalla()));
             campos.put("peso", String.valueOf(ninno.getPeso()));
             campos.put("situacionEspecial", ninno.getSituacionEspecial());
-            campos.put("genero", ninno.getGenero());
-            campos.put("horario", ninno.getHorario());
-            campos.put("year", ninno.getNacimiento().getYear());
-            campos.put("month", ninno.getNacimiento().getMonth());
-            campos.put("day", ninno.getNacimiento().getDayOfMonth());
+            campos.put("genero", String.valueOf(ninno.getGenero()));
+            campos.put("horario", String.valueOf(ninno.getHorario()));
+            campos.put("year", String.valueOf(ninno.getNacimiento().getYear()));
+            campos.put("month", String.valueOf(ninno.getNacimiento().getMonthValue()));
+            campos.put("day", String.valueOf(ninno.getNacimiento().getDayOfMonth()));
             
             JSONObject jsonNinno = new JSONObject();
             jsonNinno.put("Ninno", campos);
@@ -82,13 +86,50 @@ public class Almacenamiento {
     public static ArrayList<Ninno> cargarNinnos(JSONArray jsonNinnos){
         ArrayList<Ninno> ninnos = new ArrayList<>();
         
-        for(Object registro: jsonNinnos){
-            JSONObject jsonRegistro = (JSONObject) registro;
-            Ninno ninno = new Ninno(jsonRegistro.get(id), nombre, apellido, 
-                    idType, 0, 0, 0, 0, situacionEspecial, 0, 0, 0, 0, 0);
+        if(jsonNinnos!=null){        
+            for(Object registro: jsonNinnos){
+                //Se deben pasar dos capas de abstraccion para llegar a la informacion de ninno
+                JSONObject jsonRegistro = (JSONObject) registro;
+                jsonRegistro = (JSONObject) jsonRegistro.get("Ninno");
+                Ninno ninno = new Ninno(jsonRegistro.get("id").toString(), 
+                                        jsonRegistro.get("nombre").toString(), 
+                                        jsonRegistro.get("apellido").toString(), 
+                                        jsonRegistro.get("idType").toString(),
+                                        Integer.parseInt(jsonRegistro.get("edad").toString()),
+                                        Integer.parseInt(jsonRegistro.get("grupo").toString()),
+                                        Float.parseFloat(jsonRegistro.get("talla").toString()),
+                                        Float.parseFloat(jsonRegistro.get("peso").toString()),
+                                        jsonRegistro.get("situacionEspecial").toString(),
+                                        jsonRegistro.get("genero").toString().charAt(0),
+                                        jsonRegistro.get("horario").toString().charAt(0),
+                                        Integer.parseInt(jsonRegistro.get("year").toString()),
+                                        Integer.parseInt(jsonRegistro.get("month").toString()),
+                                        Integer.parseInt(jsonRegistro.get("day").toString()));
+                ninnos.add(ninno);
+            }
         }
-        
         return ninnos;
+    }
+    
+    public static ArrayList<Profesor> cargarProfesores(JSONArray jsonProfesores){
+        ArrayList<Profesor> profesores = new ArrayList<>();
+        
+        if(jsonProfesores != null){
+            for(Object registro: jsonProfesores){
+                
+                JSONObject jsonRegistro = (JSONObject) registro;
+                jsonRegistro = (JSONObject) jsonRegistro.get("Profesor");
+                Profesor profesor = new Profesor(jsonRegistro.get("id").toString(),
+                                                jsonRegistro.get("nombre").toString(),
+                                                jsonRegistro.get("apellido").toString(),
+                                                jsonRegistro.get("idType").toString(),
+                                                jsonRegistro.get("password").toString(),
+                                                jsonRegistro.get("telefono").toString(), 
+                                                jsonRegistro.get("especialidad").toString());
+                profesores.add(profesor);
+            }
+        }        
+        return profesores;        
     }
     
     /**
@@ -98,22 +139,24 @@ public class Almacenamiento {
      */
     public static JSONArray cargarInformacion(String nombreArchivo){
         //Parser para convertir la informacion en el json en un objeto de java
-        JSONParser jSONParser = new JSONParser();
+        JSONParser parser = new JSONParser();
+        JSONArray registro = null;
         //Se intenta leer un archivo
-        try(FileReader reader = new FileReader(nombreArchivo + ",json")){
+        try(FileReader reader = new FileReader(nombreArchivo + ".json")){
+            System.out.println("Hola");
             //lee todo el array como un solo objeto
-            Object obj = jSONParser.parse(reader);
+            Object obj = parser.parse(reader);
             //Convierte dicho objeto en un JsonArray el cual devuelve.
-            JSONArray registro = (JSONArray) obj;
-            return registro;
+            System.out.println("Hola de nuevo");
+            registro = (JSONArray) obj;
         }catch(FileNotFoundException fe){
             System.out.println("Registro de " + nombreArchivo + " no existe");
         }catch(IOException io){
             System.out.println("Registro de " + nombreArchivo + " no se pudo cargar");
         }catch(ParseException pe){
-            System.out.println("Registro de " + nombreArchivo + " fallo al recuperarse");
+            System.out.println("Registro de " + nombreArchivo + " falló al recuperarse");
         }
         
-        return null;
+        return registro;
     }
 }

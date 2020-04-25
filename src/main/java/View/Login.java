@@ -114,7 +114,7 @@ public class Login extends javax.swing.JFrame {
 
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
         Almacenamiento alm = new Almacenamiento();
-        alm.guardarTodo();
+        //alm.guardarTodo();
         System.exit(0);
     }//GEN-LAST:event_salirBotonActionPerformed
 
