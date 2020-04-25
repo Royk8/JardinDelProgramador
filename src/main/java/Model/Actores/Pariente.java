@@ -1,9 +1,13 @@
 package Model.Actores;
 
 public class Pariente extends Persona {
-    private String telefono, celular;
-    private String calidad, direccion;
-    private String password;
+    protected String telefono, celular;
+    protected String calidad, direccion;
+    protected String password;
+    
+    public Pariente(){
+        
+    }
 
     public Pariente(String id, String nombre, String apellido, String idType,
             String password, String telefono, String celular, String calidad, 

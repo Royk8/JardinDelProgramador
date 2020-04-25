@@ -732,11 +732,11 @@
                                                   <Component id="niBorrarNinnoBoton" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="grRegistrarNinnoBoton2" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="niRegistrarNinnoBoton2" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEditarNinnoBoton2" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="niEditarNinnoBoton2" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEliminarNinnoBoton2" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="niEliminarNinnoBoton2" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -773,7 +773,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="Label1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="acudienteLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="niAcudienteLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="NombreLabel5" min="-2" max="-2" attributes="0"/>
@@ -797,13 +797,13 @@
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="Padre" min="-2" max="-2" attributes="0"/>
-                                              <Component id="Label3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="niPariente1Label" min="-2" max="-2" attributes="0"/>
+                                              <Component id="niPariente2Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="niPadreLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="niMadreLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="niParienteInfo1Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="niParienteInfo2Label" alignment="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -827,17 +827,17 @@
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="Label1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="acudienteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niAcudienteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="niPadreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Padre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niParienteInfo1Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niPariente1Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Label3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="niMadreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niPariente2Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niParienteInfo2Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -881,9 +881,9 @@
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="grEditarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grRegistrarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grEliminarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niEditarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niRegistrarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="niEliminarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
@@ -919,22 +919,22 @@
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator4">
                         </Component>
-                        <Component class="javax.swing.JButton" name="grEditarNinnoBoton2">
+                        <Component class="javax.swing.JButton" name="niEditarNinnoBoton2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Asignar Grupo"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="grEliminarNinnoBoton2">
+                        <Component class="javax.swing.JButton" name="niEliminarNinnoBoton2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Editar Informaci&#xf3;n de Padres"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="grRegistrarNinnoBoton2">
+                        <Component class="javax.swing.JButton" name="niRegistrarNinnoBoton2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Registrar Ni&#xf1;o"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="grRegistrarNinnoBoton2ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="niRegistrarNinnoBoton2ActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="Label1">
@@ -957,7 +957,7 @@
                             <Property name="text" type="java.lang.String" value="Ninguna"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="acudienteLabel">
+                        <Component class="javax.swing.JLabel" name="niAcudienteLabel">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Acudiente"/>
                           </Properties>
@@ -1047,22 +1047,22 @@
                             <Property name="text" type="java.lang.String" value="Situacion Especial"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="Label3">
+                        <Component class="javax.swing.JLabel" name="niPariente2Label">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Madre"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="Padre">
+                        <Component class="javax.swing.JLabel" name="niPariente1Label">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Padre"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="niPadreLabel">
+                        <Component class="javax.swing.JLabel" name="niParienteInfo1Label">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Acudiente"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="niMadreLabel">
+                        <Component class="javax.swing.JLabel" name="niParienteInfo2Label">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Acudiente"/>
                           </Properties>

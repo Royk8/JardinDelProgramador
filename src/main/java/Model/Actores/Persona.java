@@ -1,11 +1,14 @@
 package Model.Actores;
 
 public abstract class Persona {
-    private String id;
-    private String nombre;
-    private String apellido;
-    private String idType;
+    protected String id;
+    protected String nombre;
+    protected String apellido;
+    protected String idType;
 
+    public Persona(){
+        
+    }
     public Persona(String id, String nombre, String apellido, String idType) {
         this.id = id;
         this.nombre = nombre;

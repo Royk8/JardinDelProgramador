@@ -18,7 +18,6 @@ import javax.swing.event.ListSelectionListener;
  * @author Royk
  */
 public class AdminGUI extends javax.swing.JFrame {
-    //private AdminController adminController;
     
     /**
      * Creates new form AdminGUI
@@ -42,7 +41,6 @@ public class AdminGUI extends javax.swing.JFrame {
      */
     public void niLlenarNinnosList(){
         DefaultListModel<String> listaNinnos = new DefaultListModel<String>();
-        //listaNinnos = (DefaultListModel<String>) niNinnosList.getModel();
         ArrayList<Ninno> ninnos = JardinController.getNinnos();
         for(Ninno ninno : ninnos){
             listaNinnos.addElement(ninno.getNombreCompleto());
@@ -54,7 +52,6 @@ public class AdminGUI extends javax.swing.JFrame {
      * Llena los detalles del niño seleccionado en la lista
      */
     public void niLlenarDetalles(){
-        //ArrayList<Ninno> Ninnos = JardinController.getNinnos();
         niNinnosList.addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -65,8 +62,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     niApellidoLabel.setText(ninno.getApellido());
                     niIdTypeLabel.setText(ninno.getIdType());
                     niIdLabel.setText(ninno.getId());
-                    /*acudienteLabel.setText(ninno.getAcudiente().getNombre() + 
-                                            ninno.getAcudiente().getApellido());*/
+                    niAcudienteLabel.setText(ninno.getAcudiente().getNombreCompleto());
                     niGrupoLabel.setText(Integer.toString(ninno.getGrupo()));
                     niEdadLabel.setText(Integer.toString(ninno.getEdad()));
                     niTallaLabel.setText(Float.toString(ninno.getTalla()) + "m");
@@ -75,9 +71,24 @@ public class AdminGUI extends javax.swing.JFrame {
                     niNacimientoLabel.setText(ninno.getNacimiento().toString());
                     niHorarioLabel.setText((ninno.getHorario() == 'M')? "Mañana" : "Tarde" );
                     niEspecialLabel.setText(ninno.getSituacionEspecial());
+                    if(!ninno.getParientes().isEmpty() && ninno.getParientes().get(0)!=null){
+                        niPariente1Label.setText(ninno.getParientes().get(0).getCalidad());
+                        niParienteInfo1Label.setText(ninno.getParientes().get(0).getNombreCompleto());
+                        if(ninno.getParientes().size() > 1){
+                            niPariente2Label.setText(ninno.getParientes().get(1).getCalidad());
+                            niParienteInfo2Label.setText(ninno.getParientes().get(1).getNombreCompleto());
+                        }else{
+                            niPariente2Label.setText(" ");
+                            niParienteInfo2Label.setText(" ");
+                        }
+                    }else{
+                        niPariente1Label.setText(" ");
+                        niParienteInfo1Label.setText(" ");
+                        niPariente2Label.setText(" ");
+                        niParienteInfo2Label.setText(" ");
+                    }
                 }
-        }
-            
+            }            
         });
     }
 
@@ -147,14 +158,14 @@ public class AdminGUI extends javax.swing.JFrame {
         niBorrarNinnoBoton = new javax.swing.JButton();
         niEditarNinnoBoton = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
-        grEditarNinnoBoton2 = new javax.swing.JButton();
-        grEliminarNinnoBoton2 = new javax.swing.JButton();
-        grRegistrarNinnoBoton2 = new javax.swing.JButton();
+        niEditarNinnoBoton2 = new javax.swing.JButton();
+        niEliminarNinnoBoton2 = new javax.swing.JButton();
+        niRegistrarNinnoBoton2 = new javax.swing.JButton();
         Label1 = new javax.swing.JLabel();
         NombreLabel8 = new javax.swing.JLabel();
         Label2 = new javax.swing.JLabel();
         niEspecialLabel = new javax.swing.JLabel();
-        acudienteLabel = new javax.swing.JLabel();
+        niAcudienteLabel = new javax.swing.JLabel();
         niNacimientoLabel = new javax.swing.JLabel();
         niGrupoLabel = new javax.swing.JLabel();
         NombreLabel9 = new javax.swing.JLabel();
@@ -172,10 +183,10 @@ public class AdminGUI extends javax.swing.JFrame {
         niTallaLabel = new javax.swing.JLabel();
         niIdLabel = new javax.swing.JLabel();
         NombreLabel7 = new javax.swing.JLabel();
-        Label3 = new javax.swing.JLabel();
-        Padre = new javax.swing.JLabel();
-        niPadreLabel = new javax.swing.JLabel();
-        niMadreLabel = new javax.swing.JLabel();
+        niPariente2Label = new javax.swing.JLabel();
+        niPariente1Label = new javax.swing.JLabel();
+        niParienteInfo1Label = new javax.swing.JLabel();
+        niParienteInfo2Label = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jSplitPane4 = new javax.swing.JSplitPane();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -540,14 +551,14 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        grEditarNinnoBoton2.setText("Asignar Grupo");
+        niEditarNinnoBoton2.setText("Asignar Grupo");
 
-        grEliminarNinnoBoton2.setText("Editar Información de Padres");
+        niEliminarNinnoBoton2.setText("Editar Información de Padres");
 
-        grRegistrarNinnoBoton2.setText("Registrar Niño");
-        grRegistrarNinnoBoton2.addActionListener(new java.awt.event.ActionListener() {
+        niRegistrarNinnoBoton2.setText("Registrar Niño");
+        niRegistrarNinnoBoton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                grRegistrarNinnoBoton2ActionPerformed(evt);
+                niRegistrarNinnoBoton2ActionPerformed(evt);
             }
         });
 
@@ -559,7 +570,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
         niEspecialLabel.setText("Ninguna");
 
-        acudienteLabel.setText("Acudiente");
+        niAcudienteLabel.setText("Acudiente");
 
         niNacimientoLabel.setText("Fecha de Nacimiento");
 
@@ -595,13 +606,13 @@ public class AdminGUI extends javax.swing.JFrame {
 
         NombreLabel7.setText("Situacion Especial");
 
-        Label3.setText("Madre");
+        niPariente2Label.setText("Madre");
 
-        Padre.setText("Padre");
+        niPariente1Label.setText("Padre");
 
-        niPadreLabel.setText("Acudiente");
+        niParienteInfo1Label.setText("Acudiente");
 
-        niMadreLabel.setText("Acudiente");
+        niParienteInfo2Label.setText("Acudiente");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -621,11 +632,11 @@ public class AdminGUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(niBorrarNinnoBoton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addComponent(grRegistrarNinnoBoton2)
+                                .addComponent(niRegistrarNinnoBoton2)
                                 .addGap(18, 18, 18)
-                                .addComponent(grEditarNinnoBoton2)
+                                .addComponent(niEditarNinnoBoton2)
                                 .addGap(18, 18, 18)
-                                .addComponent(grEliminarNinnoBoton2))))
+                                .addComponent(niEliminarNinnoBoton2))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addComponent(niIdTypeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -653,7 +664,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addComponent(Label1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(acudienteLabel))
+                        .addComponent(niAcudienteLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addComponent(NombreLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -672,12 +683,12 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(niEspecialLabel))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Padre)
-                            .addComponent(Label3))
+                            .addComponent(niPariente1Label)
+                            .addComponent(niPariente2Label))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(niPadreLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(niMadreLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(niParienteInfo1Label, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(niParienteInfo2Label, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -694,15 +705,15 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Label1)
-                    .addComponent(acudienteLabel))
+                    .addComponent(niAcudienteLabel))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(niPadreLabel)
-                    .addComponent(Padre))
+                    .addComponent(niParienteInfo1Label)
+                    .addComponent(niPariente1Label))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label3)
-                    .addComponent(niMadreLabel))
+                    .addComponent(niPariente2Label)
+                    .addComponent(niParienteInfo2Label))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Label2)
@@ -737,9 +748,9 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(niEspecialLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(grEditarNinnoBoton2)
-                    .addComponent(grRegistrarNinnoBoton2)
-                    .addComponent(grEliminarNinnoBoton2))
+                    .addComponent(niEditarNinnoBoton2)
+                    .addComponent(niRegistrarNinnoBoton2)
+                    .addComponent(niEliminarNinnoBoton2))
                 .addGap(28, 28, 28)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -932,9 +943,10 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_niEditarNinnoBotonActionPerformed
 
-    private void grRegistrarNinnoBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grRegistrarNinnoBoton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_grRegistrarNinnoBoton2ActionPerformed
+    private void niRegistrarNinnoBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niRegistrarNinnoBoton2ActionPerformed
+        NinnoEdit editNinno = new NinnoEdit();
+        editNinno.setVisible(true);
+    }//GEN-LAST:event_niRegistrarNinnoBoton2ActionPerformed
 
     private void grEditarNinnoBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grEditarNinnoBoton1ActionPerformed
         // TODO add your handling code here:
@@ -982,7 +994,6 @@ public class AdminGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label1;
     private javax.swing.JLabel Label2;
-    private javax.swing.JLabel Label3;
     private javax.swing.JLabel NombreLabel11;
     private javax.swing.JLabel NombreLabel4;
     private javax.swing.JLabel NombreLabel5;
@@ -990,8 +1001,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel NombreLabel7;
     private javax.swing.JLabel NombreLabel8;
     private javax.swing.JLabel NombreLabel9;
-    private javax.swing.JLabel Padre;
-    private javax.swing.JLabel acudienteLabel;
     private javax.swing.JList<String> adAdminList;
     private javax.swing.JLabel adApellidoLabel;
     private javax.swing.JButton adBorrarBoton;
@@ -1008,10 +1017,8 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton grEditarGrupoBoton1;
     private javax.swing.JButton grEditarNinnoBoton;
     private javax.swing.JButton grEditarNinnoBoton1;
-    private javax.swing.JButton grEditarNinnoBoton2;
     private javax.swing.JButton grEliminarNinnoBoton;
     private javax.swing.JButton grEliminarNinnoBoton1;
-    private javax.swing.JButton grEliminarNinnoBoton2;
     private javax.swing.JList<String> grGruposList;
     private javax.swing.JLabel grHorarioLabel;
     private javax.swing.JLabel grNinnoLabel;
@@ -1019,7 +1026,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel grProfesorLabel;
     private javax.swing.JButton grRegistrarNinnoBoton;
     private javax.swing.JButton grRegistrarNinnoBoton1;
-    private javax.swing.JButton grRegistrarNinnoBoton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
@@ -1054,23 +1060,29 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel niAcudienteLabel;
     private javax.swing.JLabel niApellidoLabel;
     private javax.swing.JButton niBorrarNinnoBoton;
     private javax.swing.JLabel niEdadLabel;
     private javax.swing.JButton niEditarNinnoBoton;
+    private javax.swing.JButton niEditarNinnoBoton2;
+    private javax.swing.JButton niEliminarNinnoBoton2;
     private javax.swing.JLabel niEspecialLabel;
     private javax.swing.JLabel niGeneroLabel;
     private javax.swing.JLabel niGrupoLabel;
     private javax.swing.JLabel niHorarioLabel;
     private javax.swing.JLabel niIdLabel;
     private javax.swing.JLabel niIdTypeLabel;
-    private javax.swing.JLabel niMadreLabel;
     private javax.swing.JLabel niNacimientoLabel;
     private javax.swing.JList<String> niNinnosList;
     private javax.swing.JLabel niNombreLabel;
-    private javax.swing.JLabel niPadreLabel;
+    private javax.swing.JLabel niPariente1Label;
+    private javax.swing.JLabel niPariente2Label;
+    private javax.swing.JLabel niParienteInfo1Label;
+    private javax.swing.JLabel niParienteInfo2Label;
     private javax.swing.JLabel niPesoLabel;
     private javax.swing.JButton niRegistrarNinnoBoton;
+    private javax.swing.JButton niRegistrarNinnoBoton2;
     private javax.swing.JLabel niTallaLabel;
     private javax.swing.JLabel prApellidoLabel;
     private javax.swing.JLabel prEspecialLabel;

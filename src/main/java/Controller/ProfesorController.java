@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 /**
+ * Clase pensada para controlar la vista de profesor, contiene la informacion
+ * del profesor y su lista de estudiantes.
  * @author Royk
  */
 public class ProfesorController {

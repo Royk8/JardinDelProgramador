@@ -47,7 +47,7 @@ public class Almacenamiento {
             
             JSONObject jsonNinno = new JSONObject();
             jsonNinno.put("Ninno", campos);
-            jsonNinnos.add(jsonNinno);
+            jsonNinnos.add(campos);
         }
         almacenarInformacion("Ninnos", jsonNinnos);
     }
@@ -128,7 +128,7 @@ public class Almacenamiento {
             for(Object registro: jsonNinnos){
                 //Se deben pasar dos capas de abstraccion para llegar a la informacion de ninno
                 JSONObject jsonRegistro = (JSONObject) registro;
-                jsonRegistro = (JSONObject) jsonRegistro.get("Ninno");
+                //jsonRegistro = (JSONObject) jsonRegistro.get("Ninno");
                 Ninno ninno = new Ninno(jsonRegistro.get("id").toString(), 
                     jsonRegistro.get("nombre").toString(), 
                     jsonRegistro.get("apellido").toString(), 
@@ -182,11 +182,9 @@ public class Almacenamiento {
         JSONArray registro = null;
         //Se intenta leer un archivo
         try(FileReader reader = new FileReader(nombreArchivo + ".json")){
-            System.out.println("Hola");
             //lee todo el array como un solo objeto
             Object obj = parser.parse(reader);
             //Convierte dicho objeto en un JsonArray el cual devuelve.
-            System.out.println("Hola de nuevo");
             registro = (JSONArray) obj;
         }catch(FileNotFoundException fe){
             System.out.println("Registro de " + nombreArchivo + " no existe");

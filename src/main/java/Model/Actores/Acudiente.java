@@ -3,6 +3,10 @@ package Model.Actores;
 public class Acudiente extends Pariente {
     private String horario, permiso;
 
+    public Acudiente(){
+        
+    }    
+
     public Acudiente(String id, String nombre, String apellido, String idType, 
             String password, String telefono, String celular, String calidad, 
             String direccion, String horario, 
@@ -33,6 +37,26 @@ public class Acudiente extends Pariente {
     }
 
     public void setPermiso(String permiso) {
+        this.permiso = permiso;
+    }
+    
+    public boolean isEmpty(){
+        return id == null;
+    }
+    
+    public void setAllAcudiente(String id, String nombre, String apellido, String idType, 
+            String password, String telefono, String celular, String calidad, 
+            String direccion, String horario, String permiso){
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.idType = idType;
+        this.password = password;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.calidad = calidad;
+        this.direccion = direccion;
+        this.horario = horario;
         this.permiso = permiso;
     }
 }

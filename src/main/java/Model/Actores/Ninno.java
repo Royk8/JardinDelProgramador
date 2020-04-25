@@ -157,7 +157,24 @@ public class Ninno extends Persona{
         this.parientes = parientes;
     }
     
-    
+    public void setAll(String id, String nombre, String apellido, String idType, 
+                int edad, int grupo, float talla, float peso, String situacionEspecial,
+                char genero, char horario, int year, int month, int day, 
+                Acudiente acudiente){        
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.idType = idType;
+        this.edad = edad;
+        this.grupo = grupo;
+        this.talla = talla;
+        this.peso = peso;
+        this.situacionEspecial = situacionEspecial;
+        this.genero = genero;
+        this.horario = horario;
+        this.fechaDeNacimiento = LocalDate.of(year,month,day);
+        this.acudiente = acudiente;
+    }
     
     
 }
