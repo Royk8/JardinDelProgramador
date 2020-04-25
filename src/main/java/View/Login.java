@@ -113,8 +113,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
-        Almacenamiento alm = new Almacenamiento();
-        //alm.guardarTodo();
+        Almacenamiento.almacenarNinnos(JardinController.getNinnos());
         System.exit(0);
     }//GEN-LAST:event_salirBotonActionPerformed
 

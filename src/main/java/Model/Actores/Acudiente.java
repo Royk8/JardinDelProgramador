@@ -11,6 +11,14 @@ public class Acudiente extends Pariente {
         this.horario = horario;
         this.permiso = permiso;
     }
+    
+    public Acudiente(String id, String nombre, String apellido, String idType, 
+            String password, String telefono, String celular, String calidad, 
+            String direccion, String horario){        
+        super(id, nombre, apellido, idType, password, telefono, celular, calidad, direccion);
+        this.horario = horario;
+        this.permiso = "";
+    }
 
     public String getHorario() {
         return horario;

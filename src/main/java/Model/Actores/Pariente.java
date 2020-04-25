@@ -51,4 +51,14 @@ public class Pariente extends Persona {
     public boolean isPassword(char[] password){
         return this.password.equals(new String(password));
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
 }

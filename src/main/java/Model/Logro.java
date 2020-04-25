@@ -1,7 +1,9 @@
 package Model;
 
+import Model.Actores.Ninno;
+
 public class Logro {
-    private String titulo;
+    private String titulo, estado;
     private Bimestre bimestre;
     private Boolean completado;
 

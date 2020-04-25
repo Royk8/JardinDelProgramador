@@ -1,6 +1,7 @@
 package Persistencia;
 
 import Controller.JardinController;
+import Model.Actores.Acudiente;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
 import java.io.FileNotFoundException;
@@ -42,12 +43,49 @@ public class Almacenamiento {
             campos.put("year", String.valueOf(ninno.getNacimiento().getYear()));
             campos.put("month", String.valueOf(ninno.getNacimiento().getMonthValue()));
             campos.put("day", String.valueOf(ninno.getNacimiento().getDayOfMonth()));
+            campos.put("Acudiente", cifrarAcudiente(ninno.getAcudiente()));
             
             JSONObject jsonNinno = new JSONObject();
             jsonNinno.put("Ninno", campos);
             jsonNinnos.add(jsonNinno);
         }
         almacenarInformacion("Ninnos", jsonNinnos);
+    }
+    
+    public static JSONObject cifrarAcudiente(Acudiente acudiente){
+        JSONObject campos = new JSONObject();
+        campos.put("id", acudiente.getId());
+        campos.put("nombre", acudiente.getNombre());
+        campos.put("apellido", acudiente.getApellido());
+        campos.put("idType", acudiente.getIdType());
+        campos.put("password", acudiente.getPassword());
+        campos.put("telefono", acudiente.getTelefono());
+        campos.put("celular", acudiente.getCelular());
+        campos.put("calidad", acudiente.getCalidad());
+        campos.put("direccion", acudiente.getDireccion());
+        campos.put("horario", acudiente.getHorario());
+        campos.put("permiso", acudiente.getPermiso());
+        //JSONObject jsonAcudiente = new JSONObject();
+        //jsonAcudiente.put("Acudiente",jsonAcudiente);
+        return campos;
+    }
+    
+    public static Acudiente descifrarAcudiente(JSONObject jsonAcudiente){
+        if(jsonAcudiente !=null){
+            Acudiente acudiente = new Acudiente(jsonAcudiente.get("id").toString(),
+                jsonAcudiente.get("nombre").toString(), 
+                jsonAcudiente.get("apellido").toString(),
+                jsonAcudiente.get("idType").toString(),
+                jsonAcudiente.get("password").toString(),
+                jsonAcudiente.get("telefono").toString(),
+                jsonAcudiente.get("celular").toString(),
+                jsonAcudiente.get("calidad").toString(),
+                jsonAcudiente.get("direccion").toString(),
+                jsonAcudiente.get("horario").toString(),
+                jsonAcudiente.get("permiso").toString());
+            return acudiente;
+        }
+        return null;
     }
     
     public static void almacenarProfesores(ArrayList<Profesor> profesores){
@@ -92,19 +130,20 @@ public class Almacenamiento {
                 JSONObject jsonRegistro = (JSONObject) registro;
                 jsonRegistro = (JSONObject) jsonRegistro.get("Ninno");
                 Ninno ninno = new Ninno(jsonRegistro.get("id").toString(), 
-                                        jsonRegistro.get("nombre").toString(), 
-                                        jsonRegistro.get("apellido").toString(), 
-                                        jsonRegistro.get("idType").toString(),
-                                        Integer.parseInt(jsonRegistro.get("edad").toString()),
-                                        Integer.parseInt(jsonRegistro.get("grupo").toString()),
-                                        Float.parseFloat(jsonRegistro.get("talla").toString()),
-                                        Float.parseFloat(jsonRegistro.get("peso").toString()),
-                                        jsonRegistro.get("situacionEspecial").toString(),
-                                        jsonRegistro.get("genero").toString().charAt(0),
-                                        jsonRegistro.get("horario").toString().charAt(0),
-                                        Integer.parseInt(jsonRegistro.get("year").toString()),
-                                        Integer.parseInt(jsonRegistro.get("month").toString()),
-                                        Integer.parseInt(jsonRegistro.get("day").toString()));
+                    jsonRegistro.get("nombre").toString(), 
+                    jsonRegistro.get("apellido").toString(), 
+                    jsonRegistro.get("idType").toString(),
+                    Integer.parseInt(jsonRegistro.get("edad").toString()),
+                    Integer.parseInt(jsonRegistro.get("grupo").toString()),
+                    Float.parseFloat(jsonRegistro.get("talla").toString()),
+                    Float.parseFloat(jsonRegistro.get("peso").toString()),
+                    jsonRegistro.get("situacionEspecial").toString(),
+                    jsonRegistro.get("genero").toString().charAt(0),
+                    jsonRegistro.get("horario").toString().charAt(0),
+                    Integer.parseInt(jsonRegistro.get("year").toString()),
+                    Integer.parseInt(jsonRegistro.get("month").toString()),
+                    Integer.parseInt(jsonRegistro.get("day").toString()),
+                    descifrarAcudiente((JSONObject) jsonRegistro.get("Acudiente")));
                 ninnos.add(ninno);
             }
         }
@@ -120,12 +159,12 @@ public class Almacenamiento {
                 JSONObject jsonRegistro = (JSONObject) registro;
                 jsonRegistro = (JSONObject) jsonRegistro.get("Profesor");
                 Profesor profesor = new Profesor(jsonRegistro.get("id").toString(),
-                                                jsonRegistro.get("nombre").toString(),
-                                                jsonRegistro.get("apellido").toString(),
-                                                jsonRegistro.get("idType").toString(),
-                                                jsonRegistro.get("password").toString(),
-                                                jsonRegistro.get("telefono").toString(), 
-                                                jsonRegistro.get("especialidad").toString());
+                    jsonRegistro.get("nombre").toString(),
+                    jsonRegistro.get("apellido").toString(),
+                    jsonRegistro.get("idType").toString(),
+                    jsonRegistro.get("password").toString(),
+                    jsonRegistro.get("telefono").toString(), 
+                    jsonRegistro.get("especialidad").toString());
                 profesores.add(profesor);
             }
         }        

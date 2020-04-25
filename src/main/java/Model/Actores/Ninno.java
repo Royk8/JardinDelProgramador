@@ -12,6 +12,7 @@ public class Ninno extends Persona{
     private LocalDate fechaDeNacimiento;
     private ArrayList<Logro> logros;
     private Acudiente acudiente;
+    private ArrayList<Pariente> parientes;
     private Profesor profesor;
 
     public Ninno(String id, String nombre, String apellido, String idType, int edad, int grupo, float talla,
@@ -26,6 +27,26 @@ public class Ninno extends Persona{
         this.horario = horario;
         this.fechaDeNacimiento = LocalDate.of(year,month,day);
         logros = new ArrayList<Logro>();
+        parientes = new ArrayList<Pariente>();
+    }
+    
+        public Ninno(String id, String nombre, String apellido, String idType, 
+                int edad, int grupo, float talla, float peso, String situacionEspecial,
+                char genero, char horario, int year, int month, int day, 
+                Acudiente acudiente) {
+        super(id, nombre, apellido, idType);
+        this.edad = edad;
+        this.grupo = grupo;
+        this.talla = talla;
+        this.peso = peso;
+        this.situacionEspecial = situacionEspecial;
+        this.genero = genero;
+        this.horario = horario;
+        this.fechaDeNacimiento = LocalDate.of(year,month,day);
+        logros = new ArrayList<Logro>();
+        parientes = new ArrayList<Pariente>();
+        this.acudiente = acudiente;
+        //this.profesor = profesor;
     }
 
     public int getEdad() {
@@ -104,6 +125,39 @@ public class Ninno extends Persona{
         return fechaDeNacimiento;
     }
 
+    public LocalDate getFechaDeNacimiento() {
+        return fechaDeNacimiento;
+    }
+
+    public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
+    }
+
+    public ArrayList<Logro> getLogros() {
+        return logros;
+    }
+
+    public void setLogros(ArrayList<Logro> logros) {
+        this.logros = logros;
+    }
+
+    public void agregarLogro(Logro logro){
+        logros.add(logro);
+    }
+
+    public ArrayList<Pariente> getParientes() {
+        return parientes;
+    }
+    
+    public void agregarPariente(Pariente pariente){
+        parientes.add(pariente);
+    }
+
+    public void setParientes(ArrayList<Pariente> parientes) {
+        this.parientes = parientes;
+    }
+    
+    
     
     
 }
