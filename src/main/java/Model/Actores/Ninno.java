@@ -14,6 +14,11 @@ public class Ninno extends Persona{
     private Acudiente acudiente;
     private ArrayList<Pariente> parientes;
     private Profesor profesor;
+    
+    public Ninno(){
+        logros = new ArrayList<>();
+        parientes = new ArrayList<>();
+    }
 
     public Ninno(String id, String nombre, String apellido, String idType, int edad, int grupo, float talla,
                  float peso, String situacionEspecial, char genero, char horario, int year, int month, int day) {
@@ -30,7 +35,7 @@ public class Ninno extends Persona{
         parientes = new ArrayList<Pariente>();
     }
     
-        public Ninno(String id, String nombre, String apellido, String idType, 
+    public Ninno(String id, String nombre, String apellido, String idType, 
                 int edad, int grupo, float talla, float peso, String situacionEspecial,
                 char genero, char horario, int year, int month, int day, 
                 Acudiente acudiente) {
@@ -47,6 +52,24 @@ public class Ninno extends Persona{
         parientes = new ArrayList<Pariente>();
         this.acudiente = acudiente;
         //this.profesor = profesor;
+    }
+    
+    public Ninno(String id, String nombre, String apellido, String idType, 
+                int edad, int grupo, float talla, float peso, String situacionEspecial,
+                char genero, char horario, int year, int month, int day, 
+                Acudiente acudiente, ArrayList<Pariente> parientes) {
+        super(id, nombre, apellido, idType);
+        this.edad = edad;
+        this.grupo = grupo;
+        this.talla = talla;
+        this.peso = peso;
+        this.situacionEspecial = situacionEspecial;
+        this.genero = genero;
+        this.horario = horario;
+        this.fechaDeNacimiento = LocalDate.of(year,month,day);
+        logros = new ArrayList<Logro>();
+        this.parientes = parientes;
+        this.acudiente = acudiente;
     }
 
     public int getEdad() {
@@ -158,23 +181,26 @@ public class Ninno extends Persona{
     }
     
     public void setAll(String id, String nombre, String apellido, String idType, 
-                int edad, int grupo, float talla, float peso, String situacionEspecial,
-                char genero, char horario, int year, int month, int day, 
+                int edad, float talla, float peso, String situacionEspecial,
+                char genero, int year, int month, int day, 
                 Acudiente acudiente){        
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.idType = idType;
         this.edad = edad;
-        this.grupo = grupo;
         this.talla = talla;
         this.peso = peso;
         this.situacionEspecial = situacionEspecial;
         this.genero = genero;
-        this.horario = horario;
         this.fechaDeNacimiento = LocalDate.of(year,month,day);
         this.acudiente = acudiente;
     }
+    
+    public boolean isEmpty(){
+        return id == null;
+    }
+    
     
     
 }

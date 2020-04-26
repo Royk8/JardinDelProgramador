@@ -5,9 +5,17 @@
  */
 package View;
 
+import Controller.JardinController;
 import Model.Actores.Acudiente;
 import Model.Actores.Ninno;
 import Model.StringWraper;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -17,22 +25,93 @@ public class NinnoEdit extends javax.swing.JFrame {
     private Ninno ninno;
     private StringWraper situacionEspecial;
     private Acudiente acudiente;
+    private boolean nuevoNinno;
     
     /**
      * Creates new form NinnoEditPanel
      */
     public NinnoEdit(){
         initComponents();
-        ninno = null;
-        
     }
     
-    public NinnoEdit(Ninno ninno) {
+    /**
+     * Constructor para cuando se quiere registrar un ninno de cero
+     * @param titulo Parametro que indica el titulo de la ventana
+     */
+    public NinnoEdit(String titulo){
         initComponents();
-        this.ninno = ninno;
-        situacionEspecial.setText("Ninguna");
-        acudiente = ninno.getAcudiente();
+        titleLabel.setText(titulo);
+        ninno = new Ninno();
+        nuevoNinno = true;
+        situacionEspecial = new StringWraper(ninno.getSituacionEspecial());
+        acudiente = new Acudiente();
+        ninno.setAcudiente(acudiente);
+        llenarInformacion(ninno);
     }
+    
+    /**
+     * Constructor para cuando se quiere editar la informacion de un ninno
+     * @param ninno: instancia del ninno a editar
+     * @param titulo: Parametro que indica el titulo de la ventana
+     */
+    public NinnoEdit(Ninno ninno, String titulo) {
+        initComponents();
+        titleLabel.setText(titulo);
+        this.ninno = ninno;
+        situacionEspecial = new StringWraper("");
+        acudiente = ninno.getAcudiente();
+        llenarInformacion(ninno);
+    }
+    
+    public void llenarInformacion(Ninno ninno){
+        //Funciones lambda, para obtener un vector de string con los años desde 2000 hasta hoy
+        String[] years = Arrays.stream(IntStream.range(2000, LocalDate.now().getYear() + 1).toArray())
+                                    .mapToObj(String::valueOf)
+                                    .toArray(String[]::new);
+        yearCombo.setModel(new DefaultComboBoxModel(years));
+        
+        String[] months = Arrays.stream(IntStream.range(1,13).toArray())
+                                    .mapToObj(String::valueOf)
+                                    .toArray(String[]::new);
+        monthCombo.setModel(new DefaultComboBoxModel(months));
+        
+        if(ninno == null || ninno.isEmpty()){
+            idField.setText("");
+            nombreField.setText("");
+            apellidoField.setText("");
+            idTypeField.setText("");
+            edadField.setText("");
+            pesoField.setText("");
+            tallaField.setText("");
+            yearCombo.setSelectedIndex(0);
+            monthCombo.setSelectedIndex(0);
+            setDayList();
+        }else{
+            idField.setText(ninno.getId());
+            nombreField.setText(ninno.getNombre());
+            apellidoField.setText(ninno.getApellido());
+            idTypeField.setText(ninno.getIdType());
+            edadField.setText(Integer.toString(ninno.getEdad()));
+            pesoField.setText(Float.toString(ninno.getPeso()));
+            tallaField.setText(Float.toString(ninno.getTalla()));
+            yearCombo.setSelectedItem(Integer.toString(ninno.getFechaDeNacimiento().getYear()));
+            monthCombo.setSelectedIndex(ninno.getFechaDeNacimiento().getMonthValue() -1);
+            setDayList();
+            dayCombo.setSelectedIndex(ninno.getFechaDeNacimiento().getDayOfMonth()-1);
+        }
+    }
+    
+    public void setDayList(){
+        YearMonth month = YearMonth.of(Integer.valueOf(yearCombo.getSelectedItem().toString()), 
+        Integer.valueOf(monthCombo.getSelectedItem().toString()));
+        int qDays = month.lengthOfMonth();
+        String[] days = Arrays.stream(IntStream.range(1, qDays + 1).toArray())
+                              .mapToObj(String::valueOf)
+                              .toArray(String[]::new);
+        dayCombo.setModel(new DefaultComboBoxModel(days));
+    }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,8 +136,6 @@ public class NinnoEdit extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         generoCombo = new javax.swing.JComboBox<>();
-        grupoCombo = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
         editarAcudienteBoton = new javax.swing.JButton();
         editarParienteBoton = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -75,7 +152,7 @@ public class NinnoEdit extends javax.swing.JFrame {
         volverBoton = new javax.swing.JButton();
         restablecerBoton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titleLabel.setText("jLabel1");
 
@@ -95,10 +172,6 @@ public class NinnoEdit extends javax.swing.JFrame {
 
         generoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
 
-        grupoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grupo" }));
-
-        jLabel8.setText("Grupo");
-
         editarAcudienteBoton.setText("Editar Acudiente");
         editarAcudienteBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +180,11 @@ public class NinnoEdit extends javax.swing.JFrame {
         });
 
         editarParienteBoton.setText("Editar Parientes");
+        editarParienteBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarParienteBotonActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Talla");
 
@@ -120,8 +198,18 @@ public class NinnoEdit extends javax.swing.JFrame {
         jLabel10.setText("Fecha de Nacimiento");
 
         yearCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año" }));
+        yearCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearComboActionPerformed(evt);
+            }
+        });
 
         monthCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes" }));
+        monthCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthComboActionPerformed(evt);
+            }
+        });
 
         dayCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia" }));
 
@@ -173,8 +261,6 @@ public class NinnoEdit extends javax.swing.JFrame {
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(grupoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -220,18 +306,12 @@ public class NinnoEdit extends javax.swing.JFrame {
                         .addGap(25, 25, 25)))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(grupoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(25, 25, 25))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -265,8 +345,18 @@ public class NinnoEdit extends javax.swing.JFrame {
         });
 
         volverBoton.setText("Volver");
+        volverBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverBotonActionPerformed(evt);
+            }
+        });
 
         restablecerBoton.setText("Restablecer");
+        restablecerBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restablecerBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -331,22 +421,48 @@ public class NinnoEdit extends javax.swing.JFrame {
                 apellidoField.getText(),
                 idTypeField.getText(),
                 Integer.valueOf(edadField.getText()),
-                Integer.valueOf(grupoCombo.getSelectedItem().toString()),
                 Float.valueOf(tallaField.getText()),
                 Float.valueOf(pesoField.getText()),
-                situacionEspecial.ToString(),
+                situacionEspecial.toString(),
                 generoCombo.getSelectedItem().toString().charAt(0),
-                ' ',
                 Integer.valueOf(yearCombo.getSelectedItem().toString()),
                 Integer.valueOf(monthCombo.getSelectedItem().toString()),
                 Integer.valueOf(dayCombo.getSelectedItem().toString()),
                 acudiente);
+        if(nuevoNinno){
+            JardinController.getNinnos().add(ninno);
+        }
+        dispose();
     }//GEN-LAST:event_guardarBotonActionPerformed
 
     private void situacionBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_situacionBotonActionPerformed
         TextEdit situacionEdit = new TextEdit(situacionEspecial,"Situacion Especial");
         situacionEdit.setVisible(true);
     }//GEN-LAST:event_situacionBotonActionPerformed
+
+    private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
+        dispose();
+    }//GEN-LAST:event_volverBotonActionPerformed
+
+    private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios?","Restablecer",JOptionPane.YES_NO_OPTION);
+        if(confirmacion == 0){
+            llenarInformacion(ninno);
+        }
+    }//GEN-LAST:event_restablecerBotonActionPerformed
+
+    private void monthComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthComboActionPerformed
+        setDayList();
+    }//GEN-LAST:event_monthComboActionPerformed
+
+    private void yearComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboActionPerformed
+        setDayList();
+    }//GEN-LAST:event_yearComboActionPerformed
+
+    private void editarParienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarParienteBotonActionPerformed
+        ParienteEdit edit = new ParienteEdit(ninno,1);
+        edit.setVisible(true);
+    }//GEN-LAST:event_editarParienteBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -391,7 +507,6 @@ public class NinnoEdit extends javax.swing.JFrame {
     private javax.swing.JButton editarAcudienteBoton;
     private javax.swing.JButton editarParienteBoton;
     private javax.swing.JComboBox<String> generoCombo;
-    private javax.swing.JComboBox<String> grupoCombo;
     private javax.swing.JButton guardarBoton;
     private javax.swing.JFormattedTextField idField;
     private javax.swing.JTextField idTypeField;
@@ -403,7 +518,6 @@ public class NinnoEdit extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

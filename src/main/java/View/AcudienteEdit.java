@@ -31,7 +31,7 @@ public class AcudienteEdit extends javax.swing.JFrame {
     }
     
     private void llenarInformacion(Acudiente acudiente) {
-        if(acudiente.isEmpty()){
+        if(acudiente == null || acudiente.isEmpty()){
             idField.setText("");
             nombreField.setText("");
             apellidoField.setText("");
@@ -102,7 +102,7 @@ public class AcudienteEdit extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        titleLabel.setText("jLabel1");
+        titleLabel.setText("Editar Acudiente");
 
         jLabel1.setText("Nombre");
 
@@ -350,7 +350,7 @@ public class AcudienteEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_guardarBotonActionPerformed
 
     private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
-        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea limpiar todos los campos?","Restablecer",JOptionPane.YES_NO_OPTION);
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios?","Restablecer",JOptionPane.YES_NO_OPTION);
         if(confirmacion == 0){
             llenarInformacion(acudiente);
         }

@@ -1,7 +1,7 @@
 package Model.Actores;
 
 public class Acudiente extends Pariente {
-    private String horario, permiso;
+    private String horario, permiso, password;
 
     public Acudiente(){
         
@@ -11,15 +11,17 @@ public class Acudiente extends Pariente {
             String password, String telefono, String celular, String calidad, 
             String direccion, String horario, 
             String permiso) {        
-        super(id, nombre, apellido, idType, password, telefono, celular, calidad, direccion);
+        super(id, nombre, apellido, idType, telefono, celular, calidad, direccion);
         this.horario = horario;
         this.permiso = permiso;
+        this.password = password;
     }
     
     public Acudiente(String id, String nombre, String apellido, String idType, 
             String password, String telefono, String celular, String calidad, 
             String direccion, String horario){        
-        super(id, nombre, apellido, idType, password, telefono, celular, calidad, direccion);
+        super(id, nombre, apellido, idType, telefono, celular, calidad, direccion);
+        this.password = password;
         this.horario = horario;
         this.permiso = "";
     }
@@ -58,5 +60,17 @@ public class Acudiente extends Pariente {
         this.direccion = direccion;
         this.horario = horario;
         this.permiso = permiso;
+    }
+    
+    public boolean isPassword(char[] password){
+        return this.password.equals(new String(password));
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

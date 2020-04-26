@@ -41,7 +41,7 @@ public class TextEdit extends javax.swing.JFrame {
         guardarBoton = new javax.swing.JButton();
         volverBoton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titleLabel.setText("jLabel1");
 

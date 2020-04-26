@@ -5,17 +5,53 @@
  */
 package View;
 
+import Model.Actores.Ninno;
+import Model.Actores.Pariente;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Royk
  */
 public class ParienteEdit extends javax.swing.JFrame {
-
+    private Ninno ninno;
+    private int inception;
     /**
      * Creates new form ParienteEdit
      */
     public ParienteEdit() {
         initComponents();
+    }
+    
+    public ParienteEdit(Ninno ninno, int parienteIndex){
+        initComponents();
+        this.ninno = ninno;
+        inception = parienteIndex;
+        llenarInformacion();
+        
+    }
+    
+    public void llenarInformacion(){
+        if(ninno.getParientes().size() < inception){
+            idField.setText("");
+            nombreField.setText("");
+            apellidoField.setText("");
+            idTypeField.setText("");
+            telefonoField.setText("");
+            celularField.setText("");
+            calidadField.setText("");
+            direccionField.setText(""); 
+        }else{
+            Pariente pariente = ninno.getParientes().get(inception - 1);
+            idField.setText(pariente.getId());
+            nombreField.setText(pariente.getNombre());
+            apellidoField.setText(pariente.getApellido());
+            idTypeField.setText(pariente.getIdType());
+            telefonoField.setText(pariente.getTelefono());
+            celularField.setText(pariente.getCelular());
+            calidadField.setText(pariente.getCalidad());
+            direccionField.setText(pariente.getDireccion()); 
+        }
     }
 
     /**
@@ -51,9 +87,9 @@ public class ParienteEdit extends javax.swing.JFrame {
         volverBoton = new javax.swing.JButton();
         restablecerBoton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        titleLabel.setText("jLabel1");
+        titleLabel.setText("Parientes");
 
         jLabel1.setText("Nombre");
 
@@ -78,6 +114,11 @@ public class ParienteEdit extends javax.swing.JFrame {
         jLabel5.setText("Parentesco");
 
         addParienteBoton.setText("Añadir OTRO pariente");
+        addParienteBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addParienteBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -179,8 +220,18 @@ public class ParienteEdit extends javax.swing.JFrame {
         });
 
         volverBoton.setText("Volver");
+        volverBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverBotonActionPerformed(evt);
+            }
+        });
 
         restablecerBoton.setText("Restablecer");
+        restablecerBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restablecerBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,22 +285,45 @@ public class ParienteEdit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
-        /*Ninno ninno = new Ninno(idField.getText(),
+        if(ninno.getParientes().size() < inception){
+            Pariente pariente = new Pariente(idField.getText(),
             nombreField.getText(),
             apellidoField.getText(),
             idTypeField.getText(),
-            Integer.valueOf(edadField.getText()),
-            Integer.valueOf(grupoCombo.getSelectedItem().toString()),
-            Float.valueOf(tallaField.getText()),
-            Float.valueOf(pesoField.getText()),
-            " ",
-            generoCombo.getSelectedItem().toString().charAt(0),
-            ' ',
-            Integer.valueOf(yearCombo.getSelectedItem().toString()),
-            Integer.valueOf(monthCombo.getSelectedItem().toString()),
-            Integer.valueOf(dayCombo.getSelectedItem().toString()),
-            null);*/
+            telefonoField.getText(),
+            celularField.getText(),
+            calidadField.getText(), 
+            direccionField.getText());
+            ninno.agregarPariente(pariente);
+        }else{
+            Pariente pariente = ninno.getParientes().get(inception -1);
+            pariente.setAll(idField.getText(),
+            nombreField.getText(),
+            apellidoField.getText(),
+            idTypeField.getText(),
+            telefonoField.getText(),
+            celularField.getText(),
+            calidadField.getText(), 
+            direccionField.getText());
+        }
+        dispose();
     }//GEN-LAST:event_guardarBotonActionPerformed
+
+    private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios","Restablecer",JOptionPane.YES_NO_OPTION);
+        if(confirmacion == 0){
+            llenarInformacion();
+        }
+    }//GEN-LAST:event_restablecerBotonActionPerformed
+
+    private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
+        dispose();
+    }//GEN-LAST:event_volverBotonActionPerformed
+
+    private void addParienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addParienteBotonActionPerformed
+        ParienteEdit edit = new ParienteEdit(ninno,++inception);
+        edit.setVisible(true);
+    }//GEN-LAST:event_addParienteBotonActionPerformed
 
     /**
      * @param args the command line arguments

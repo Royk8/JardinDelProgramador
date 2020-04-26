@@ -3,17 +3,14 @@ package Model.Actores;
 public class Pariente extends Persona {
     protected String telefono, celular;
     protected String calidad, direccion;
-    protected String password;
     
     public Pariente(){
         
     }
 
     public Pariente(String id, String nombre, String apellido, String idType,
-            String password, String telefono, String celular, String calidad, 
-            String direccion) {
+            String telefono, String celular, String calidad, String direccion) {
         super(id, nombre, apellido, idType);
-        this.password = password;
         this.telefono = telefono;
         this.celular = celular;
         this.calidad = calidad;
@@ -52,17 +49,20 @@ public class Pariente extends Persona {
         this.direccion = direccion;
     }
     
-    public boolean isPassword(char[] password){
-        return this.password.equals(new String(password));
+    public void setAll(String id, String nombre, String apellido, String idType,
+            String telefono, String celular, String calidad, 
+            String direccion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.idType = idType;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.calidad = calidad;
+        this.direccion = direccion;
     }
+    
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
     
     
 }

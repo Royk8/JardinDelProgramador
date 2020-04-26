@@ -16,7 +16,8 @@ public class StringWraper {
         this.str = str;
     }
 
-    public String ToString() {
+    @Override
+    public String toString() {
         return str;
     }
 

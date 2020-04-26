@@ -10,6 +10,7 @@ import Model.Actores.Admin;
 import Model.Actores.Ninno;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -160,7 +161,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         niEditarNinnoBoton2 = new javax.swing.JButton();
         niEliminarNinnoBoton2 = new javax.swing.JButton();
-        niRegistrarNinnoBoton2 = new javax.swing.JButton();
         Label1 = new javax.swing.JLabel();
         NombreLabel8 = new javax.swing.JLabel();
         Label2 = new javax.swing.JLabel();
@@ -204,7 +204,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setPreferredSize(new java.awt.Dimension(800, 650));
 
         jSplitPane1.setDividerLocation(150);
 
@@ -541,8 +541,18 @@ public class AdminGUI extends javax.swing.JFrame {
         jSplitPane3.setLeftComponent(jScrollPane5);
 
         niRegistrarNinnoBoton.setText("Registrar Niño");
+        niRegistrarNinnoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                niRegistrarNinnoBotonActionPerformed(evt);
+            }
+        });
 
         niBorrarNinnoBoton.setText("Borrar Registro");
+        niBorrarNinnoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                niBorrarNinnoBotonActionPerformed(evt);
+            }
+        });
 
         niEditarNinnoBoton.setText("Editar Información");
         niEditarNinnoBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -553,14 +563,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
         niEditarNinnoBoton2.setText("Asignar Grupo");
 
-        niEliminarNinnoBoton2.setText("Editar Información de Padres");
-
-        niRegistrarNinnoBoton2.setText("Registrar Niño");
-        niRegistrarNinnoBoton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                niRegistrarNinnoBoton2ActionPerformed(evt);
-            }
-        });
+        niEliminarNinnoBoton2.setText("Ver Informacion de Padres");
 
         Label1.setText("Acudiente");
 
@@ -623,7 +626,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(0, 200, Short.MAX_VALUE)
+                        .addGap(0, 249, Short.MAX_VALUE)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                                 .addComponent(niRegistrarNinnoBoton)
@@ -632,8 +635,6 @@ public class AdminGUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(niBorrarNinnoBoton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addComponent(niRegistrarNinnoBoton2)
-                                .addGap(18, 18, 18)
                                 .addComponent(niEditarNinnoBoton2)
                                 .addGap(18, 18, 18)
                                 .addComponent(niEliminarNinnoBoton2))))
@@ -749,7 +750,6 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(niEditarNinnoBoton2)
-                    .addComponent(niRegistrarNinnoBoton2)
                     .addComponent(niEliminarNinnoBoton2))
                 .addGap(28, 28, 28)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -940,21 +940,38 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_grEditarGrupoBotonActionPerformed
 
     private void niEditarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niEditarNinnoBotonActionPerformed
-        // TODO add your handling code here:
+        String nombreCompleto = niNinnosList.getSelectedValue();
+        Ninno ninno = JardinController.getNinnoCompleto(nombreCompleto);
+        if(ninno != null){
+            NinnoEdit editNinno = new NinnoEdit(ninno, "Editar Niño");
+            editNinno.setVisible(true);
+        }
     }//GEN-LAST:event_niEditarNinnoBotonActionPerformed
 
-    private void niRegistrarNinnoBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niRegistrarNinnoBoton2ActionPerformed
-        NinnoEdit editNinno = new NinnoEdit();
-        editNinno.setVisible(true);
-    }//GEN-LAST:event_niRegistrarNinnoBoton2ActionPerformed
-
     private void grEditarNinnoBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grEditarNinnoBoton1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_grEditarNinnoBoton1ActionPerformed
 
     private void adEditarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adEditarBotonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_adEditarBotonActionPerformed
+
+    private void niRegistrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niRegistrarNinnoBotonActionPerformed
+        NinnoEdit editNinno = new NinnoEdit("Registrar Niño");
+        editNinno.setVisible(true);
+        
+    }//GEN-LAST:event_niRegistrarNinnoBotonActionPerformed
+
+    private void niBorrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niBorrarNinnoBotonActionPerformed
+        Ninno ninno = JardinController.getNinnoCompleto(niNinnosList.getSelectedValue());
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "¿Desea eliminar a " + ninno.getNombreCompleto() + " de los registros?",
+                "Borrar registro",JOptionPane.YES_NO_OPTION);
+        if(confirmacion == 1){
+            JardinController.getNinnos().remove(ninno);
+        }
+        
+    }//GEN-LAST:event_niBorrarNinnoBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1082,7 +1099,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel niParienteInfo2Label;
     private javax.swing.JLabel niPesoLabel;
     private javax.swing.JButton niRegistrarNinnoBoton;
-    private javax.swing.JButton niRegistrarNinnoBoton2;
     private javax.swing.JLabel niTallaLabel;
     private javax.swing.JLabel prApellidoLabel;
     private javax.swing.JLabel prEspecialLabel;

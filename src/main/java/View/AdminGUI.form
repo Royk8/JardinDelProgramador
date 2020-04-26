@@ -4,7 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 600]"/>
+      <Dimension value="[800, 650]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -722,7 +722,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="0" pref="200" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="249" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Component id="niRegistrarNinnoBoton" min="-2" max="-2" attributes="0"/>
@@ -732,8 +732,6 @@
                                                   <Component id="niBorrarNinnoBoton" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="niRegistrarNinnoBoton2" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="niEditarNinnoBoton2" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="niEliminarNinnoBoton2" min="-2" max="-2" attributes="0"/>
@@ -882,7 +880,6 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="niEditarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="niRegistrarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="niEliminarNinnoBoton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -903,11 +900,17 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Registrar Ni&#xf1;o"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="niRegistrarNinnoBotonActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="niBorrarNinnoBoton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Borrar Registro"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="niBorrarNinnoBotonActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="niEditarNinnoBoton">
                           <Properties>
@@ -926,16 +929,8 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="niEliminarNinnoBoton2">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Editar Informaci&#xf3;n de Padres"/>
+                            <Property name="text" type="java.lang.String" value="Ver Informacion de Padres"/>
                           </Properties>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="niRegistrarNinnoBoton2">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Registrar Ni&#xf1;o"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="niRegistrarNinnoBoton2ActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="Label1">
                           <Properties>

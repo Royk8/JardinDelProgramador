@@ -3,6 +3,7 @@ package Persistencia;
 import Controller.JardinController;
 import Model.Actores.Acudiente;
 import Model.Actores.Ninno;
+import Model.Actores.Pariente;
 import Model.Actores.Profesor;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -44,12 +45,29 @@ public class Almacenamiento {
             campos.put("month", String.valueOf(ninno.getNacimiento().getMonthValue()));
             campos.put("day", String.valueOf(ninno.getNacimiento().getDayOfMonth()));
             campos.put("Acudiente", cifrarAcudiente(ninno.getAcudiente()));
+            campos.put("Parientes", cifrarParientes(ninno.getParientes()));
             
-            JSONObject jsonNinno = new JSONObject();
-            jsonNinno.put("Ninno", campos);
             jsonNinnos.add(campos);
         }
         almacenarInformacion("Ninnos", jsonNinnos);
+    }
+    
+    public static JSONArray cifrarParientes(ArrayList<Pariente> parientes){
+        JSONArray jsonParientes = new JSONArray();
+        for(Pariente pariente : parientes){
+            JSONObject campos = new JSONObject();
+            campos.put("id", pariente.getId());
+            campos.put("nombre", pariente.getNombre());
+            campos.put("apellido", pariente.getApellido());
+            campos.put("idType", pariente.getIdType());
+            campos.put("telefono", pariente.getTelefono());
+            campos.put("celular", pariente.getCelular());
+            campos.put("calidad", pariente.getCalidad());
+            campos.put("direccion", pariente.getDireccion());
+            JSONObject jsonPariente = new JSONObject();
+            jsonParientes.add(campos);
+        }
+        return jsonParientes;
     }
     
     public static JSONObject cifrarAcudiente(Acudiente acudiente){
@@ -65,8 +83,6 @@ public class Almacenamiento {
         campos.put("direccion", acudiente.getDireccion());
         campos.put("horario", acudiente.getHorario());
         campos.put("permiso", acudiente.getPermiso());
-        //JSONObject jsonAcudiente = new JSONObject();
-        //jsonAcudiente.put("Acudiente",jsonAcudiente);
         return campos;
     }
     
@@ -86,6 +102,25 @@ public class Almacenamiento {
             return acudiente;
         }
         return null;
+    }
+    
+    public static ArrayList<Pariente> descifrarParientes(JSONArray jsonParientes){
+        ArrayList<Pariente> parientes = new ArrayList<>();
+        if(jsonParientes != null){
+            for(Object registro : jsonParientes){
+                JSONObject jsonRegistro = (JSONObject) registro;
+                Pariente pariente = new Pariente(jsonRegistro.get("id").toString(),
+                    jsonRegistro.get("nombre").toString(), 
+                    jsonRegistro.get("apellido").toString(),
+                    jsonRegistro.get("idType").toString(),
+                    jsonRegistro.get("telefono").toString(),
+                    jsonRegistro.get("celular").toString(),
+                    jsonRegistro.get("calidad").toString(),
+                    jsonRegistro.get("direccion").toString());
+                parientes.add(pariente);
+            }
+        }
+        return parientes;
     }
     
     public static void almacenarProfesores(ArrayList<Profesor> profesores){
@@ -126,9 +161,8 @@ public class Almacenamiento {
         
         if(jsonNinnos!=null){        
             for(Object registro: jsonNinnos){
-                //Se deben pasar dos capas de abstraccion para llegar a la informacion de ninno
+
                 JSONObject jsonRegistro = (JSONObject) registro;
-                //jsonRegistro = (JSONObject) jsonRegistro.get("Ninno");
                 Ninno ninno = new Ninno(jsonRegistro.get("id").toString(), 
                     jsonRegistro.get("nombre").toString(), 
                     jsonRegistro.get("apellido").toString(), 
@@ -143,7 +177,8 @@ public class Almacenamiento {
                     Integer.parseInt(jsonRegistro.get("year").toString()),
                     Integer.parseInt(jsonRegistro.get("month").toString()),
                     Integer.parseInt(jsonRegistro.get("day").toString()),
-                    descifrarAcudiente((JSONObject) jsonRegistro.get("Acudiente")));
+                    descifrarAcudiente((JSONObject) jsonRegistro.get("Acudiente")),
+                    descifrarParientes((JSONArray) jsonRegistro.get("Parientes")));
                 ninnos.add(ninno);
             }
         }
