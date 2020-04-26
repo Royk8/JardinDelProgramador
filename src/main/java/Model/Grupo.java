@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Actores.Ninno;
 import Model.Actores.Profesor;
 
 /**
@@ -8,17 +9,19 @@ import Model.Actores.Profesor;
  */
 public class Grupo {
     private String id;
+    private int nivel;
     private char horario;
     private Profesor profesor;
     
-    public Grupo(String id, char horario, Profesor profesor){
+    public Grupo(String id, int nivel, char horario, Profesor profesor){
         this.id = id;
+        this.nivel = nivel;
         this.horario = horario;
         this.profesor = profesor;
     }
     
-    public Grupo(int id, char horario, Profesor profesor){
-        this(Integer.toString(id), horario, profesor);
+    public Grupo(int id, int nivel, char horario, Profesor profesor){
+        this(Integer.toString(id), nivel, horario, profesor);
     }
     
     public int getIdInt(){
@@ -53,7 +56,17 @@ public class Grupo {
         this.horario = horario;
     }
     
-    
+    public boolean isNivel(Ninno ninno){
+        return ninno.getEdad() == nivel;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
     
     
     

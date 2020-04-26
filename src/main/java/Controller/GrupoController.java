@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 /**
  * Clase para controlar los grupos en la vista
- * @author Royk
  */
 public class GrupoController {
     private Grupo grupo;
@@ -37,7 +36,21 @@ public class GrupoController {
         this.ninnos = ninnos;
     }
     
+    public boolean addNinno(Ninno ninno){
+        if(grupo.isNivel(ninno)){
+            ninnos.add(ninno);
+            ninno.setGrupo(grupo.getIdInt());
+            ninno.setHorario(grupo.getHorario());
+            return true;
+        }
+        return false;
+    }
     
-    
+    public static void addNinno(Ninno ninno, Grupo grupo){
+        if(grupo.isNivel(ninno)){
+            ninno.setGrupo(grupo.getIdInt());
+            ninno.setHorario(grupo.getHorario());
+        }
+    }
     
 }

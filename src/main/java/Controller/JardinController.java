@@ -4,6 +4,7 @@ import Model.Actores.Acudiente;
 import Model.Actores.Admin;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
+import Model.Grupo;
 import Persistencia.Almacenamiento;
 import View.Login;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class JardinController {
     private static ArrayList<Ninno> ninnos;
     private static ArrayList<Profesor> profesores;
     private static ArrayList<Admin> admins;
+    private static ArrayList<Grupo> grupos;
     private static Admin superAdmin;
 
     public static Admin getAdmin(String adminId) {
@@ -27,11 +29,15 @@ public class JardinController {
     }
     
     public JardinController(){
+        //Inicializa la lista de ninnos.
         Almacenamiento.cargarRegistros();
         profesores = new ArrayList<>();
         admins = new ArrayList<>();
         superAdmin = new Admin();
         admins.add(superAdmin);
+        cargarGrupos();
+
+        
         /*Acudiente manuel = new Acudiente("5415", "Manuel", "Yarce", "Cedula", 
                 "4545", "3104548", "315181", "Tio", "Cada de manuel", "Miercoles en la ma;ana");
         Acudiente gabriela = new Acudiente("546", "Gabriela", "Cordoba", "Cedula", 
@@ -86,8 +92,28 @@ public class JardinController {
         return null;
     }
     
+    public void cargarGrupos(){
+        grupos = new ArrayList<>();
+        for(Ninno ninno: ninnos){
+            //Lambda expresion, pregunta si existe algun grupo con este identificador asociado a un ninno
+            if(!grupos.stream().anyMatch(grupo -> ninno.getGrupo() == grupo.getIdInt())){
+                Grupo grupo = new Grupo(ninno.getGrupo(), 
+                        ninno.getEdad(), 
+                        ninno.getHorario(), 
+                        ninno.getProfesor());
+                grupos.add(grupo);
+            }
+        }
+    }
     
-
+    public static Grupo getGrupo(int grupo){
+        for(Grupo gr : grupos){
+            if(grupo == gr.getIdInt())
+                return gr;
+        }
+        return null;
+    }
+    
     public static void setNinnos(ArrayList<Ninno> ninnos) {
         JardinController.ninnos = ninnos;
     }
@@ -98,6 +124,10 @@ public class JardinController {
 
     public static void setAdmins(ArrayList<Admin> admins) {
         JardinController.admins = admins;
+    }
+    
+    public static ArrayList<Grupo> getGrupos(){
+        return grupos;
     }
     
     public static void main(String[] args) {

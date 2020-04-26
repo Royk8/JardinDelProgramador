@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.GrupoController;
 import Controller.JardinController;
 import Model.Actores.Admin;
 import Model.Actores.Ninno;
@@ -159,7 +160,7 @@ public class AdminGUI extends javax.swing.JFrame {
         niBorrarNinnoBoton = new javax.swing.JButton();
         niEditarNinnoBoton = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
-        niEditarNinnoBoton2 = new javax.swing.JButton();
+        niAsignarGrupoBoton = new javax.swing.JButton();
         niEliminarNinnoBoton2 = new javax.swing.JButton();
         Label1 = new javax.swing.JLabel();
         NombreLabel8 = new javax.swing.JLabel();
@@ -561,7 +562,12 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        niEditarNinnoBoton2.setText("Asignar Grupo");
+        niAsignarGrupoBoton.setText("Asignar Grupo");
+        niAsignarGrupoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                niAsignarGrupoBotonActionPerformed(evt);
+            }
+        });
 
         niEliminarNinnoBoton2.setText("Ver Informacion de Padres");
 
@@ -635,7 +641,7 @@ public class AdminGUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(niBorrarNinnoBoton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addComponent(niEditarNinnoBoton2)
+                                .addComponent(niAsignarGrupoBoton)
                                 .addGap(18, 18, 18)
                                 .addComponent(niEliminarNinnoBoton2))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
@@ -749,7 +755,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(niEspecialLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(niEditarNinnoBoton2)
+                    .addComponent(niAsignarGrupoBoton)
                     .addComponent(niEliminarNinnoBoton2))
                 .addGap(28, 28, 28)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -940,11 +946,13 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_grEditarGrupoBotonActionPerformed
 
     private void niEditarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niEditarNinnoBotonActionPerformed
-        String nombreCompleto = niNinnosList.getSelectedValue();
-        Ninno ninno = JardinController.getNinnoCompleto(nombreCompleto);
-        if(ninno != null){
-            NinnoEdit editNinno = new NinnoEdit(ninno, "Editar Niño");
-            editNinno.setVisible(true);
+        if(!niNinnosList.isSelectionEmpty()){
+            String nombreCompleto = niNinnosList.getSelectedValue();
+            Ninno ninno = JardinController.getNinnoCompleto(nombreCompleto);
+            if(ninno != null){
+                NinnoEdit editNinno = new NinnoEdit(ninno, "Editar Niño");
+                editNinno.setVisible(true);
+            }
         }
     }//GEN-LAST:event_niEditarNinnoBotonActionPerformed
 
@@ -963,15 +971,29 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_niRegistrarNinnoBotonActionPerformed
 
     private void niBorrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niBorrarNinnoBotonActionPerformed
-        Ninno ninno = JardinController.getNinnoCompleto(niNinnosList.getSelectedValue());
-        int confirmacion = JOptionPane.showConfirmDialog(this,
-                "¿Desea eliminar a " + ninno.getNombreCompleto() + " de los registros?",
-                "Borrar registro",JOptionPane.YES_NO_OPTION);
-        if(confirmacion == 1){
-            JardinController.getNinnos().remove(ninno);
+        if(!niNinnosList.isSelectionEmpty()){
+            Ninno ninno = JardinController.getNinnoCompleto(niNinnosList.getSelectedValue());
+            int confirmacion = JOptionPane.showConfirmDialog(this,
+                    "¿Desea eliminar a " + ninno.getNombreCompleto() + " de los registros?",
+                    "Borrar registro",JOptionPane.YES_NO_OPTION);
+            if(confirmacion == 1){
+                JardinController.getNinnos().remove(ninno);
+            }    
         }
-        
     }//GEN-LAST:event_niBorrarNinnoBotonActionPerformed
+
+    private void niAsignarGrupoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niAsignarGrupoBotonActionPerformed
+        if(!niNinnosList.isSelectionEmpty()){
+            Ninno ninno = JardinController.getNinnoCompleto(niNinnosList.getSelectedValue());
+            String[] grupos = JardinController.getGrupos().stream()
+                    .map(grupo -> Integer.toString(grupo.getIdInt()))
+                    .toArray(String[]::new);
+            Object seleccion = (JOptionPane.showInputDialog(this, "Seleciona un grupo", "Asignar Grupo", JOptionPane.DEFAULT_OPTION,
+                    null, grupos, grupos[0]));
+            if(seleccion != null)                
+                GrupoController.addNinno(ninno, JardinController.getGrupo(Integer.valueOf(seleccion.toString()))); 
+        }
+    }//GEN-LAST:event_niAsignarGrupoBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1079,10 +1101,10 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel niAcudienteLabel;
     private javax.swing.JLabel niApellidoLabel;
+    private javax.swing.JButton niAsignarGrupoBoton;
     private javax.swing.JButton niBorrarNinnoBoton;
     private javax.swing.JLabel niEdadLabel;
     private javax.swing.JButton niEditarNinnoBoton;
-    private javax.swing.JButton niEditarNinnoBoton2;
     private javax.swing.JButton niEliminarNinnoBoton2;
     private javax.swing.JLabel niEspecialLabel;
     private javax.swing.JLabel niGeneroLabel;
