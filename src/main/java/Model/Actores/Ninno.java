@@ -67,7 +67,7 @@ public class Ninno extends Persona{
         this.genero = genero;
         this.horario = horario;
         this.fechaDeNacimiento = LocalDate.of(year,month,day);
-        logros = new ArrayList<Logro>();
+        logros = new ArrayList<>();
         this.parientes = parientes;
         this.acudiente = acudiente;
     }

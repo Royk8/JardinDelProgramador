@@ -13,6 +13,10 @@ public class Grupo {
     private char horario;
     private Profesor profesor;
     
+    public Grupo(){
+        
+    }
+    
     public Grupo(String id, int nivel, char horario, Profesor profesor){
         this.id = id;
         this.nivel = nivel;
@@ -24,7 +28,15 @@ public class Grupo {
         this(Integer.toString(id), nivel, horario, profesor);
     }
     
+    public void setAll(String id, int nivel, char horario, Profesor profesor){
+        this.id = id;
+        this.nivel = nivel;
+        this.horario = horario;
+        this.profesor = profesor;
+    }
+    
     public int getIdInt(){
+        if(id.equals("Sin Grupo")) return 0;
         return Integer.valueOf(id);
     }
     

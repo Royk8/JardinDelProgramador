@@ -28,6 +28,11 @@ public class Almacenamiento {
         JardinController.setGrupos(cargarGrupos(cargarInformacion("Grupos")));
     }
     
+    public static void almacenarRegistros(){
+        almacenarNinnos(JardinController.getNinnos());
+        almacenarGrupos(JardinController.getGrupos());
+    }
+    
     public static void almacenarNinnos(ArrayList<Ninno> ninnos){
         JSONArray jsonNinnos = new JSONArray();
         for(Ninno ninno: ninnos){

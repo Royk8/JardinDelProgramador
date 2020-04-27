@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Actores.Acudiente;
 import Model.Actores.Admin;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
