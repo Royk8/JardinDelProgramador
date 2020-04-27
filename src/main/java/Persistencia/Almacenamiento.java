@@ -5,6 +5,7 @@ import Model.Actores.Acudiente;
 import Model.Actores.Ninno;
 import Model.Actores.Pariente;
 import Model.Actores.Profesor;
+import Model.Grupo;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -24,6 +25,7 @@ public class Almacenamiento {
       
     public static void cargarRegistros(){
         JardinController.setNinnos(cargarNinnos(cargarInformacion("Ninnos")));
+        JardinController.setGrupos(cargarGrupos(cargarInformacion("Grupos")));
     }
     
     public static void almacenarNinnos(ArrayList<Ninno> ninnos){
@@ -50,6 +52,39 @@ public class Almacenamiento {
             jsonNinnos.add(campos);
         }
         almacenarInformacion("Ninnos", jsonNinnos);
+    }
+    
+    public static void almacenarProfesores(ArrayList<Profesor> profesores){
+        JSONArray jsonProfesores = new JSONArray();
+        for(Profesor profesor: profesores){
+            JSONObject campos = new JSONObject();
+            campos.put("id", profesor.getId());
+            campos.put("nombre", profesor.getNombre());
+            campos.put("apellido", profesor.getApellido());
+            campos.put("idType", profesor.getIdType());
+            campos.put("password", profesor.getPassword());
+            campos.put("especialidad", profesor.getEspecialidad());
+            campos.put("telefono", profesor.getTelefono());
+            
+            JSONObject jsonProfesor = new JSONObject();
+            jsonProfesor.put("Profesor", campos);
+            jsonProfesores.add(jsonProfesor);
+        }
+        almacenarInformacion("Profesores", jsonProfesores);
+    }
+        
+    public static void almacenarGrupos(ArrayList<Grupo> grupos){
+        JSONArray jsonGrupos = new JSONArray();
+        for(Grupo grupo : grupos){
+            JSONObject campos = new JSONObject();
+            campos.put("id", grupo.getId());
+            campos.put("nivel", Integer.toString(grupo.getNivel()));
+            campos.put("horario", Character.toString(grupo.getHorario()));
+            campos.put("profesorId", grupo.getProfesor().getId());
+            
+            jsonGrupos.add(campos);
+        }
+        almacenarInformacion("Grupos", jsonGrupos);
     }
     
     public static JSONArray cifrarParientes(ArrayList<Pariente> parientes){
@@ -123,24 +158,7 @@ public class Almacenamiento {
         return parientes;
     }
     
-    public static void almacenarProfesores(ArrayList<Profesor> profesores){
-        JSONArray jsonProfesores = new JSONArray();
-        for(Profesor profesor: profesores){
-            JSONObject campos = new JSONObject();
-            campos.put("id", profesor.getId());
-            campos.put("nombre", profesor.getNombre());
-            campos.put("apellido", profesor.getApellido());
-            campos.put("idType", profesor.getIdType());
-            campos.put("password", profesor.getPassword());
-            campos.put("especialidad", profesor.getEspecialidad());
-            campos.put("telefono", profesor.getTelefono());
-            
-            JSONObject jsonProfesor = new JSONObject();
-            jsonProfesor.put("Profesor", campos);
-            jsonProfesores.add(jsonProfesor);
-        }
-        almacenarInformacion("Profesores", jsonProfesores);
-    }
+
     
     /**
      * Metodo que toma un JSONArray y lo guarda en un archivo tipo JSON
@@ -204,6 +222,23 @@ public class Almacenamiento {
             }
         }        
         return profesores;        
+    }
+    
+    public static ArrayList<Grupo> cargarGrupos(JSONArray jsonGrupos){
+        ArrayList<Grupo> grupos = new ArrayList<>();
+        
+        if(jsonGrupos != null){
+            for(Object registro : jsonGrupos){
+                
+                JSONObject jsonRegistro = (JSONObject) registro;
+                Grupo grupo = new Grupo(jsonRegistro.get("id").toString(),
+                        Integer.valueOf(jsonRegistro.get("nivel").toString()),
+                        jsonRegistro.get("horario").toString().charAt(0),
+                        JardinController.getProfesor(jsonRegistro.get("profesor").toString()));
+                grupos.add(grupo);
+            }
+        }
+        return grupos;
     }
     
     /**

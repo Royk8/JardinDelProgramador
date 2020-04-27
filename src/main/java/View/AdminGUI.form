@@ -166,7 +166,7 @@
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="grGrupoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="grNinnoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -199,7 +199,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="grGrupoLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -252,7 +252,7 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="grEditarGrupoBotonActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel1">
+                        <Component class="javax.swing.JLabel" name="grGrupoLabel">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="jLabel1"/>
                           </Properties>
@@ -436,7 +436,7 @@
                                           <Component id="prEspecialLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="223" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Component id="grCrearGrupoBoton1" min="-2" max="-2" attributes="0"/>
@@ -459,17 +459,14 @@
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="prTelefonoLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="prGrupoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="prNumeroLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="prNumeroLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -503,29 +500,27 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="prNumeroLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="197" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="grEditarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="grRegistrarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="grEliminarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="grCrearGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="grBorrarGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="grEditarGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="prGrupoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace pref="164" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="grEditarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grRegistrarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grEliminarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="grCrearGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grBorrarGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grEditarGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="prNumeroLabel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -553,7 +548,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="prNombreLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel1"/>
+                            <Property name="text" type="java.lang.String" value="Nombre"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -563,7 +558,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="prApellidoLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel3"/>
+                            <Property name="text" type="java.lang.String" value="Apellido"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -573,7 +568,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="prTelefonoLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel4"/>
+                            <Property name="text" type="java.lang.String" value="Telefono"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator3">
@@ -601,22 +596,12 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="prIdTypeLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel4"/>
+                            <Property name="text" type="java.lang.String" value="Tipo de documento"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="prIdLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel13"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel14">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Grupo"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="prGrupoLabel">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel15"/>
+                            <Property name="text" type="java.lang.String" value="Documento"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel15">
@@ -631,12 +616,12 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="prEspecialLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel17"/>
+                            <Property name="text" type="java.lang.String" value="Especilaidad"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="prNumeroLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel4"/>
+                            <Property name="text" type="java.lang.String" value="Numero de Estudiantes"/>
                           </Properties>
                         </Component>
                       </SubComponents>

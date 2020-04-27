@@ -114,8 +114,28 @@ public class JardinController {
         return null;
     }
     
+    public static Grupo getGrupo(String grupo){
+        for(Grupo gr : grupos){
+            if(grupo.equals(gr.getId()))
+                return gr;
+        }
+        return null;
+    }
+    
     public static void setNinnos(ArrayList<Ninno> ninnos) {
         JardinController.ninnos = ninnos;
+    }
+    
+    public static ArrayList<Profesor> getProfesores(){
+        return profesores;
+    }
+    
+    public static Profesor getProfesorNombreCompleto(String nombreCompleto){
+        for(Profesor profesor: profesores){
+            if(profesor.getNombreCompleto().equals(nombreCompleto))
+                return profesor;
+        }
+        return null;
     }
 
     public static void setProfesores(ArrayList<Profesor> profesores) {
@@ -124,6 +144,10 @@ public class JardinController {
 
     public static void setAdmins(ArrayList<Admin> admins) {
         JardinController.admins = admins;
+    }
+
+    public static void setGrupos(ArrayList<Grupo> grupos) {
+        JardinController.grupos = grupos;
     }
     
     public static ArrayList<Grupo> getGrupos(){
