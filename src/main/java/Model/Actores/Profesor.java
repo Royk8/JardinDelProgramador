@@ -4,9 +4,24 @@ public class Profesor extends Persona {
     private String telefono;
     private String especialidad;
     private String password;
+    
+    public Profesor(){
+        
+    }
 
     public Profesor(String id, String nombre, String apellido, String idType, String password, String telefono, String especialidad) {
         super(id, nombre, apellido, idType);
+        this.telefono = telefono;
+        this.especialidad = especialidad;
+        this.password = password;
+    }
+    
+    public void setAll(String id, String nombre, String apellido, String idType, 
+            String password, String telefono, String especialidad){
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.idType = idType;
         this.telefono = telefono;
         this.especialidad = especialidad;
         this.password = password;

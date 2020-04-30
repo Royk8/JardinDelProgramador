@@ -4,6 +4,12 @@ import Model.Logro;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Hereda de Persona, modelo central del programa
+ * Implementa los atributos de edad, grupo, talla, pero, situacion especial,genero, horario
+ * fecha de nacimiento, acudiente, profesor, y arrays de logros y parientes
+ * @author Royk
+ */
 public class Ninno extends Persona{
     private int edad, grupo;
     private float talla, peso;
@@ -15,16 +21,19 @@ public class Ninno extends Persona{
     private ArrayList<Pariente> parientes;
     private Profesor profesor;
     
+    /**
+     * Constructor casi vacio, inicializa los arrayLists.
+     */
     public Ninno(){
         logros = new ArrayList<>();
         parientes = new ArrayList<>();
     }
 
-    public Ninno(String id, String nombre, String apellido, String idType, int edad, int grupo, float talla,
+    public Ninno(String id, String nombre, String apellido, String idType, int edad, float talla,
                  float peso, String situacionEspecial, char genero, char horario, int year, int month, int day) {
         super(id, nombre, apellido, idType);
         this.edad = edad;
-        this.grupo = grupo;
+        this.grupo = 0;
         this.talla = talla;
         this.peso = peso;
         this.situacionEspecial = situacionEspecial;
@@ -36,12 +45,12 @@ public class Ninno extends Persona{
     }
     
     public Ninno(String id, String nombre, String apellido, String idType, 
-                int edad, int grupo, float talla, float peso, String situacionEspecial,
+                int edad, float talla, float peso, String situacionEspecial,
                 char genero, char horario, int year, int month, int day, 
                 Acudiente acudiente) {
         super(id, nombre, apellido, idType);
         this.edad = edad;
-        this.grupo = grupo;
+        this.grupo = 0;
         this.talla = talla;
         this.peso = peso;
         this.situacionEspecial = situacionEspecial;

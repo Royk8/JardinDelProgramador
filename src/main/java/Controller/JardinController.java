@@ -9,6 +9,9 @@ import View.Login;
 import java.util.ArrayList;
 
 /**
+ * Clase encargada de iniciar y controlar el flujo del programa
+ * Contiene arrays estaticos que contienen la informacion necesaria durante la ejecucion
+ * Contiene metodos estaticos de utilidad para las diferentes partes del programa
  * @author Royk
  */
 public class JardinController {
@@ -18,15 +21,10 @@ public class JardinController {
     private static ArrayList<Grupo> grupos;
     private static Admin superAdmin;
 
-    public static Admin getAdmin(String adminId) {
-        for(Admin admin: admins){
-            if(admin.getId().equals(adminId)){
-                return admin;
-            }
-        }
-        return null;
-    }
-    
+
+    /**
+     * Constructor de la clase, arranca el programa y llama los metodos que cargan la informacion
+     */
     public JardinController(){
         //Inicializa la lista de ninnos.
         Almacenamiento.cargarRegistros();
@@ -60,10 +58,28 @@ public class JardinController {
         profesores.add(diana);
     }
     
+    public static Admin getAdmin(String adminId) {
+        for(Admin admin: admins){
+            if(admin.getId().equals(adminId)){
+                return admin;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Getter para acceder a la lista general de Ninnos
+     * @return ArrayList con Ninnos
+     */
     public static ArrayList<Ninno> getNinnos(){
         return ninnos;
     }
     
+    /**
+     * Retorna un profesor especifico indicado por su Id
+     * @param profesorId Id enviada
+     * @return Objeto de la clase profesor con el ID buscado
+     */
     public static Profesor getProfesor(String profesorId){
         for(Profesor profesor: profesores){
             if(profesor.getId().equals(profesorId)){
@@ -73,6 +89,11 @@ public class JardinController {
         return null;
     }
     
+    /**
+     * Retorna un Ninno de la lista general de ninnos especifico indicado por su nombre
+     * @param ninnoNombre Nombre del ninno solicitado
+     * @return Objeto de la clase Ninno con el nombre buscado o nul si no se encuentra
+     */
     public static Ninno getNinno(String ninnoNombre){
         for(Ninno ninno: ninnos){
             if(ninno.getNombre().equals(ninnoNombre)){
@@ -82,6 +103,11 @@ public class JardinController {
         return null;
     }
     
+    /**
+     * Retorna un Ninno de la lista general de ninnos especifico indicado por su nombre completo
+     * @param nombreCompleto Nombre completo del ninno solicitado
+     * @return Objeto de la clase Ninno con el nombre buscado o null si no se encuentra
+     */
     public static Ninno getNinnoCompleto(String nombreCompleto){
         for(Ninno ninno: ninnos){
             if(ninno.getNombreCompleto().equals(nombreCompleto)){
@@ -91,6 +117,9 @@ public class JardinController {
         return null;
     }
     
+    /**
+     * Para borrar
+     */
     public void cargarGrupos(){
         grupos = new ArrayList<>();
         for(Ninno ninno: ninnos){
@@ -105,6 +134,11 @@ public class JardinController {
         }
     }
     
+    /**
+     * Retorna un grupo de la lista de grupos, especificado por su id
+     * @param grupo Entero con el identificador del grupo
+     * @return Objeto de la clase Grupo solicitado o null si no se encuentra
+     */
     public static Grupo getGrupo(int grupo){
         for(Grupo gr : grupos){
             if(grupo == gr.getIdInt())
@@ -113,6 +147,11 @@ public class JardinController {
         return null;
     }
     
+    /**
+     * Retorna un grupo de la lista de grupos, especificado por su id
+     * @param grupo String con el identificador del grupo
+     * @return Objeto de la clase Grupo solicitado o null si no se encuentra
+     */
     public static Grupo getGrupo(String grupo){
         for(Grupo gr : grupos){
             if(grupo.equals(gr.getId()))
@@ -121,14 +160,27 @@ public class JardinController {
         return null;
     }
     
+    /**
+     * Reemplaza la lista general de ninnos por otra lista enviada
+     * @param ninnos Lista de ninnos envidad
+     */
     public static void setNinnos(ArrayList<Ninno> ninnos) {
         JardinController.ninnos = ninnos;
     }
     
+    /**
+     * Retorna la lista general de profesores 
+     * @return ArrayList con los profesores registrados
+     */
     public static ArrayList<Profesor> getProfesores(){
         return profesores;
     }
     
+    /**
+     * Retorna un profesor de la lista, especificado por su nombre completo
+     * @param nombreCompleto nombre del profesor a buscar
+     * @return Retorna profesor solicitado o null si no hay coincidencias
+     */
     public static Profesor getProfesorNombreCompleto(String nombreCompleto){
         for(Profesor profesor: profesores){
             if(profesor.getNombreCompleto().equals(nombreCompleto))
@@ -137,22 +189,43 @@ public class JardinController {
         return null;
     }
 
+    /**
+     * Reemplaza la lista general de profesores por una lista enviada
+     * @param profesores Lista de profesores enviada
+     */
     public static void setProfesores(ArrayList<Profesor> profesores) {
         JardinController.profesores = profesores;
     }
 
+    /**
+     * Reemplaza la lista general de administradores por una lista enviada
+     * @param admins Lista de administradores enviada
+     */
     public static void setAdmins(ArrayList<Admin> admins) {
         JardinController.admins = admins;
     }
 
+    /**
+     * Reemplaza la lista general de grupos por una lista enviada
+     * @param grupos Lista de grupos enviada
+     */
     public static void setGrupos(ArrayList<Grupo> grupos) {
         JardinController.grupos = grupos;
     }
     
+    /**
+     * Retorna la lista general de grupos
+     * @return ArrayList con los grupos registrados
+     */
     public static ArrayList<Grupo> getGrupos(){
         return grupos;
     }
     
+    /**
+     * Metodo main que aranca el programa al instancias un objeto de esta clase
+     * Instancia un objeto de la ventana de Login
+     * @param args 
+     */
     public static void main(String[] args) {
         JardinController jardinController = new JardinController();
         Login login = new Login();

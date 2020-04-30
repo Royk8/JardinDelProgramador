@@ -123,13 +123,7 @@
                         <Component class="javax.swing.JList" name="grGruposList">
                           <Properties>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                              <StringArray count="5">
-                                <StringItem index="0" value="Item 1"/>
-                                <StringItem index="1" value="Item 2"/>
-                                <StringItem index="2" value="Item 3"/>
-                                <StringItem index="3" value="Item 4"/>
-                                <StringItem index="4" value="Item 5"/>
-                              </StringArray>
+                              <StringArray count="0"/>
                             </Property>
                             <Property name="selectionMode" type="int" value="0"/>
                           </Properties>
@@ -224,7 +218,7 @@
                                   <Component id="grNinnoLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="72" max="32767" attributes="0"/>
+                                  <EmptySpace pref="80" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="grEditarNinnoBoton" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="grRegistrarNinnoBoton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -270,7 +264,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="grGrupoLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel1"/>
+                            <Property name="text" type="java.lang.String" value="Grupo"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -280,7 +274,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="grProfesorLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel3"/>
+                            <Property name="text" type="java.lang.String" value="Profesor"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -290,7 +284,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="grHorarioLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel4"/>
+                            <Property name="text" type="java.lang.String" value="Horario"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="grNinnoLabel">
@@ -308,13 +302,7 @@
                             <Component class="javax.swing.JList" name="grNinnosList">
                               <Properties>
                                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                                  <StringArray count="5">
-                                    <StringItem index="0" value="Item 1"/>
-                                    <StringItem index="1" value="Item 2"/>
-                                    <StringItem index="2" value="Item 3"/>
-                                    <StringItem index="3" value="Item 4"/>
-                                    <StringItem index="4" value="Item 5"/>
-                                  </StringArray>
+                                  <StringArray count="0"/>
                                 </Property>
                                 <Property name="selectionMode" type="int" value="0"/>
                               </Properties>
@@ -351,7 +339,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="grNivelLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel4"/>
+                            <Property name="text" type="java.lang.String" value="Nivel"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -416,13 +404,7 @@
                         <Component class="javax.swing.JList" name="prProfesoresList">
                           <Properties>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                              <StringArray count="5">
-                                <StringItem index="0" value="Item 1"/>
-                                <StringItem index="1" value="Item 2"/>
-                                <StringItem index="2" value="Item 3"/>
-                                <StringItem index="3" value="Item 4"/>
-                                <StringItem index="4" value="Item 5"/>
-                              </StringArray>
+                              <StringArray count="0"/>
                             </Property>
                             <Property name="selectionMode" type="int" value="0"/>
                           </Properties>
@@ -465,11 +447,11 @@
                                           <EmptySpace min="0" pref="223" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="grCrearGrupoBoton1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="prRegistrarProfesorBoton" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEditarGrupoBoton1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="prEditarProfesorBoton" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grBorrarGrupoBoton1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="prBorrarProfesorBoton" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Component id="grRegistrarNinnoBoton1" min="-2" max="-2" attributes="0"/>
@@ -538,9 +520,9 @@
                                           <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="grCrearGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="grBorrarGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="grEditarGrupoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="prRegistrarProfesorBoton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="prBorrarProfesorBoton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="prEditarProfesorBoton" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" attributes="0">
@@ -554,22 +536,25 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JButton" name="grCrearGrupoBoton1">
+                        <Component class="javax.swing.JButton" name="prRegistrarProfesorBoton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Registrar Profesor"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prRegistrarProfesorBotonActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="grBorrarGrupoBoton1">
+                        <Component class="javax.swing.JButton" name="prBorrarProfesorBoton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Eliminar Registro"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="grEditarGrupoBoton1">
+                        <Component class="javax.swing.JButton" name="prEditarProfesorBoton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Editar Informacion"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="grEditarGrupoBoton1ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prEditarProfesorBotonActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="prNombreLabel">
@@ -1134,13 +1119,7 @@
                         <Component class="javax.swing.JList" name="adAdminList">
                           <Properties>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                              <StringArray count="5">
-                                <StringItem index="0" value="Item 1"/>
-                                <StringItem index="1" value="Item 2"/>
-                                <StringItem index="2" value="Item 3"/>
-                                <StringItem index="3" value="Item 4"/>
-                                <StringItem index="4" value="Item 5"/>
-                              </StringArray>
+                              <StringArray count="0"/>
                             </Property>
                             <Property name="selectionMode" type="int" value="0"/>
                           </Properties>
@@ -1281,15 +1260,46 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="salirBoton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="cerrarSesionBoton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="112" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="salirBoton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cerrarSesionBoton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="salirBoton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Guardar y Salir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salirBotonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="cerrarSesionBoton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cerrarSesionBotonActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
     </Container>
   </SubComponents>
 </Form>

@@ -140,10 +140,11 @@ public class Login extends javax.swing.JFrame {
                 Admin admin = getAdmin();
                 if(admin != null){
                     if(admin.isPassword(passwordText.getPassword())){
-                        AdminGUI adminGui = new AdminGUI(admin);
+                        AdminGUI adminGui = new AdminGUI(admin, this);
                         adminGui.setTitle("Administradores - " +
                             admin.getNombreCompleto());
                         adminGui.setVisible(true);
+                        this.setVisible(false);
                     }else
                         informacionLabel.setText("Contraseña Invalida");
                 }else

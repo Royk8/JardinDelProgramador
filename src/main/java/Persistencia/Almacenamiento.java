@@ -85,7 +85,8 @@ public class Almacenamiento {
             campos.put("id", grupo.getId());
             campos.put("nivel", Integer.toString(grupo.getNivel()));
             campos.put("horario", Character.toString(grupo.getHorario()));
-            campos.put("profesorId", grupo.getProfesor().getId());
+            
+            campos.put("profesorId", (grupo.getProfesor()!=null)? grupo.getProfesor().getId():"");
             
             jsonGrupos.add(campos);
         }
@@ -161,6 +162,10 @@ public class Almacenamiento {
             }
         }
         return parientes;
+    }
+    
+    public static void guardarCampo(String etiqueta, String dato){
+        
     }
     
 

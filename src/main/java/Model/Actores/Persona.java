@@ -1,14 +1,30 @@
 package Model.Actores;
 
+/**
+ * Clase abstracta que agrupa todas las clases relacionadas con personas
+ * Tiene cuatro atributos String nombre, apellido, tipo de documento y numero de documento
+ * @author Royk
+ */
 public abstract class Persona {
     protected String id;
     protected String nombre;
     protected String apellido;
     protected String idType;
 
+    /**
+     * Constructor Vacio
+     */
     public Persona(){
         
     }
+    
+    /**
+     * Constructor completo
+     * @param id
+     * @param nombre
+     * @param apellido
+     * @param idType 
+     */
     public Persona(String id, String nombre, String apellido, String idType) {
         this.id = id;
         this.nombre = nombre;
@@ -16,6 +32,31 @@ public abstract class Persona {
         this.idType = idType;
     }
 
+    /**
+     * A 
+     * @param nombreCompleto
+     * @return 
+     */
+    public boolean isNombreCompleto(String nombreCompleto){
+        return nombreCompleto.equals(nombre + apellido);
+    }
+    
+    /**
+     * Getter que retorna nombre y apellido concatenados
+     * @return String 
+     */
+    public String getNombreCompleto(){
+        return nombre + " " + apellido;
+    }
+    
+    /**
+     * Retorna null si es un objeto vacio de esta clase
+     * @return 
+     */
+    public boolean isEmpty(){
+        return id == null;
+    }
+    
     public String getId() {
         return id;
     }
@@ -39,15 +80,7 @@ public abstract class Persona {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
-    public String getNombreCompleto(){
-        return nombre + " " + apellido;
-    }
-    
-    public boolean isNombreCompleto(String nombreCompleto){
-        return nombreCompleto.equals(nombre + apellido);
-    }
-    
+        
     public String getIdType() {
         return idType;
     }

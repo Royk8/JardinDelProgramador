@@ -12,6 +12,7 @@ import Model.Actores.Admin;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
 import Model.Grupo;
+import Persistencia.Almacenamiento;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ import javax.swing.event.ListSelectionListener;
  * @author Royk
  */
 public class AdminGUI extends javax.swing.JFrame {
-    
+    private Login login;
     /**
      * Creates new form AdminGUI
      */
@@ -35,8 +36,9 @@ public class AdminGUI extends javax.swing.JFrame {
      * Crea la ventana admin con la informacion del perfin de admin que logueo
      * @param admin Perfil de admin del cual se extraera informacion
      */
-    public AdminGUI(Admin admin) {
+    public AdminGUI(Admin admin, Login login) {
         initComponents();
+        this.login = login;
         llenarTodasLasListas();
     }
     
@@ -213,9 +215,9 @@ public class AdminGUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         prProfesoresList = new javax.swing.JList<>();
         jPanel9 = new javax.swing.JPanel();
-        grCrearGrupoBoton1 = new javax.swing.JButton();
-        grBorrarGrupoBoton1 = new javax.swing.JButton();
-        grEditarGrupoBoton1 = new javax.swing.JButton();
+        prRegistrarProfesorBoton = new javax.swing.JButton();
+        prBorrarProfesorBoton = new javax.swing.JButton();
+        prEditarProfesorBoton = new javax.swing.JButton();
         prNombreLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         prApellidoLabel = new javax.swing.JLabel();
@@ -283,6 +285,8 @@ public class AdminGUI extends javax.swing.JFrame {
         adIdLabel = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
+        salirBoton = new javax.swing.JButton();
+        cerrarSesionBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 650));
@@ -292,11 +296,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(50, 50));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(200, 139));
 
-        grGruposList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         grGruposList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(grGruposList);
 
@@ -323,23 +322,18 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        grGrupoLabel.setText("jLabel1");
+        grGrupoLabel.setText("Grupo");
 
         jLabel2.setText("Profesor");
 
-        grProfesorLabel.setText("jLabel3");
+        grProfesorLabel.setText("Profesor");
 
         jLabel3.setText("Horario");
 
-        grHorarioLabel.setText("jLabel4");
+        grHorarioLabel.setText("Horario");
 
         grNinnoLabel.setText("Niños");
 
-        grNinnosList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         grNinnosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(grNinnosList);
 
@@ -356,7 +350,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Nivel");
 
-        grNivelLabel.setText("jLabel4");
+        grNivelLabel.setText("Nivel");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -422,7 +416,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(grNinnoLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(grEditarNinnoBoton)
                     .addComponent(grRegistrarNinnoBoton)
@@ -457,24 +451,24 @@ public class AdminGUI extends javax.swing.JFrame {
         jScrollPane3.setMinimumSize(new java.awt.Dimension(50, 50));
         jScrollPane3.setPreferredSize(new java.awt.Dimension(200, 139));
 
-        prProfesoresList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         prProfesoresList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(prProfesoresList);
 
         jSplitPane2.setLeftComponent(jScrollPane3);
 
-        grCrearGrupoBoton1.setText("Registrar Profesor");
-
-        grBorrarGrupoBoton1.setText("Eliminar Registro");
-
-        grEditarGrupoBoton1.setText("Editar Informacion");
-        grEditarGrupoBoton1.addActionListener(new java.awt.event.ActionListener() {
+        prRegistrarProfesorBoton.setText("Registrar Profesor");
+        prRegistrarProfesorBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                grEditarGrupoBoton1ActionPerformed(evt);
+                prRegistrarProfesorBotonActionPerformed(evt);
+            }
+        });
+
+        prBorrarProfesorBoton.setText("Eliminar Registro");
+
+        prEditarProfesorBoton.setText("Editar Informacion");
+        prEditarProfesorBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prEditarProfesorBotonActionPerformed(evt);
             }
         });
 
@@ -540,11 +534,11 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addGap(0, 223, Short.MAX_VALUE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addComponent(grCrearGrupoBoton1)
+                                .addComponent(prRegistrarProfesorBoton)
                                 .addGap(18, 18, 18)
-                                .addComponent(grEditarGrupoBoton1)
+                                .addComponent(prEditarProfesorBoton)
                                 .addGap(18, 18, 18)
-                                .addComponent(grBorrarGrupoBoton1))
+                                .addComponent(prBorrarProfesorBoton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                                 .addComponent(grRegistrarNinnoBoton1)
                                 .addGap(18, 18, 18)
@@ -598,9 +592,9 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(grCrearGrupoBoton1)
-                            .addComponent(grBorrarGrupoBoton1)
-                            .addComponent(grEditarGrupoBoton1)))
+                            .addComponent(prRegistrarProfesorBoton)
+                            .addComponent(prBorrarProfesorBoton)
+                            .addComponent(prEditarProfesorBoton)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(prNumeroLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -881,11 +875,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jScrollPane7.setMinimumSize(new java.awt.Dimension(50, 50));
         jScrollPane7.setPreferredSize(new java.awt.Dimension(200, 139));
 
-        adAdminList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         adAdminList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane7.setViewportView(adAdminList);
 
@@ -988,15 +977,39 @@ public class AdminGUI extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
         );
 
+        salirBoton.setText("Guardar y Salir");
+        salirBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirBotonActionPerformed(evt);
+            }
+        });
+
+        cerrarSesionBoton.setText("Cerrar Sesión");
+        cerrarSesionBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarSesionBotonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(salirBoton)
+                .addGap(18, 18, 18)
+                .addComponent(cerrarSesionBoton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 112, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salirBoton)
+                    .addComponent(cerrarSesionBoton))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1027,9 +1040,9 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_grRegistrarNinnoBoton1ActionPerformed
 
-    private void grEditarGrupoBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grEditarGrupoBoton1ActionPerformed
+    private void prEditarProfesorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prEditarProfesorBotonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_grEditarGrupoBoton1ActionPerformed
+    }//GEN-LAST:event_prEditarProfesorBotonActionPerformed
 
     private void grRegistrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grRegistrarNinnoBotonActionPerformed
         // TODO add your handling code here:
@@ -1106,6 +1119,21 @@ public class AdminGUI extends javax.swing.JFrame {
         JardinController.getGrupos().remove(JardinController.getGrupo(idGrupo));
     }//GEN-LAST:event_grBorrarGrupoBotonActionPerformed
 
+    private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
+        Almacenamiento.almacenarRegistros();
+        System.exit(0);      
+    }//GEN-LAST:event_salirBotonActionPerformed
+
+    private void cerrarSesionBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionBotonActionPerformed
+        Almacenamiento.almacenarRegistros();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_cerrarSesionBotonActionPerformed
+
+    private void prRegistrarProfesorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prRegistrarProfesorBotonActionPerformed
+        
+    }//GEN-LAST:event_prRegistrarProfesorBotonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1159,12 +1187,10 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel adIdTypeLabel;
     private javax.swing.JLabel adNombreLabel;
     private javax.swing.JButton adRegistrarBoton;
+    private javax.swing.JButton cerrarSesionBoton;
     private javax.swing.JButton grBorrarGrupoBoton;
-    private javax.swing.JButton grBorrarGrupoBoton1;
     private javax.swing.JButton grCrearGrupoBoton;
-    private javax.swing.JButton grCrearGrupoBoton1;
     private javax.swing.JButton grEditarGrupoBoton;
-    private javax.swing.JButton grEditarGrupoBoton1;
     private javax.swing.JButton grEditarNinnoBoton;
     private javax.swing.JButton grEditarNinnoBoton1;
     private javax.swing.JButton grEliminarNinnoBoton;
@@ -1235,12 +1261,16 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton niRegistrarNinnoBoton;
     private javax.swing.JLabel niTallaLabel;
     private javax.swing.JLabel prApellidoLabel;
+    private javax.swing.JButton prBorrarProfesorBoton;
+    private javax.swing.JButton prEditarProfesorBoton;
     private javax.swing.JLabel prEspecialLabel;
     private javax.swing.JLabel prIdLabel;
     private javax.swing.JLabel prIdTypeLabel;
     private javax.swing.JLabel prNombreLabel;
     private javax.swing.JLabel prNumeroLabel;
     private javax.swing.JList<String> prProfesoresList;
+    private javax.swing.JButton prRegistrarProfesorBoton;
     private javax.swing.JLabel prTelefonoLabel;
+    private javax.swing.JButton salirBoton;
     // End of variables declaration//GEN-END:variables
 }

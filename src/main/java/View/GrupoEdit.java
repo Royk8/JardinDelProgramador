@@ -33,7 +33,7 @@ public class GrupoEdit extends javax.swing.JFrame {
         tituloLabel.setText(tarea);
         this.tarea = tarea;
         this.grupo = new Grupo();
-        numeroGrupo = JardinController.getGrupos().size() + 1;
+        numeroGrupo = JardinController.getGrupos().size();
         llenarCombos();
     }
     
@@ -43,7 +43,7 @@ public class GrupoEdit extends javax.swing.JFrame {
         tituloLabel.setText(tarea);
         this.tarea = tarea;
         this.grupo = grupo;
-        numeroGrupo = grupo.getIdInt();
+        numeroGrupo = grupo.getIdInt() -1;
         llenarCombos();
         
     }
