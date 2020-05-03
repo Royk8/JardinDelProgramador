@@ -1,1 +1,1 @@
-[{"horario":"M","id":"0","nivel":"1","profesorId":""},{"horario":"M","id":"1","nivel":"1","profesorId":"123456"},{"horario":"M","id":"2","nivel":"3","profesorId":"123456"},{"horario":"T","id":"3","nivel":"2","profesorId":"123456"},{"horario":"T","id":"4","nivel":"3","profesorId":"123456"}]
+[{"horario":"M","id":"0","nivel":"1","profesorId":""},{"horario":"T","id":"1","nivel":"2","profesorId":"123456"},{"horario":"T","id":"2","nivel":"3","profesorId":"12345"},{"horario":"T","id":"3","nivel":"1","profesorId":"12345"},{"horario":"M","id":"4","nivel":"2","profesorId":"123456"}]

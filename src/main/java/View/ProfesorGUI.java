@@ -49,11 +49,14 @@ public class ProfesorGUI extends javax.swing.JFrame {
         Ninno ninno = getSelectedNinno();
         
         DefaultTableModel tablaLogros = (DefaultTableModel) logrosTabla.getModel();
+        tablaLogros.setRowCount(0);
         ArrayList<Logro> logros = ninno.getLogros();
         
         for(Logro logro: logros){
             tablaLogros.addRow(new Object[]{logro.getBimestreString(), logro.getTitulo(), logro.getEstado()});
         }
+        
+        
     }
     
     /**

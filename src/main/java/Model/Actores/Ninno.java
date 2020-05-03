@@ -66,7 +66,8 @@ public class Ninno extends Persona{
     public Ninno(String id, String nombre, String apellido, String idType, 
                 int edad, int grupo, float talla, float peso, String situacionEspecial,
                 char genero, char horario, int year, int month, int day, 
-                Acudiente acudiente, ArrayList<Pariente> parientes, String profesor) {
+                Acudiente acudiente, ArrayList<Pariente> parientes, String profesor, 
+                ArrayList<Logro> logros) {
         super(id, nombre, apellido, idType);
         this.edad = edad;
         this.grupo = grupo;
@@ -76,7 +77,7 @@ public class Ninno extends Persona{
         this.genero = genero;
         this.horario = horario;
         this.fechaDeNacimiento = LocalDate.of(year,month,day);
-        logros = new ArrayList<>();
+        this.logros = logros;
         this.parientes = parientes;
         this.acudiente = acudiente;
         this.profesor = profesor;

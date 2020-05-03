@@ -6,6 +6,7 @@ import Model.Actores.Ninno;
 import Model.Actores.Pariente;
 import Model.Actores.Profesor;
 import Model.Grupo;
+import Model.Logro;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -55,10 +56,12 @@ public class Almacenamiento {
             campos.put("day", String.valueOf(ninno.getNacimiento().getDayOfMonth()));
             campos.put("Acudiente", cifrarAcudiente(ninno.getAcudiente()));
             campos.put("Parientes", cifrarParientes(ninno.getParientes()));
+            campos.put("Logros", cifrarLogros(ninno.getLogros()));
             String profesorid;
             try{
                 profesorid = ninno.getProfesor();
             }catch(NullPointerException nu){
+                System.out.println("Problema con profesor");
                 profesorid = " ";
             }
             campos.put("profesorId", profesorid);
@@ -102,24 +105,6 @@ public class Almacenamiento {
         almacenarInformacion("Grupos", jsonGrupos);
     }
     
-    public static JSONArray cifrarParientes(ArrayList<Pariente> parientes){
-        JSONArray jsonParientes = new JSONArray();
-        for(Pariente pariente : parientes){
-            JSONObject campos = new JSONObject();
-            campos.put("id", pariente.getId());
-            campos.put("nombre", pariente.getNombre());
-            campos.put("apellido", pariente.getApellido());
-            campos.put("idType", pariente.getIdType());
-            campos.put("telefono", pariente.getTelefono());
-            campos.put("celular", pariente.getCelular());
-            campos.put("calidad", pariente.getCalidad());
-            campos.put("direccion", pariente.getDireccion());
-            JSONObject jsonPariente = new JSONObject();
-            jsonParientes.add(campos);
-        }
-        return jsonParientes;
-    }
-    
     public static JSONObject cifrarAcudiente(Acudiente acudiente){
         JSONObject campos = new JSONObject();
         campos.put("id", acudiente.getId());
@@ -134,6 +119,39 @@ public class Almacenamiento {
         campos.put("horario", acudiente.getHorario());
         campos.put("permiso", acudiente.getPermiso());
         return campos;
+    }
+    
+    public static JSONArray cifrarParientes(ArrayList<Pariente> parientes){
+        JSONArray jsonParientes = new JSONArray();
+        for(Pariente pariente : parientes){
+            JSONObject campos = new JSONObject();
+            campos.put("id", pariente.getId());
+            campos.put("nombre", pariente.getNombre());
+            campos.put("apellido", pariente.getApellido());
+            campos.put("idType", pariente.getIdType());
+            campos.put("telefono", pariente.getTelefono());
+            campos.put("celular", pariente.getCelular());
+            campos.put("calidad", pariente.getCalidad());
+            campos.put("direccion", pariente.getDireccion());
+
+            jsonParientes.add(campos);
+        }
+        return jsonParientes;
+    }
+        
+    public static JSONArray cifrarLogros(ArrayList<Logro> logros){
+        JSONArray jsonLogros = new JSONArray();
+        for(Logro logro: logros){
+            JSONObject campos = new JSONObject();
+            campos.put("titulo", logro.getTitulo());
+            campos.put("descripcion", logro.getDescripcion());
+            campos.put("estado", logro.getEstado());
+            campos.put("year", Integer.toString(logro.getBimestre().getYear()));
+            campos.put("bimestre",Integer.toString(logro.getBimestre().getNumBimestre()));
+            
+            jsonLogros.add(campos);
+        }
+        return jsonLogros;
     }
     
     public static Acudiente descifrarAcudiente(JSONObject jsonAcudiente){
@@ -173,8 +191,21 @@ public class Almacenamiento {
         return parientes;
     }
     
-    public static void guardarCampo(String etiqueta, String dato){
-        
+    public static ArrayList<Logro> descifrarLogros(JSONArray jsonLogros){
+        ArrayList<Logro> logros = new ArrayList<>();
+        if(jsonLogros != null){
+            for(Object registro: jsonLogros){
+                JSONObject jsonRegistro = (JSONObject) registro;
+                Logro logro = new Logro();
+                logro.setAll(jsonRegistro.get("titulo").toString(),
+                        Integer.valueOf(jsonRegistro.get("bimestre").toString()),
+                        Integer.valueOf(jsonRegistro.get("year").toString()), 
+                        jsonRegistro.get("estado").toString(),
+                        jsonRegistro.get("descripcion").toString());
+                logros.add(logro);
+            }
+        }
+        return logros;
     }
     
 
@@ -225,7 +256,8 @@ public class Almacenamiento {
                     Integer.parseInt(jsonRegistro.get("day").toString()),
                     descifrarAcudiente((JSONObject) jsonRegistro.get("Acudiente")),
                     descifrarParientes((JSONArray) jsonRegistro.get("Parientes")),
-                    jsonRegistro.get("profesorId").toString());
+                    jsonRegistro.get("profesorId").toString(),
+                    descifrarLogros((JSONArray) jsonRegistro.get("Logros")));
                 ninnos.add(ninno);
             }
         }

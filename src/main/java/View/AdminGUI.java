@@ -121,16 +121,16 @@ public class AdminGUI extends javax.swing.JFrame {
                     prIdLabel.setText(profesor.getId());
                     prEspecialLabel.setText(profesor.getEspecialidad());
                     prTelefonoLabel.setText(profesor.getTelefono());
-                    /*ProfesorController prController = new ProfesorController(profesor);
+                    ProfesorController prController = new ProfesorController(profesor);
                     prController.getNinnos().size();
-                    prNumeroLabel.setText(Integer.toString(prController.getNinnos().size()));*/
+                    prNumeroLabel.setText(Integer.toString(prController.getNinnos().size()));
                 }
             }
         });
     }
 
     public void niLlenarNinnosList(){
-        DefaultListModel<String> listaNinnos = new DefaultListModel<String>();
+        DefaultListModel<String> listaNinnos = new DefaultListModel<>();
         ArrayList<Ninno> ninnos = JardinController.getNinnos();
         for(Ninno ninno : ninnos){
             listaNinnos.addElement(ninno.getNombreCompleto());
@@ -1117,8 +1117,9 @@ public class AdminGUI extends javax.swing.JFrame {
             Object seleccion = (JOptionPane.showInputDialog(this, "Seleciona un grupo", "Asignar Grupo", JOptionPane.DEFAULT_OPTION,
                     null, grupos, grupos[0]));
             if(seleccion != null){                
-                GrupoController.addNinno(ninno, JardinController.getGrupo(Integer.valueOf(seleccion.toString()))); 
-                
+                Grupo grupo = JardinController.getGrupo(Integer.valueOf(seleccion.toString()));
+                GrupoController.addNinno(ninno, grupo); 
+                ninno.setProfesor(grupo.getProfesor().getId());
             }
             
         }
