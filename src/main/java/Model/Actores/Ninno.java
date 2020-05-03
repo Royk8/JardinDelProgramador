@@ -211,6 +211,14 @@ public class Ninno extends Persona{
         return id == null;
     }
     
+    public Logro getLogro(String titulo){
+        for(Logro logro: logros){
+            if(logro.getTitulo().equals(titulo))
+                return logro;
+        }
+        return null;
+    }
+    
     
     
 }

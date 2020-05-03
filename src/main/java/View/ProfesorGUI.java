@@ -4,6 +4,7 @@ import Controller.JardinController;
 import Controller.ProfesorController;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
+import Model.Logro;
 import Persistencia.Almacenamiento;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class ProfesorGUI extends javax.swing.JFrame {
     private ProfesorController profesorController;
     private Login login;
+    
     /**
      * Creates new form ProfesoGUI
      */
@@ -25,9 +27,14 @@ public class ProfesorGUI extends javax.swing.JFrame {
     public ProfesorGUI(Profesor profesor, Login login) {
         initComponents();
         profesorController = new ProfesorController(profesor);
-        this.login = login;
+        this.login = login;        
+        llenarInformacion();
+    }
+    
+    public void llenarInformacion(){
         llenarListado();
-        llenarDetalles(0);
+        llenarDetalles();
+        llenarLogros();
     }
     
     public void llenarListado(){
@@ -38,14 +45,22 @@ public class ProfesorGUI extends javax.swing.JFrame {
         }
     }
     
+    public void llenarLogros(){
+        Ninno ninno = getSelectedNinno();
+        
+        DefaultTableModel tablaLogros = (DefaultTableModel) logrosTabla.getModel();
+        ArrayList<Logro> logros = ninno.getLogros();
+        
+        for(Logro logro: logros){
+            tablaLogros.addRow(new Object[]{logro.getBimestreString(), logro.getTitulo(), logro.getEstado()});
+        }
+    }
+    
     /**
      * Metodo que llena los campos de detalles con la informacion de los niños
-     * @param row Parametro que recibe la fila seleccionada en la tabla de niños
      */
-    public void llenarDetalles(int row){
-        DefaultTableModel tabla = (DefaultTableModel) ninnosTabla.getModel();
-        String ninnoNombre = tabla.getValueAt(row, 0).toString();
-        Ninno ninno = JardinController.getNinno(ninnoNombre);
+    public void llenarDetalles(){
+        Ninno ninno = getSelectedNinno();
         if(ninno != null){
             nombreLabel.setText(ninno.getNombre());
             apellidoLabel.setText(ninno.getApellido());
@@ -62,6 +77,21 @@ public class ProfesorGUI extends javax.swing.JFrame {
             especialLabel.setText(ninno.getSituacionEspecial());
             nombreLabel.setText(ninno.getNombre());            
         }
+    }
+    
+    public Logro getSelectedLogro(){
+        Ninno ninno = getSelectedNinno();
+        String logroTitulo = logrosTabla.getModel().getValueAt(logrosTabla.getSelectedRow(), 1).toString();
+        
+        return ninno.getLogro(logroTitulo);
+    }
+    
+    public Ninno getSelectedNinno(){
+        DefaultTableModel tablaNinnos = (DefaultTableModel) ninnosTabla.getModel();
+        int selection = (ninnosTabla.getSelectedRow() >= 0)? ninnosTabla.getSelectedRow() : 0;        
+        String ninnoNombre = tablaNinnos.getValueAt(selection, 0).toString();
+
+        return JardinController.getNinno(ninnoNombre);
     }
 
     /**
@@ -107,9 +137,9 @@ public class ProfesorGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        logrosTabla = new javax.swing.JTable();
+        EditarLogro = new javax.swing.JButton();
+        agregarLogro = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ninnosTabla = new javax.swing.JTable();
@@ -327,7 +357,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Logros");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        logrosTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -335,22 +365,22 @@ public class ProfesorGUI extends javax.swing.JFrame {
                 "Bimestre", "Logro", "Estado"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(logrosTabla);
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jButton1.setText("Editar Logro");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        EditarLogro.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        EditarLogro.setText("Editar Logro");
+        EditarLogro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                EditarLogroActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jButton2.setText("Agregar Logro");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        agregarLogro.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        agregarLogro.setText("Agregar Logro");
+        agregarLogro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        agregarLogro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                agregarLogroActionPerformed(evt);
             }
         });
 
@@ -369,9 +399,9 @@ public class ProfesorGUI extends javax.swing.JFrame {
                         .addContainerGap())))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(134, 134, 134)
-                .addComponent(jButton2)
+                .addComponent(agregarLogro)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(EditarLogro)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -383,8 +413,8 @@ public class ProfesorGUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(agregarLogro)
+                    .addComponent(EditarLogro))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -468,16 +498,19 @@ public class ProfesorGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ninnosTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ninnosTablaMouseClicked
-        llenarDetalles(ninnosTabla.getSelectedRow());
+        llenarDetalles();
+        llenarLogros();
     }//GEN-LAST:event_ninnosTablaMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void agregarLogroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLogroActionPerformed
+        LogroEdit edit = new LogroEdit("Asignar Logro", this, getSelectedNinno());
+        edit.setVisible(true);
+    }//GEN-LAST:event_agregarLogroActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void EditarLogroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarLogroActionPerformed
+        LogroEdit edit = new LogroEdit("Asignar Logro", this, getSelectedNinno(), getSelectedLogro());
+        edit.setVisible(true);
+    }//GEN-LAST:event_EditarLogroActionPerformed
 
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
         Almacenamiento.almacenarRegistros();
@@ -527,6 +560,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EditarLogro;
     private javax.swing.JLabel Label1;
     private javax.swing.JLabel Label2;
     private javax.swing.JLabel NombreLabel10;
@@ -538,6 +572,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel NombreLabel8;
     private javax.swing.JLabel NombreLabel9;
     private javax.swing.JLabel acudienteLabel;
+    private javax.swing.JButton agregarLogro;
     private javax.swing.JLabel apellidoLabel;
     private javax.swing.JButton cerrarSesionBoton;
     private javax.swing.JLabel edadLabel;
@@ -547,8 +582,6 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel horarioLabel;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idTypeLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -561,7 +594,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable logrosTabla;
     private javax.swing.JLabel nacimientoLabel;
     private javax.swing.JTable ninnosTabla;
     private javax.swing.JLabel nombreLabel;
@@ -569,4 +602,5 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private javax.swing.JButton salirBoton;
     private javax.swing.JLabel tallaLabel;
     // End of variables declaration//GEN-END:variables
+
 }

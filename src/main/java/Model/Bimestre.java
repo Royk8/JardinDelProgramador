@@ -19,17 +19,17 @@ public class Bimestre {
      */
     private String toBimestre(int numBimestre){
         switch (numBimestre){
-            case 1: case 2:
+            case 1:
                 return "Ene-Feb";
-            case 3: case 4:
+            case 2:
                 return "Mar-Abr";
-            case 5: case 6:
+            case 3:
                 return "May-Jun";
-            case 7: case 8:
+            case 4:
                 return "Jul-Ago";
-            case 9: case 10:
+            case 5:
                 return "Sep-Oct";
-            case 11: case 12:
+            case 6:
                 return "Nov-Dic";
             default:
                 return "Bimestre Invalido";
