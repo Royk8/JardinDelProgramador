@@ -1,14 +1,14 @@
 package View;
 
 import Controller.JardinController;
+import Model.Actores.Acudiente;
 import Model.Actores.Admin;
+import Model.Actores.Ninno;
 import Model.Actores.Profesor;
 import Persistencia.Almacenamiento;
 
 public class Login extends javax.swing.JFrame {
     
-    String[] usuarios = {"Administrativo", "Profesor", "Padre"};
-
     /**
      * Creates new form Login
      */
@@ -151,7 +151,21 @@ public class Login extends javax.swing.JFrame {
                 }else
                     informacionLabel.setText("Identificacion no valida para Administrador");
                 break;
-                
+            case "Acudiente":
+                Acudiente acudiente = getAcudiente();
+                Ninno ninno = getNinno();
+                if(ninno != null && acudiente != null){
+                    if(acudiente.isPassword(passwordText.getPassword())){
+                        AcudienteGUI acudienteGui = new AcudienteGUI(ninno, this);
+                        acudienteGui.setTitle("Acudientes - " +
+                            acudiente.getNombreCompleto());
+                        acudienteGui.setVisible(true);
+                        this.setVisible(false);
+                    }else
+                        informacionLabel.setText("Contraseña Invalida");
+                }else
+                    informacionLabel.setText("Identificacion no valida para Administrador");
+                break;                
         }
     }//GEN-LAST:event_ingresarBotonActionPerformed
 
@@ -211,5 +225,13 @@ public class Login extends javax.swing.JFrame {
         usuarioCombo.addItem("Administrativo");
         usuarioCombo.addItem("Profesor");
         usuarioCombo.addItem("Acudiente");
+    }
+
+    private Acudiente getAcudiente() {
+        return JardinController.getAcudiente(idText.getText());
+    }
+    
+    private Ninno getNinno(){
+        return JardinController.getNinnoPorAcudiente(idText.getText());
     }
 }

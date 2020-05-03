@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Actores.Acudiente;
 import Model.Actores.Admin;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
@@ -135,6 +136,32 @@ public class JardinController {
             if(ninno.getNombreCompleto().equals(nombreCompleto)){
                 return ninno;
             }
+        }
+        return null;
+    }
+    
+    /**
+     * Retorna un ninno de la lista, buscado por el id de su acudiente
+     * @param acudienteId 
+     * @return Objeto de la clase Ninno
+     */
+    public static Ninno getNinnoPorAcudiente(String acudienteId){
+        for(Ninno ninno: ninnos){
+            if(ninno.getAcudiente().getId().equals(acudienteId))
+                return ninno;
+        }
+        return null;
+    }
+    
+    /**
+     * Retorna el acudiente de un ninno en la lista general de ninnos
+     * @param acudienteId usado para identificar el acudiente buscado
+     * @return 
+     */
+    public static Acudiente getAcudiente(String acudienteId){
+        for(Ninno ninno : ninnos){
+            if(ninno.getAcudiente().getId().equals(acudienteId))
+                return ninno.getAcudiente();
         }
         return null;
     }

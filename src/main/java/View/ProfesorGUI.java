@@ -511,8 +511,11 @@ public class ProfesorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarLogroActionPerformed
 
     private void EditarLogroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarLogroActionPerformed
-        LogroEdit edit = new LogroEdit("Asignar Logro", this, getSelectedNinno(), getSelectedLogro());
-        edit.setVisible(true);
+        Logro logro = getSelectedLogro();
+        if(logro != null){
+            LogroEdit edit = new LogroEdit("Asignar Logro", this, getSelectedNinno(), logro);
+            edit.setVisible(true);
+        }
     }//GEN-LAST:event_EditarLogroActionPerformed
 
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
