@@ -54,7 +54,7 @@ public class Logro {
         this.bimestre = bimestre;
     }
 
-    public Boolean getCompletado() {
+    public Boolean isCompletado() {
         return completado;
     }
 

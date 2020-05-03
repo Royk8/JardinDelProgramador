@@ -220,6 +220,12 @@ public class Ninno extends Persona{
         return null;
     }
     
-    
+    public String logrosCompletos(){
+        int completados = 0;
+        for(Logro logro: logros){
+            if(logro.isCompletado()) completados++;
+        }
+        return completados + " logro"+((logros.size() == 1)? " ":"s ")+"completado" + ((completados == 1)? " ":"s ");
+    }
     
 }

@@ -9,6 +9,7 @@ import Controller.JardinController;
 import Model.Actores.Ninno;
 import Model.Grupo;
 import Model.Logro;
+import Persistencia.ReportPrinter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -87,7 +88,7 @@ public class AcudienteGUI extends javax.swing.JFrame {
         imprimirBoton = new javax.swing.JButton();
         salirBoton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tittleLabel.setText("Informacion del Niño");
 
@@ -135,6 +136,11 @@ public class AcudienteGUI extends javax.swing.JFrame {
         });
 
         imprimirBoton.setText("Imprimir Reporte");
+        imprimirBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirBotonActionPerformed(evt);
+            }
+        });
 
         salirBoton.setText("Salir");
         salirBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +241,11 @@ public class AcudienteGUI extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_salirBotonActionPerformed
+
+    private void imprimirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirBotonActionPerformed
+        ReportPrinter printer = new ReportPrinter(ninno, "Historico");
+        printer.imprimirPDF();
+    }//GEN-LAST:event_imprimirBotonActionPerformed
 
     /**
      * @param args the command line arguments
