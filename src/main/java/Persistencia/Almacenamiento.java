@@ -25,11 +25,13 @@ public class Almacenamiento {
       
     public static void cargarRegistros(){
         JardinController.setNinnos(cargarNinnos(cargarInformacion("Ninnos")));
+        JardinController.setProfesores(cargarProfesores(cargarInformacion("Profesores")));
         JardinController.setGrupos(cargarGrupos(cargarInformacion("Grupos")));
     }
     
     public static void almacenarRegistros(){
         almacenarNinnos(JardinController.getNinnos());
+        almacenarProfesores(JardinController.getProfesores());
         almacenarGrupos(JardinController.getGrupos());
     }
     
@@ -53,6 +55,13 @@ public class Almacenamiento {
             campos.put("day", String.valueOf(ninno.getNacimiento().getDayOfMonth()));
             campos.put("Acudiente", cifrarAcudiente(ninno.getAcudiente()));
             campos.put("Parientes", cifrarParientes(ninno.getParientes()));
+            String profesorid;
+            try{
+                profesorid = ninno.getProfesor();
+            }catch(NullPointerException nu){
+                profesorid = " ";
+            }
+            campos.put("profesorId", profesorid);
             
             jsonNinnos.add(campos);
         }
@@ -191,6 +200,15 @@ public class Almacenamiento {
             for(Object registro: jsonNinnos){
 
                 JSONObject jsonRegistro = (JSONObject) registro;
+                
+                //problemas con situacion especial
+                String situacionEspecial;
+                try{
+                    situacionEspecial = jsonRegistro.get("situacionEspecial").toString();
+                }catch(NullPointerException nu){
+                    situacionEspecial = "Ninguna";
+                }        
+                
                 Ninno ninno = new Ninno(jsonRegistro.get("id").toString(), 
                     jsonRegistro.get("nombre").toString(), 
                     jsonRegistro.get("apellido").toString(), 
@@ -199,14 +217,15 @@ public class Almacenamiento {
                     Integer.parseInt(jsonRegistro.get("grupo").toString()),
                     Float.parseFloat(jsonRegistro.get("talla").toString()),
                     Float.parseFloat(jsonRegistro.get("peso").toString()),
-                    jsonRegistro.get("situacionEspecial").toString(),
+                    situacionEspecial,
                     jsonRegistro.get("genero").toString().charAt(0),
                     jsonRegistro.get("horario").toString().charAt(0),
                     Integer.parseInt(jsonRegistro.get("year").toString()),
                     Integer.parseInt(jsonRegistro.get("month").toString()),
                     Integer.parseInt(jsonRegistro.get("day").toString()),
                     descifrarAcudiente((JSONObject) jsonRegistro.get("Acudiente")),
-                    descifrarParientes((JSONArray) jsonRegistro.get("Parientes")));
+                    descifrarParientes((JSONArray) jsonRegistro.get("Parientes")),
+                    jsonRegistro.get("profesorId").toString());
                 ninnos.add(ninno);
             }
         }
@@ -241,10 +260,19 @@ public class Almacenamiento {
             for(Object registro : jsonGrupos){
                 
                 JSONObject jsonRegistro = (JSONObject) registro;
+                
+                //problemas con profesor
+                Profesor profesor;
+                try{
+                    profesor = JardinController.getProfesor(jsonRegistro.get("profesorId").toString());
+                }catch(NullPointerException ne){
+                    profesor = null;
+                }
+                
                 Grupo grupo = new Grupo(jsonRegistro.get("id").toString(),
                         Integer.valueOf(jsonRegistro.get("nivel").toString()),
                         jsonRegistro.get("horario").toString().charAt(0),
-                        JardinController.getProfesor(jsonRegistro.get("profesor").toString()));
+                        profesor);
                 grupos.add(grupo);
             }
         }
@@ -274,6 +302,7 @@ public class Almacenamiento {
             System.out.println("Registro de " + nombreArchivo + " falló al recuperarse");
         }
         
+        System.out.println(nombreArchivo + " cargados.");        
         return registro;
     }
 }

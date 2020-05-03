@@ -2,6 +2,7 @@ D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Model\Actores\Persona.jav
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\View\ProfesorGUI.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\View\AcudienteEdit.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Controller\JardinController.java
+D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Model\Grupo.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Model\Actores\Admin.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Model\Actores\Profesor.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\View\NinnoEdit.java
@@ -10,7 +11,10 @@ D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Persistencia\Printer.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Persistencia\Almacenamiento.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\View\ParienteEdit.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Model\Actores\Ninno.java
+D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\View\GrupoEdit.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\View\Login.java
+D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Controller\GrupoController.java
+D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\View\ProfesorEdit.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Controller\ProfesorController.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Model\Actores\Pariente.java
 D:\Roy\Cosas Udea\Java\JardinProgramador\src\main\java\Model\StringWraper.java

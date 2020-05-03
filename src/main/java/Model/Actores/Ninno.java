@@ -19,7 +19,7 @@ public class Ninno extends Persona{
     private ArrayList<Logro> logros;
     private Acudiente acudiente;
     private ArrayList<Pariente> parientes;
-    private Profesor profesor;
+    private String profesor;
     
     /**
      * Constructor casi vacio, inicializa los arrayLists.
@@ -66,7 +66,7 @@ public class Ninno extends Persona{
     public Ninno(String id, String nombre, String apellido, String idType, 
                 int edad, int grupo, float talla, float peso, String situacionEspecial,
                 char genero, char horario, int year, int month, int day, 
-                Acudiente acudiente, ArrayList<Pariente> parientes) {
+                Acudiente acudiente, ArrayList<Pariente> parientes, String profesor) {
         super(id, nombre, apellido, idType);
         this.edad = edad;
         this.grupo = grupo;
@@ -79,6 +79,7 @@ public class Ninno extends Persona{
         logros = new ArrayList<>();
         this.parientes = parientes;
         this.acudiente = acudiente;
+        this.profesor = profesor;
     }
 
     public int getEdad() {
@@ -145,11 +146,11 @@ public class Ninno extends Persona{
         this.acudiente = acudiente;
     }
 
-    public Profesor getProfesor() {
+    public String getProfesor() {
         return profesor;
     }
 
-    public void setProfesor(Profesor profesor) {
+    public void setProfesor(String profesor) {
         this.profesor = profesor;
     }
     

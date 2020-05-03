@@ -28,11 +28,12 @@ public class JardinController {
     public JardinController(){
         //Inicializa la lista de ninnos.
         Almacenamiento.cargarRegistros();
-        profesores = new ArrayList<>();
         admins = new ArrayList<>();
         superAdmin = new Admin();
         admins.add(superAdmin);
-        cargarGrupos();
+        grupoCero();
+        
+        //cargarGrupos();
 
         
         /*Acudiente manuel = new Acudiente("5415", "Manuel", "Yarce", "Cedula", 
@@ -44,7 +45,7 @@ public class JardinController {
             2,1,1.1f,20f,"Brutico",'M','T',2000,7,3);
         Ninno alejito = new Ninno("1455236","Alejandro","Yarce","Registro Civil",
             3,1,1.2f,25f,"Brutico",'M','M',1998,12,30);*/
-        Profesor diana = new Profesor("123456","Diana","Lopez","Cedula","1234","31487965214",
+        /*Profesor diana = new Profesor("123456","Diana","Lopez","Cedula","1234","31487965214",
             "Programacion");
         Ninno jhoniercito = getNinno("Jhoniercito");
         Ninno alejito = getNinno("Alejandro");
@@ -55,7 +56,7 @@ public class JardinController {
         
         /*ninnos.add(alejito);
         ninnos.add(jhoniercito);*/
-        profesores.add(diana);
+        //profesores.add(diana);
     }
     
     public static Admin getAdmin(String adminId) {
@@ -65,6 +66,13 @@ public class JardinController {
             }
         }
         return null;
+    }
+    
+    public static void grupoCero(){
+        if(grupos.isEmpty()){
+            Grupo cero = new Grupo("0",1,'M',null);
+            grupos.add(cero);
+        }
     }
     
     /**
@@ -83,6 +91,20 @@ public class JardinController {
     public static Profesor getProfesor(String profesorId){
         for(Profesor profesor: profesores){
             if(profesor.getId().equals(profesorId)){
+                return profesor;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Retorna un profesor especifico indicado por su nombre completo
+     * @param nombreCompleto nombre completo del profesor
+     * @return Objeto de la clase profesor con el nombre buscado buscado
+     */
+    public static Profesor getProfesorCompleto(String nombreCompleto){
+        for(Profesor profesor: profesores){
+            if(profesor.getNombreCompleto().equals(nombreCompleto)){
                 return profesor;
             }
         }
@@ -120,7 +142,7 @@ public class JardinController {
     /**
      * Para borrar
      */
-    public void cargarGrupos(){
+    /*public void cargarGrupos(){
         grupos = new ArrayList<>();
         for(Ninno ninno: ninnos){
             //Lambda expresion, pregunta si existe algun grupo con este identificador asociado a un ninno
@@ -132,7 +154,7 @@ public class JardinController {
                 grupos.add(grupo);
             }
         }
-    }
+    }*/
     
     /**
      * Retorna un grupo de la lista de grupos, especificado por su id

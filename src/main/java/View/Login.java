@@ -127,10 +127,11 @@ public class Login extends javax.swing.JFrame {
                 Profesor profesor = getProfesor();
                 if(profesor != null){
                     if(profesor.isPassword(passwordText.getPassword())){
-                        ProfesorGUI profesorGui = new ProfesorGUI(profesor);
+                        ProfesorGUI profesorGui = new ProfesorGUI(profesor, this);
                         profesorGui.setTitle("Profesores - " + 
                             profesor.getNombreCompleto());
                         profesorGui.setVisible(true);
+                        this.setVisible(false);
                     }else
                         informacionLabel.setText("Contraseña Invalida");
                 }else

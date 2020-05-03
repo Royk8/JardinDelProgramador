@@ -15,16 +15,18 @@ public class ProfesorController {
     private ArrayList<Ninno> ninnos;
 
     public ProfesorController(Profesor profesor){
+        this.profesor = profesor;
         ninnos = new ArrayList<>();
         ArrayList<Ninno> ninnosTodos = JardinController.getNinnos();
-        /*for (Ninno ninno: ninnosTodos ) {
-            if(ninno.getProfesor().getId().equals(profesor.getId())){
+        for (Ninno ninno: ninnosTodos ) {
+            String profesorNinno = ninno.getProfesor();
+            if(profesorNinno != null && profesorNinno.equals(profesor.getId())){
                 this.ninnos.add(ninno);
             }
-        }*/
-        ninnos = ninnosTodos.stream()
+        }
+        /*ninnos = ninnosTodos.stream()
                 .filter(c -> profesor.getId().equals(c.getProfesor().getId()))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(ArrayList::new));*/
     }
     
     public ArrayList<Ninno> getNinnos(){

@@ -22,10 +22,11 @@ import javax.swing.JOptionPane;
  * @author Royk
  */
 public class NinnoEdit extends javax.swing.JFrame {
+    private AdminGUI papa;
     private Ninno ninno;
     private StringWraper situacionEspecial;
     private Acudiente acudiente;
-    private boolean nuevoNinno;
+    private boolean nuevoNinno;    
     
     /**
      * Creates new form NinnoEditPanel
@@ -38,9 +39,10 @@ public class NinnoEdit extends javax.swing.JFrame {
      * Constructor para cuando se quiere registrar un ninno de cero
      * @param titulo Parametro que indica el titulo de la ventana
      */
-    public NinnoEdit(String titulo){
+    public NinnoEdit(String titulo, AdminGUI papa){
         initComponents();
         titleLabel.setText(titulo);
+        this.papa = papa;
         ninno = new Ninno();
         nuevoNinno = true;
         situacionEspecial = new StringWraper(ninno.getSituacionEspecial());
@@ -54,11 +56,12 @@ public class NinnoEdit extends javax.swing.JFrame {
      * @param ninno: instancia del ninno a editar
      * @param titulo: Parametro que indica el titulo de la ventana
      */
-    public NinnoEdit(Ninno ninno, String titulo) {
+    public NinnoEdit(Ninno ninno, String titulo, AdminGUI papa) {
         initComponents();
         titleLabel.setText(titulo);
+        this.papa = papa;
         this.ninno = ninno;
-        situacionEspecial = new StringWraper("");
+        situacionEspecial = new StringWraper("Ninguna");
         acudiente = ninno.getAcudiente();
         llenarInformacion(ninno);
     }
@@ -432,6 +435,7 @@ public class NinnoEdit extends javax.swing.JFrame {
         if(nuevoNinno){
             JardinController.getNinnos().add(ninno);
         }
+        papa.niLlenarNinnosList();
         dispose();
     }//GEN-LAST:event_guardarBotonActionPerformed
 

@@ -17,7 +17,7 @@ public class Profesor extends Persona {
     }
     
     public void setAll(String id, String nombre, String apellido, String idType, 
-            String password, String telefono, String especialidad){
+            String telefono, String especialidad, String password){
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;

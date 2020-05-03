@@ -70,9 +70,15 @@ public class AdminGUI extends javax.swing.JFrame {
                     grGrupoLabel.setText("Grupo " + grupo.getId());
                     grHorarioLabel.setText((grupo.getHorario() == 'M')? "Mañana" : "Tarde");
                     grNivelLabel.setText(Integer.toString(grupo.getNivel()));
-                    /*Profesor profesor = grupo.getProfesor();
+                    
+                    try{
+                    Profesor profesor = grupo.getProfesor();
                     grProfesorLabel.setText(profesor.getNombreCompleto());
-                    grLlenarNinnos(grupo);*/
+                    }catch(NullPointerException nu){
+                        grProfesorLabel.setText("Sin Profesor");
+                    }
+                    
+                    grLlenarNinnos(grupo);
                 }
             }
         });
@@ -1041,7 +1047,13 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_grRegistrarNinnoBoton1ActionPerformed
 
     private void prEditarProfesorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prEditarProfesorBotonActionPerformed
-        // TODO add your handling code here:
+        if(!prProfesoresList.isSelectionEmpty()){
+            Profesor profesor = JardinController.getProfesorNombreCompleto(prProfesoresList.getSelectedValue());
+            if(profesor != null){
+                ProfesorEdit edit = new ProfesorEdit("Editar Profesor", this, profesor);
+                edit.setVisible(true);
+            }
+        }   
     }//GEN-LAST:event_prEditarProfesorBotonActionPerformed
 
     private void grRegistrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grRegistrarNinnoBotonActionPerformed
@@ -1064,7 +1076,7 @@ public class AdminGUI extends javax.swing.JFrame {
             String nombreCompleto = niNinnosList.getSelectedValue();
             Ninno ninno = JardinController.getNinnoCompleto(nombreCompleto);
             if(ninno != null){
-                NinnoEdit editNinno = new NinnoEdit(ninno, "Editar Niño");
+                NinnoEdit editNinno = new NinnoEdit(ninno, "Editar Niño", this);
                 editNinno.setVisible(true);
             }
         }
@@ -1079,7 +1091,7 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_adEditarBotonActionPerformed
 
     private void niRegistrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niRegistrarNinnoBotonActionPerformed
-        NinnoEdit editNinno = new NinnoEdit("Registrar Niño");
+        NinnoEdit editNinno = new NinnoEdit("Registrar Niño",this);
         editNinno.setVisible(true);
         
     }//GEN-LAST:event_niRegistrarNinnoBotonActionPerformed
@@ -1104,8 +1116,11 @@ public class AdminGUI extends javax.swing.JFrame {
                     .toArray(String[]::new);
             Object seleccion = (JOptionPane.showInputDialog(this, "Seleciona un grupo", "Asignar Grupo", JOptionPane.DEFAULT_OPTION,
                     null, grupos, grupos[0]));
-            if(seleccion != null)                
+            if(seleccion != null){                
                 GrupoController.addNinno(ninno, JardinController.getGrupo(Integer.valueOf(seleccion.toString()))); 
+                
+            }
+            
         }
     }//GEN-LAST:event_niAsignarGrupoBotonActionPerformed
 
@@ -1115,8 +1130,17 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_grCrearGrupoBotonActionPerformed
 
     private void grBorrarGrupoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grBorrarGrupoBotonActionPerformed
-        String idGrupo = grGruposList.getSelectedValue();
-        JardinController.getGrupos().remove(JardinController.getGrupo(idGrupo));
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+            "¿Desea eliminar este grupo de los registros?",
+            "Borrar registro",JOptionPane.YES_NO_OPTION);
+        if(confirmacion == 0){
+            String idGrupo = grGruposList.getSelectedValue();
+            GrupoController grControl = new GrupoController(JardinController.getGrupo(idGrupo));
+            grControl.eliminarNinnosGrupo();
+            JardinController.getGrupos().remove(JardinController.getGrupo(idGrupo));
+            grLlenarGruposList();
+        }
+        
     }//GEN-LAST:event_grBorrarGrupoBotonActionPerformed
 
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
@@ -1131,7 +1155,8 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarSesionBotonActionPerformed
 
     private void prRegistrarProfesorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prRegistrarProfesorBotonActionPerformed
-        
+        ProfesorEdit edit = new ProfesorEdit("Registrar Profesor", this);
+        edit.setVisible(true);
     }//GEN-LAST:event_prRegistrarProfesorBotonActionPerformed
 
     /**

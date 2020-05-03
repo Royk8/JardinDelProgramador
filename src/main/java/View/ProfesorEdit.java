@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.JardinController;
 import Model.Actores.Profesor;
 import javax.swing.JOptionPane;
 
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 public class ProfesorEdit extends javax.swing.JFrame {
     private Profesor profesor;
     private AdminGUI papa;
+    private String tarea;
     /**
      * Creates new form ProfesorEdit
      */
@@ -26,6 +28,7 @@ public class ProfesorEdit extends javax.swing.JFrame {
         initComponents();
         this.papa = papa;
         titleLabel.setText(titulo);
+        tarea = titulo;
         this.profesor = new Profesor();
         llenarInformacion();
     }
@@ -33,6 +36,7 @@ public class ProfesorEdit extends javax.swing.JFrame {
     public ProfesorEdit(String titulo, AdminGUI papa, Profesor profesor) {
         initComponents();
         this.papa = papa;
+        tarea = titulo;
         titleLabel.setText(titulo);
         this.profesor = profesor;
         llenarInformacion();
@@ -95,7 +99,7 @@ public class ProfesorEdit extends javax.swing.JFrame {
         restablecerBoton = new javax.swing.JButton();
         informationLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nombre");
 
@@ -105,7 +109,7 @@ public class ProfesorEdit extends javax.swing.JFrame {
 
         jLabel4.setText("Numero Documento");
 
-        idField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        idField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jLabel6.setText("Telefono");
 
@@ -306,6 +310,8 @@ public class ProfesorEdit extends javax.swing.JFrame {
                 especialidadField.getText(),
                 new String(passwordField1.getPassword()));
             
+            if(tarea == "Registrar Profesor")
+                JardinController.getProfesores().add(profesor);
             papa.prLlenarProfesoresList();
             this.dispose();
         }else informationLabel.setText("Las contraseñas NO coinciden.");

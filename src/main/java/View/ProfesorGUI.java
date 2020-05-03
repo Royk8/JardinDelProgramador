@@ -4,6 +4,7 @@ import Controller.JardinController;
 import Controller.ProfesorController;
 import Model.Actores.Ninno;
 import Model.Actores.Profesor;
+import Persistencia.Almacenamiento;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProfesorGUI extends javax.swing.JFrame {
     private ProfesorController profesorController;
+    private Login login;
     /**
      * Creates new form ProfesoGUI
      */
@@ -20,9 +22,10 @@ public class ProfesorGUI extends javax.swing.JFrame {
         initComponents();
     }
     
-    public ProfesorGUI(Profesor profesor) {
+    public ProfesorGUI(Profesor profesor, Login login) {
         initComponents();
         profesorController = new ProfesorController(profesor);
+        this.login = login;
         llenarListado();
         llenarDetalles(0);
     }
@@ -42,15 +45,13 @@ public class ProfesorGUI extends javax.swing.JFrame {
     public void llenarDetalles(int row){
         DefaultTableModel tabla = (DefaultTableModel) ninnosTabla.getModel();
         String ninnoNombre = tabla.getValueAt(row, 0).toString();
-        //String ninnoNombre = ninnosTabla.getValueAt(ninnosTabla.getSelectedRow(),0).toString();
         Ninno ninno = JardinController.getNinno(ninnoNombre);
         if(ninno != null){
             nombreLabel.setText(ninno.getNombre());
             apellidoLabel.setText(ninno.getApellido());
             idTypeLabel.setText(ninno.getIdType());
             idLabel.setText(ninno.getId());
-            /*acudienteLabel.setText(ninno.getAcudiente().getNombre() + 
-                                    ninno.getAcudiente().getApellido());*/
+            acudienteLabel.setText(ninno.getAcudiente().getNombreCompleto());
             grupoLabel.setText(Integer.toString(ninno.getGrupo()));
             edadLabel.setText(Integer.toString(ninno.getEdad()));
             tallaLabel.setText(Float.toString(ninno.getTalla()) + "m");
@@ -61,8 +62,6 @@ public class ProfesorGUI extends javax.swing.JFrame {
             especialLabel.setText(ninno.getSituacionEspecial());
             nombreLabel.setText(ninno.getNombre());            
         }
-        
-        
     }
 
     /**
@@ -75,14 +74,11 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        salirBoton = new javax.swing.JButton();
+        cerrarSesionBoton = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         nombreLabel = new javax.swing.JLabel();
@@ -108,6 +104,12 @@ public class ProfesorGUI extends javax.swing.JFrame {
         NombreLabel10 = new javax.swing.JLabel();
         horarioLabel = new javax.swing.JLabel();
         NombreLabel11 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ninnosTabla = new javax.swing.JTable();
@@ -119,74 +121,42 @@ public class ProfesorGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(getTitle());
 
-        jSplitPane1.setDividerLocation(300);
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Logros");
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Bimestre", "Logro", "Estado"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jButton1.setText("Editar Logro");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        salirBoton.setText("Guardar y Salir");
+        salirBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                salirBotonActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jButton2.setText("Agregar Logro");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cerrarSesionBoton.setText("Cerrar Sesión");
+        cerrarSesionBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cerrarSesionBotonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(15, 15, 15)
-                .addComponent(jButton1)
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(salirBoton)
+                .addGap(18, 18, 18)
+                .addComponent(cerrarSesionBoton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel4)
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salirBoton)
+                    .addComponent(cerrarSesionBoton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Logros", jPanel3);
+        jSplitPane1.setDividerLocation(300);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -294,7 +264,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
                                 .addComponent(especialLabel)))
                         .addGap(10, 10, 10))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                         .addGap(5, 5, 5))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -348,10 +318,77 @@ public class ProfesorGUI extends javax.swing.JFrame {
                     .addComponent(especialLabel))
                 .addGap(36, 36, 36)
                 .addComponent(NombreLabel10)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informacion Personal", jPanel2);
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Logros");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Bimestre", "Logro", "Estado"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jButton1.setText("Editar Logro");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jButton2.setText("Agregar Logro");
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel4)
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Logros", jPanel3);
 
         jSplitPane1.setRightComponent(jTabbedPane1);
 
@@ -363,7 +400,15 @@ public class ProfesorGUI extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Apellido"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         ninnosTabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ninnosTabla.getTableHeader().setReorderingAllowed(false);
         ninnosTabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -381,7 +426,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -392,8 +437,8 @@ public class ProfesorGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -404,31 +449,46 @@ public class ProfesorGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSplitPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1)
-                .addContainerGap())
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ninnosTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ninnosTablaMouseClicked
+        llenarDetalles(ninnosTabla.getSelectedRow());
+    }//GEN-LAST:event_ninnosTablaMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void ninnosTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ninnosTablaMouseClicked
-        llenarDetalles(ninnosTabla.getSelectedRow());
-    }//GEN-LAST:event_ninnosTablaMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
+        Almacenamiento.almacenarRegistros();
+        System.exit(0);
+    }//GEN-LAST:event_salirBotonActionPerformed
+
+    private void cerrarSesionBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionBotonActionPerformed
+        Almacenamiento.almacenarRegistros();        
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_cerrarSesionBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -479,6 +539,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel NombreLabel9;
     private javax.swing.JLabel acudienteLabel;
     private javax.swing.JLabel apellidoLabel;
+    private javax.swing.JButton cerrarSesionBoton;
     private javax.swing.JLabel edadLabel;
     private javax.swing.JLabel especialLabel;
     private javax.swing.JLabel generoLabel;
@@ -495,6 +556,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
@@ -504,6 +566,7 @@ public class ProfesorGUI extends javax.swing.JFrame {
     private javax.swing.JTable ninnosTabla;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel pesoLabel;
+    private javax.swing.JButton salirBoton;
     private javax.swing.JLabel tallaLabel;
     // End of variables declaration//GEN-END:variables
 }

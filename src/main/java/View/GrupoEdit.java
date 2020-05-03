@@ -81,7 +81,7 @@ public class GrupoEdit extends javax.swing.JFrame {
         volverBoton = new javax.swing.JButton();
         guardarBoton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tituloLabel.setText("jLabel1");
 
@@ -186,6 +186,7 @@ public class GrupoEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_volverBotonActionPerformed
 
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
+        
         String profesorString = profesorCombo.getSelectedItem().toString();
         profesorString = profesorString.substring(0, profesorString.indexOf('/') -1);
         

@@ -19,6 +19,12 @@ public class GrupoController {
                 .filter(ninno -> grupo.getIdInt() == ninno.getGrupo())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
+    
+    public void eliminarNinnosGrupo(){
+        for(Ninno ninno: ninnos){
+            ninno.setGrupo(0);
+        }
+    }
 
     public Grupo getGrupo() {
         return grupo;
