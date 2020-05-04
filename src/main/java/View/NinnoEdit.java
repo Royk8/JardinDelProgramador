@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
+ * JFraMe para agregar o editar ninnos
  * @author Royk
  */
 public class NinnoEdit extends javax.swing.JFrame {
@@ -66,6 +66,10 @@ public class NinnoEdit extends javax.swing.JFrame {
         llenarInformacion(ninno);
     }
     
+    /**
+     * Llena los campos y los combos
+     * @param ninno 
+     */
     public void llenarInformacion(Ninno ninno){
         //Funciones lambda, para obtener un vector de string con los años desde 2000 hasta hoy
         String[] years = Arrays.stream(IntStream.range(2000, LocalDate.now().getYear() + 1).toArray())
@@ -97,6 +101,7 @@ public class NinnoEdit extends javax.swing.JFrame {
             edadField.setText(Integer.toString(ninno.getEdad()));
             pesoField.setText(Float.toString(ninno.getPeso()));
             tallaField.setText(Float.toString(ninno.getTalla()));
+            generoCombo.setSelectedIndex((ninno.getGenero() == 'F')? 0 : 1);
             yearCombo.setSelectedItem(Integer.toString(ninno.getFechaDeNacimiento().getYear()));
             monthCombo.setSelectedIndex(ninno.getFechaDeNacimiento().getMonthValue() -1);
             setDayList();
@@ -104,6 +109,9 @@ public class NinnoEdit extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Obtiene el maximo numero de dias dependiendo del mes y del año
+     */
     public void setDayList(){
         YearMonth month = YearMonth.of(Integer.valueOf(yearCombo.getSelectedItem().toString()), 
         Integer.valueOf(monthCombo.getSelectedItem().toString()));
@@ -413,11 +421,19 @@ public class NinnoEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Abre la ventana de edicion de acudientes
+     * @param evt 
+     */
     private void editarAcudienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarAcudienteBotonActionPerformed
         AcudienteEdit edit = new AcudienteEdit(acudiente);
         edit.setVisible(true);
     }//GEN-LAST:event_editarAcudienteBotonActionPerformed
 
+    /**
+     * Guarda los datos en el ninno y cierra la ventana
+     * @param evt 
+     */
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
         ninno.setAll(idField.getText(),
                 nombreField.getText(),
@@ -439,15 +455,27 @@ public class NinnoEdit extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_guardarBotonActionPerformed
 
+    /**
+     * Abre una ventana para agregar una situacion especial al ninno
+     * @param evt 
+     */
     private void situacionBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_situacionBotonActionPerformed
         TextEdit situacionEdit = new TextEdit(situacionEspecial,"Situacion Especial");
         situacionEdit.setVisible(true);
     }//GEN-LAST:event_situacionBotonActionPerformed
 
+    /**
+     * Vuelve a adminGUI sin realizar cambios
+     * @param evt 
+     */
     private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
         dispose();
     }//GEN-LAST:event_volverBotonActionPerformed
 
+    /**
+     * Restablece los campos a sus valores iniciales
+     * @param evt 
+     */
     private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios?","Restablecer",JOptionPane.YES_NO_OPTION);
         if(confirmacion == 0){
@@ -455,14 +483,26 @@ public class NinnoEdit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_restablecerBotonActionPerformed
 
+    /**
+     * Actualiza el maximo de dias del mes 
+     * @param evt 
+     */
     private void monthComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthComboActionPerformed
         setDayList();
     }//GEN-LAST:event_monthComboActionPerformed
 
+    /**
+     * Actuliza el maximo de dias del mes
+     * @param evt 
+     */
     private void yearComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboActionPerformed
         setDayList();
     }//GEN-LAST:event_yearComboActionPerformed
 
+    /**
+     * Abre la ventana de edicion de parientes
+     * @param evt 
+     */
     private void editarParienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarParienteBotonActionPerformed
         ParienteEdit edit = new ParienteEdit(ninno,1);
         edit.setVisible(true);

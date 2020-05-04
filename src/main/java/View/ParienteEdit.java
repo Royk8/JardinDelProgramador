@@ -10,7 +10,7 @@ import Model.Actores.Pariente;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Jfram de edicion de parientes
  * @author Royk
  */
 public class ParienteEdit extends javax.swing.JFrame {
@@ -23,14 +23,21 @@ public class ParienteEdit extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor para crear un pariente
+     * @param ninno el ninno al que se le asignara el acudiente
+     * @param parienteIndex El numero del pariente, para cuando se agregan varios
+     */
     public ParienteEdit(Ninno ninno, int parienteIndex){
         initComponents();
         this.ninno = ninno;
         inception = parienteIndex;
-        llenarInformacion();
-        
+        llenarInformacion();        
     }
     
+    /**
+     * Llena los campos
+     */
     public void llenarInformacion(){
         if(ninno.getParientes().size() < inception){
             idField.setText("");
@@ -49,7 +56,7 @@ public class ParienteEdit extends javax.swing.JFrame {
             idTypeField.setText(pariente.getIdType());
             telefonoField.setText(pariente.getTelefono());
             celularField.setText(pariente.getCelular());
-            calidadField.setText(pariente.getCalidad());
+            calidadField.setText(pariente.getParentesco());
             direccionField.setText(pariente.getDireccion()); 
         }
     }
@@ -285,6 +292,10 @@ public class ParienteEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Guarda la informacion del pariente
+     * @param evt 
+     */
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
         if(ninno.getParientes().size() < inception){
             Pariente pariente = new Pariente(idField.getText(),
@@ -310,6 +321,10 @@ public class ParienteEdit extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_guardarBotonActionPerformed
 
+    /**
+     * Restablece los campos a sus valores iniciales
+     * @param evt 
+     */
     private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios","Restablecer",JOptionPane.YES_NO_OPTION);
         if(confirmacion == 0){
@@ -317,10 +332,18 @@ public class ParienteEdit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_restablecerBotonActionPerformed
 
+    /**
+     * Cierra la ventana sin guardar
+     * @param evt 
+     */
     private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
         dispose();
     }//GEN-LAST:event_volverBotonActionPerformed
 
+    /**
+     * Abre otra ventana de edicion de pariente para agregar otro pariente
+     * @param evt 
+     */
     private void addParienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addParienteBotonActionPerformed
         ParienteEdit edit = new ParienteEdit(ninno,++inception);
         edit.setVisible(true);

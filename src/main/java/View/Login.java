@@ -7,6 +7,10 @@ import Model.Actores.Ninno;
 import Model.Actores.Profesor;
 import Persistencia.Almacenamiento;
 
+/**
+ * JFrame que sirve de ventana de inicio de sesion
+ * @author Royk
+ */
 public class Login extends javax.swing.JFrame {
     
     /**
@@ -32,6 +36,9 @@ public class Login extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
         informacionLabel = new javax.swing.JLabel();
         passwordText = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Log In");
@@ -71,6 +78,16 @@ public class Login extends javax.swing.JFrame {
         passwordText.setText("admin");
         passwordText.setToolTipText("Ingrese su Contraseña");
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setText("El Programador Del Futuro");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setText("Jardin Infantil");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel3.setText("Inicio de Sesión");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,17 +107,36 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(ingresarBoton)))
                     .addComponent(informacionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(122, 122, 122))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(48, 48, 48)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
                 .addComponent(usuarioCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(ingresarBoton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(informacionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,11 +148,19 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para almacenar cambios y cerrar el programa
+     * @param evt 
+     */
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
         Almacenamiento.almacenarRegistros();
         System.exit(0);
     }//GEN-LAST:event_salirBotonActionPerformed
 
+    /**
+     * Boton que valida la informacion suministrada, y si coincide con algun perfil almacenado, abre su ventana
+     * @param evt 
+     */
     private void ingresarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarBotonActionPerformed
         String usuario = usuarioCombo.getSelectedItem().toString();
         switch(usuario){
@@ -208,29 +252,51 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField idText;
     private javax.swing.JLabel informacionLabel;
     private javax.swing.JButton ingresarBoton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField passwordText;
     private javax.swing.JButton salirBoton;
     private javax.swing.JComboBox<String> usuarioCombo;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Getter para obtener el profesor cuya id fue suministrada de la lista de profesores
+     * @return 
+     */
     Profesor getProfesor() {
         return JardinController.getProfesor(idText.getText());
     }
     
+    /**
+     * Getter para obtener el admin cuya id fue suminitrada de la lista de admins
+     * @return 
+     */
     public Admin getAdmin(){
         return JardinController.getAdmin(idText.getText());
     }
 
+    /**
+     * Llena el combo con los roles permitidos para el login
+     */
     private void llenarCombo() {
         usuarioCombo.addItem("Administrativo");
         usuarioCombo.addItem("Profesor");
         usuarioCombo.addItem("Acudiente");
     }
 
+    /**
+     * Getter para obtener el acudiente cuya id fue suministrada, buscando en la lista de ninnos
+     * @return 
+     */
     private Acudiente getAcudiente() {
         return JardinController.getAcudiente(idText.getText());
     }
     
+    /**
+     * Getter para obtener el ninno asociado al acudiente cuya id fue suministrada.
+     * @return 
+     */
     private Ninno getNinno(){
         return JardinController.getNinnoPorAcudiente(idText.getText());
     }

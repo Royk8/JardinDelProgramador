@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
 /**
- *
+ * JFrame para crear y editar grupos
  * @author Royk
  */
 public class GrupoEdit extends javax.swing.JFrame {
@@ -27,6 +27,11 @@ public class GrupoEdit extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor para cuando se quiere crear un grupo
+     * @param tarea La tarea a realiza, 
+     * @param adminGUI la ventana padre a la que se volvera cuando se finalice aqui
+     */
     public GrupoEdit(String tarea, AdminGUI adminGUI){
         initComponents();
         papa =  adminGUI;
@@ -37,6 +42,12 @@ public class GrupoEdit extends javax.swing.JFrame {
         llenarCombos();
     }
     
+     /**
+     * Constructor para cuando se quiere editar un grupo
+     * @param tarea La tarea a realiza, la ventana padre a la que se volvera cuando se finalice aqui
+     * @param adminGUI la ventana padre a la que se volvera cuando se finalice aqui
+     * @param grupo Grupo que se va a editar
+     */
     public GrupoEdit(Grupo grupo, String tarea, AdminGUI adminGUI){
         initComponents();
         papa =  adminGUI;
@@ -44,10 +55,12 @@ public class GrupoEdit extends javax.swing.JFrame {
         this.tarea = tarea;
         this.grupo = grupo;
         numeroGrupo = grupo.getIdInt() -1;
-        llenarCombos();
-        
+        llenarCombos();        
     }
     
+    /**
+     * Llena los combos de profesor, nivel y horario
+     */
     public void llenarCombos(){
         nivelCombo.setModel(new DefaultComboBoxModel<>(new String[] {"1","2","3"}));
         horarioCombo.setModel(new DefaultComboBoxModel<>(new String[] {"Mañana","Tarde"}));
@@ -181,10 +194,18 @@ public class GrupoEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que regresa a la ventana AdminGUI sin hacer cambios
+     * @param evt 
+     */
     private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
         dispose();
     }//GEN-LAST:event_volverBotonActionPerformed
 
+    /**
+     * Boton para guardar cambios y volver a la ventana AdminGUI
+     * @param evt 
+     */
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
         
         String profesorString = profesorCombo.getSelectedItem().toString();

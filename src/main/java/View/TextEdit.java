@@ -8,7 +8,7 @@ package View;
 import Model.StringWraper;
 
 /**
- *
+ * Jframe para editar un texto, se usar para permisos y situaciones especiales
  * @author Royk
  */
 public class TextEdit extends javax.swing.JFrame {
@@ -20,6 +20,11 @@ public class TextEdit extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor basico
+     * @param texto el texto a editar
+     * @param titulo de la accion a realizar
+     */
     public TextEdit(StringWraper texto, String titulo){
         initComponents();
         titleLabel.setText(titulo);
@@ -96,11 +101,18 @@ public class TextEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Guarda y cierra
+     * @param evt 
+     */
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
         texto.setText(textArea.getText());
         dispose();
     }//GEN-LAST:event_guardarBotonActionPerformed
 
+    /**
+     * Cierra sin guardar
+     */
     private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
         dispose();
     }//GEN-LAST:event_volverBotonActionPerformed

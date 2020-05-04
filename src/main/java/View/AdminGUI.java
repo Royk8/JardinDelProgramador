@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
- *
+ * JFrame para el rol de administrador, Contiene el CRUD de todo el programa
  * @author Royk
  */
 public class AdminGUI extends javax.swing.JFrame {
@@ -35,6 +35,7 @@ public class AdminGUI extends javax.swing.JFrame {
     /**
      * Crea la ventana admin con la informacion del perfin de admin que logueo
      * @param admin Perfil de admin del cual se extraera informacion
+     * @login ventana login padre de esta
      */
     public AdminGUI(Admin admin, Login login) {
         initComponents();
@@ -42,6 +43,9 @@ public class AdminGUI extends javax.swing.JFrame {
         llenarTodasLasListas();
     }
     
+    /**
+     * Llena todas las listas de informacion
+     */
     public void llenarTodasLasListas(){
         grLlenarGruposList();
         grLlenarDetalles();
@@ -51,6 +55,9 @@ public class AdminGUI extends javax.swing.JFrame {
         niLlenarDetalles();
     }
     
+    /**
+     * De la pesaña Grupos, llena la lista de grupos
+     */
     public void grLlenarGruposList(){
         DefaultListModel<String> listaGrupos = new DefaultListModel<String>();
         ArrayList<Grupo> grupos = JardinController.getGrupos();
@@ -60,6 +67,9 @@ public class AdminGUI extends javax.swing.JFrame {
         grGruposList.setModel(listaGrupos);
     }
     
+    /**
+     * De la pestaña Grupos, llena las etiquetas con los detalles del grupo
+     */
     public void grLlenarDetalles(){
         grGruposList.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -84,6 +94,10 @@ public class AdminGUI extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * De la pestaña grupos, llena la lista de ninnos de cada grupo
+     * @param grupo del que se recuperaran los ninnos
+     */
     public void grLlenarNinnos(Grupo grupo){
         GrupoController grController = new GrupoController(grupo);
         ArrayList<Ninno> ninnos = grController.getNinnos();
@@ -108,6 +122,9 @@ public class AdminGUI extends javax.swing.JFrame {
         prProfesoresList.setModel(listaProfesores);
     }
     
+    /**
+     * De la pestaña profesores, llena las etiquetas de detalles 
+     */
     public void prLlenarDetalles(){
         prProfesoresList.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -129,6 +146,9 @@ public class AdminGUI extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * De la pestaña ninnos, llena la lista de ninnos
+     */
     public void niLlenarNinnosList(){
         DefaultListModel<String> listaNinnos = new DefaultListModel<>();
         ArrayList<Ninno> ninnos = JardinController.getNinnos();
@@ -139,7 +159,7 @@ public class AdminGUI extends javax.swing.JFrame {
     }
     
     /**
-     * Llena los detalles del niño seleccionado en la lista
+     * De la pestaña ninnos, llena los detalles del niño seleccionado en la lista
      */
     public void niLlenarDetalles(){
         niNinnosList.addListSelectionListener(new ListSelectionListener(){
@@ -162,10 +182,10 @@ public class AdminGUI extends javax.swing.JFrame {
                     niHorarioLabel.setText((ninno.getHorario() == 'M')? "Mañana" : "Tarde" );
                     niEspecialLabel.setText(ninno.getSituacionEspecial());
                     if(!ninno.getParientes().isEmpty() && ninno.getParientes().get(0)!=null){
-                        niPariente1Label.setText(ninno.getParientes().get(0).getCalidad());
+                        niPariente1Label.setText(ninno.getParientes().get(0).getParentesco());
                         niParienteInfo1Label.setText(ninno.getParientes().get(0).getNombreCompleto());
                         if(ninno.getParientes().size() > 1){
-                            niPariente2Label.setText(ninno.getParientes().get(1).getCalidad());
+                            niPariente2Label.setText(ninno.getParientes().get(1).getParentesco());
                             niParienteInfo2Label.setText(ninno.getParientes().get(1).getNombreCompleto());
                         }else{
                             niPariente2Label.setText(" ");
@@ -211,9 +231,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         grNinnosList = new javax.swing.JList<>();
         jSeparator2 = new javax.swing.JSeparator();
-        grEditarNinnoBoton = new javax.swing.JButton();
-        grEliminarNinnoBoton = new javax.swing.JButton();
-        grRegistrarNinnoBoton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         grNivelLabel = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -230,9 +247,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         prTelefonoLabel = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        grEditarNinnoBoton1 = new javax.swing.JButton();
-        grEliminarNinnoBoton1 = new javax.swing.JButton();
-        grRegistrarNinnoBoton1 = new javax.swing.JButton();
         prIdTypeLabel = new javax.swing.JLabel();
         prIdLabel = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -290,6 +304,7 @@ public class AdminGUI extends javax.swing.JFrame {
         adIdTypeLabel = new javax.swing.JLabel();
         adIdLabel = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         salirBoton = new javax.swing.JButton();
         cerrarSesionBoton = new javax.swing.JButton();
@@ -343,17 +358,6 @@ public class AdminGUI extends javax.swing.JFrame {
         grNinnosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(grNinnosList);
 
-        grEditarNinnoBoton.setText("Editar Información");
-
-        grEliminarNinnoBoton.setText("Eliminar Niño del Grupo");
-
-        grRegistrarNinnoBoton.setText("Registrar Niño");
-        grRegistrarNinnoBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                grRegistrarNinnoBotonActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Nivel");
 
         grNivelLabel.setText("Nivel");
@@ -376,20 +380,12 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(grHorarioLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 213, Short.MAX_VALUE)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addComponent(grCrearGrupoBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(grEditarGrupoBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(grBorrarGrupoBoton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addComponent(grRegistrarNinnoBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(grEditarNinnoBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(grEliminarNinnoBoton))))
+                        .addGap(0, 293, Short.MAX_VALUE)
+                        .addComponent(grCrearGrupoBoton)
+                        .addGap(18, 18, 18)
+                        .addComponent(grEditarGrupoBoton)
+                        .addGap(18, 18, 18)
+                        .addComponent(grBorrarGrupoBoton))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(grGrupoLabel)
@@ -422,12 +418,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(grNinnoLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(grEditarNinnoBoton)
-                    .addComponent(grRegistrarNinnoBoton)
-                    .addComponent(grEliminarNinnoBoton))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -488,22 +479,6 @@ public class AdminGUI extends javax.swing.JFrame {
 
         prTelefonoLabel.setText("Telefono");
 
-        grEditarNinnoBoton1.setText("Cambiar Grupo");
-        grEditarNinnoBoton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                grEditarNinnoBoton1ActionPerformed(evt);
-            }
-        });
-
-        grEliminarNinnoBoton1.setText("Quitar Grupo");
-
-        grRegistrarNinnoBoton1.setText("Asignar Grupo");
-        grRegistrarNinnoBoton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                grRegistrarNinnoBoton1ActionPerformed(evt);
-            }
-        });
-
         prIdTypeLabel.setText("Tipo de documento");
 
         prIdLabel.setText("Documento");
@@ -538,19 +513,11 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(prEspecialLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGap(0, 223, Short.MAX_VALUE)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addComponent(prRegistrarProfesorBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(prEditarProfesorBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(prBorrarProfesorBoton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addComponent(grRegistrarNinnoBoton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(grEditarNinnoBoton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(grEliminarNinnoBoton1))))
+                        .addComponent(prRegistrarProfesorBoton)
+                        .addGap(18, 18, 18)
+                        .addComponent(prEditarProfesorBoton)
+                        .addGap(18, 18, 18)
+                        .addComponent(prBorrarProfesorBoton))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -589,12 +556,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(grEditarNinnoBoton1)
-                            .addComponent(grRegistrarNinnoBoton1)
-                            .addComponent(grEliminarNinnoBoton1))
-                        .addGap(28, 28, 28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -900,13 +862,16 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jLabel10.setText("Cuenta de Administrador");
 
-        adNombreLabel.setText("nombre");
+        adNombreLabel.setText("Nombre");
 
         adApellidoLabel.setText("Apellido");
 
         adIdTypeLabel.setText("Documento");
 
         adIdLabel.setText("Numero");
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabel1.setText("Disponible en futura actualizacion");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -921,17 +886,21 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(adNombreLabel)
                             .addComponent(adIdTypeLabel)
                             .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(adApellidoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(adIdLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(adBorrarBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)))
+                            .addComponent(adBorrarBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(adRegistrarBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(adEditarBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -946,7 +915,9 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(adIdTypeLabel)
                     .addComponent(adIdLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                .addGap(120, 120, 120)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(adEditarBoton)
                 .addGap(18, 18, 18)
                 .addComponent(adRegistrarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1042,10 +1013,6 @@ public class AdminGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void grRegistrarNinnoBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grRegistrarNinnoBoton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_grRegistrarNinnoBoton1ActionPerformed
-
     private void prEditarProfesorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prEditarProfesorBotonActionPerformed
         if(!prProfesoresList.isSelectionEmpty()){
             Profesor profesor = JardinController.getProfesorNombreCompleto(prProfesoresList.getSelectedValue());
@@ -1056,10 +1023,10 @@ public class AdminGUI extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_prEditarProfesorBotonActionPerformed
 
-    private void grRegistrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grRegistrarNinnoBotonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_grRegistrarNinnoBotonActionPerformed
-
+    /**
+     * De la pestaña grupos, abre la ventana de edicion de los grupos
+     * @param evt 
+     */
     private void grEditarGrupoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grEditarGrupoBotonActionPerformed
         if(!grGruposList.isSelectionEmpty()){
             String idGrupo = grGruposList.getSelectedValue();
@@ -1070,7 +1037,10 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         }        
     }//GEN-LAST:event_grEditarGrupoBotonActionPerformed
-
+    /**
+     * De la pestaña ninnos, abre la ventana de edicion de ninnos
+     * @param evt 
+     */
     private void niEditarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niEditarNinnoBotonActionPerformed
         if(!niNinnosList.isSelectionEmpty()){
             String nombreCompleto = niNinnosList.getSelectedValue();
@@ -1082,20 +1052,24 @@ public class AdminGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_niEditarNinnoBotonActionPerformed
 
-    private void grEditarNinnoBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grEditarNinnoBoton1ActionPerformed
-
-    }//GEN-LAST:event_grEditarNinnoBoton1ActionPerformed
-
     private void adEditarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adEditarBotonActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: 
+        //Coming Soon
     }//GEN-LAST:event_adEditarBotonActionPerformed
 
+    /**
+     * De la ventana ninnos abre la ventana de registro de nuevo ninno
+     * @param evt 
+     */
     private void niRegistrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niRegistrarNinnoBotonActionPerformed
         NinnoEdit editNinno = new NinnoEdit("Registrar Niño",this);
-        editNinno.setVisible(true);
-        
+        editNinno.setVisible(true);        
     }//GEN-LAST:event_niRegistrarNinnoBotonActionPerformed
 
+    /**
+     * De la ventana ninnos, borra el registro de un ninno
+     * @param evt 
+     */
     private void niBorrarNinnoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niBorrarNinnoBotonActionPerformed
         if(!niNinnosList.isSelectionEmpty()){
             Ninno ninno = JardinController.getNinnoCompleto(niNinnosList.getSelectedValue());
@@ -1108,6 +1082,10 @@ public class AdminGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_niBorrarNinnoBotonActionPerformed
 
+    /**
+     * De la ventana ninnos, abre la ventana donde se elige un grupo para el ninno seleccionado
+     * @param evt 
+     */
     private void niAsignarGrupoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niAsignarGrupoBotonActionPerformed
         if(!niNinnosList.isSelectionEmpty()){
             Ninno ninno = JardinController.getNinnoCompleto(niNinnosList.getSelectedValue());
@@ -1120,16 +1098,25 @@ public class AdminGUI extends javax.swing.JFrame {
                 Grupo grupo = JardinController.getGrupo(Integer.valueOf(seleccion.toString()));
                 GrupoController.addNinno(ninno, grupo); 
                 ninno.setProfesor(grupo.getProfesor().getId());
+                niLlenarDetalles();
             }
             
         }
     }//GEN-LAST:event_niAsignarGrupoBotonActionPerformed
 
+    /**
+     * De la ventana Grupos, abre la ventana de creacion de grupos
+     * @param evt 
+     */
     private void grCrearGrupoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grCrearGrupoBotonActionPerformed
         GrupoEdit edit = new GrupoEdit("Crear Grupo",this);
         edit.setVisible(true);
     }//GEN-LAST:event_grCrearGrupoBotonActionPerformed
 
+    /**
+     * De la ventana grupos, borra la informacion de un grupo y transfiere los ninnos al grupo cero
+     * @param evt 
+     */
     private void grBorrarGrupoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grBorrarGrupoBotonActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this,
             "¿Desea eliminar este grupo de los registros?",
@@ -1144,17 +1131,29 @@ public class AdminGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_grBorrarGrupoBotonActionPerformed
 
+    /**
+     * Almacena la informacion y cierra el programa
+     * @param evt 
+     */
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
         Almacenamiento.almacenarRegistros();
         System.exit(0);      
     }//GEN-LAST:event_salirBotonActionPerformed
 
+    /**
+     * Almacena la informacion y cierra la sesion, volviendo a login
+     * @param evt 
+     */
     private void cerrarSesionBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionBotonActionPerformed
         Almacenamiento.almacenarRegistros();
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_cerrarSesionBotonActionPerformed
 
+    /**
+     * De la pestaña profesores, abre la ventana de creacion de profesores
+     * @param evt 
+     */
     private void prRegistrarProfesorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prRegistrarProfesorBotonActionPerformed
         ProfesorEdit edit = new ProfesorEdit("Registrar Profesor", this);
         edit.setVisible(true);
@@ -1217,10 +1216,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton grBorrarGrupoBoton;
     private javax.swing.JButton grCrearGrupoBoton;
     private javax.swing.JButton grEditarGrupoBoton;
-    private javax.swing.JButton grEditarNinnoBoton;
-    private javax.swing.JButton grEditarNinnoBoton1;
-    private javax.swing.JButton grEliminarNinnoBoton;
-    private javax.swing.JButton grEliminarNinnoBoton1;
     private javax.swing.JLabel grGrupoLabel;
     private javax.swing.JList<String> grGruposList;
     private javax.swing.JLabel grHorarioLabel;
@@ -1228,8 +1223,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JList<String> grNinnosList;
     private javax.swing.JLabel grNivelLabel;
     private javax.swing.JLabel grProfesorLabel;
-    private javax.swing.JButton grRegistrarNinnoBoton;
-    private javax.swing.JButton grRegistrarNinnoBoton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;

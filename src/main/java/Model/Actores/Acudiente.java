@@ -86,7 +86,7 @@ public class Acudiente extends Pariente {
         this.password = password;
         this.telefono = telefono;
         this.celular = celular;
-        this.calidad = calidad;
+        this.parentesco = calidad;
         this.direccion = direccion;
         this.horario = horario;
         this.permiso = permiso;
@@ -117,8 +117,6 @@ public class Acudiente extends Pariente {
         this.permiso = permiso;
     }
     
-
-        
     public String getPassword() {
         return password;
     }

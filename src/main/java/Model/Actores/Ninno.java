@@ -29,6 +29,22 @@ public class Ninno extends Persona{
         parientes = new ArrayList<>();
     }
 
+    /**
+     * Constructor que recibe casi todos los parametros
+     * @param id String con nueva identificacion
+     * @param nombre String con nuevo nombre
+     * @param apellido String con nuevo apellido
+     * @param idType String con nuevo tipo de documento
+     * @param edad Styring con nueva edad
+     * @param talla String con nueva talla
+     * @param peso String con nuevo peso
+     * @param situacionEspecial String con nueva situacion especial
+     * @param genero char con nuevo genero
+     * @param horario char con el horario del ninno
+     * @param year entero con nuevo año de nacimiento
+     * @param month Entero con nuevo mes de nacimiento
+     * @param day entero con nuevo dia de nacimiento
+     */
     public Ninno(String id, String nombre, String apellido, String idType, int edad, float talla,
                  float peso, String situacionEspecial, char genero, char horario, int year, int month, int day) {
         super(id, nombre, apellido, idType);
@@ -44,6 +60,23 @@ public class Ninno extends Persona{
         parientes = new ArrayList<Pariente>();
     }
     
+     /**
+     * Constructor que recibe casi todos los parametros
+     * @param id String con nueva identificacion
+     * @param nombre String con nuevo nombre
+     * @param apellido String con nuevo apellido
+     * @param idType String con nuevo tipo de documento
+     * @param edad Styring con nueva edad
+     * @param talla String con nueva talla
+     * @param peso String con nuevo peso
+     * @param situacionEspecial String con nueva situacion especial
+     * @param genero char con nuevo genero
+     * @param horario char con el horario del ninno
+     * @param year entero con nuevo año de nacimiento
+     * @param month Entero con nuevo mes de nacimiento
+     * @param day entero con nuevo dia de nacimiento
+     * @param acudiente Objeto de la clase acudiente 
+     */
     public Ninno(String id, String nombre, String apellido, String idType, 
                 int edad, float talla, float peso, String situacionEspecial,
                 char genero, char horario, int year, int month, int day, 
@@ -63,6 +96,28 @@ public class Ninno extends Persona{
         //this.profesor = profesor;
     }
     
+     /**
+     * Constructor completo que recibe todos los parametros
+     * @param id String con nueva identificacion
+     * @param nombre String con nuevo nombre
+     * @param apellido String con nuevo apellido
+     * @param idType String con nuevo tipo de documento
+     * @param grupo
+     * @param edad Styring con nueva edad
+     * @param talla String con nueva talla
+     * @param peso String con nuevo peso
+     * @param situacionEspecial String con nueva situacion especial
+     * @param genero char con nuevo genero
+     * @param horario char con el horario del ninno
+     * @param year entero con nuevo año de nacimiento
+     * @param month Entero con nuevo mes de nacimiento
+     * @param day entero con nuevo dia de nacimiento
+     * @param acudiente Objeto de la clase acudiente
+     * @param parientes Arraylist con los parientes del ninno
+     * @param profesor String con la identificacion del profesor
+     * @param logros Arraylist con los logros
+     * 
+     */
     public Ninno(String id, String nombre, String apellido, String idType, 
                 int edad, int grupo, float talla, float peso, String situacionEspecial,
                 char genero, char horario, int year, int month, int day, 
@@ -191,6 +246,22 @@ public class Ninno extends Persona{
         this.parientes = parientes;
     }
     
+    /**
+     * Setter completo que asigna un valor a la mayoria de atributos
+     * @param id String con nueva identificacion
+     * @param nombre String con nuevo nombre
+     * @param apellido String con nuevo apellido
+     * @param idType String con nuevo tipo de documento
+     * @param edad Styring con nueva edad
+     * @param talla String con nueva talla
+     * @param peso String con nuevo peso
+     * @param situacionEspecial String con nueva situacion especial
+     * @param genero char con nuevo genero
+     * @param year entero con nuevo año de nacimiento
+     * @param month Entero con nuevo mes de nacimiento
+     * @param day entero con nuevo dia de nacimiento
+     * @param acudiente Objeto de la clase acudiente
+     */
     public void setAll(String id, String nombre, String apellido, String idType, 
                 int edad, float talla, float peso, String situacionEspecial,
                 char genero, int year, int month, int day, 
@@ -208,10 +279,19 @@ public class Ninno extends Persona{
         this.acudiente = acudiente;
     }
     
+    /**
+     * Compara este objeto a null
+     * @return True si el ninno es null
+     */
     public boolean isEmpty(){
         return id == null;
     }
     
+    /**
+     * Busca en la lista de logros y retorna uno que coincida con el titulo enviado como parametro
+     * @param titulo String con el titulo a buscar
+     * @return Objeto de la clase logro a retornar, retorna null si no hay coincidencias
+     */
     public Logro getLogro(String titulo){
         for(Logro logro: logros){
             if(logro.getTitulo().equals(titulo))
@@ -220,6 +300,10 @@ public class Ninno extends Persona{
         return null;
     }
     
+    /**
+     * Metodo que cuenta cuantos logros de la lista de logros estan completados
+     * @return String con el mensaje de X logros completados
+     */
     public String logrosCompletos(){
         int completados = 0;
         for(Logro logro: logros){

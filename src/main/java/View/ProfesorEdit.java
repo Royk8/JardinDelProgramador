@@ -10,7 +10,7 @@ import Model.Actores.Profesor;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * JFrame para editar la informacion de un profesor
  * @author Royk
  */
 public class ProfesorEdit extends javax.swing.JFrame {
@@ -24,6 +24,11 @@ public class ProfesorEdit extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor para cuando se quiere crear un nuevo profesor
+     * @param titulo de la accion que se realizara
+     * @param papa Ventana de AdminGUI a la que se volvera
+     */
     public ProfesorEdit(String titulo, AdminGUI papa) {
         initComponents();
         this.papa = papa;
@@ -33,6 +38,12 @@ public class ProfesorEdit extends javax.swing.JFrame {
         llenarInformacion();
     }
     
+    /**
+     * Constructor para cuando se quiere editar un profesor
+     * @param titulo de la accion que se realizara
+     * @param papa Ventana de AdminGUI a la que se volvera
+     * @param profesor que se va a editar
+     */
     public ProfesorEdit(String titulo, AdminGUI papa, Profesor profesor) {
         initComponents();
         this.papa = papa;
@@ -42,6 +53,9 @@ public class ProfesorEdit extends javax.swing.JFrame {
         llenarInformacion();
     }
     
+    /**
+     * Llena los campos
+     */
     public void llenarInformacion(){
         if(profesor == null || profesor.isEmpty()){
             idField.setText("");
@@ -289,17 +303,21 @@ public class ProfesorEdit extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 304, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 10, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 11, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para guardar y volver a AdminGUI
+     * @param evt 
+     */
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
         if(java.util.Arrays.equals(passwordField1.getPassword(), passwordField2.getPassword())){
             profesor.setAll(idField.getText(),
@@ -318,10 +336,18 @@ public class ProfesorEdit extends javax.swing.JFrame {
         
     }//GEN-LAST:event_guardarBotonActionPerformed
 
+    /**
+     * Cierra sin guardar
+     * @param evt 
+     */
     private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
         dispose();
     }//GEN-LAST:event_volverBotonActionPerformed
 
+    /**
+     * Restablece los campos a sus valores iniciales
+     * @param evt 
+     */
     private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios?","Restablecer",JOptionPane.YES_NO_OPTION);
         if(confirmacion == 0){

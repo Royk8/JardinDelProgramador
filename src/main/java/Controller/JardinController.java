@@ -27,39 +27,18 @@ public class JardinController {
      * Constructor de la clase, arranca el programa y llama los metodos que cargan la informacion
      */
     public JardinController(){
-        //Inicializa la lista de ninnos.
         Almacenamiento.cargarRegistros();
         admins = new ArrayList<>();
         superAdmin = new Admin();
         admins.add(superAdmin);
         grupoCero();
-        
-        //cargarGrupos();
-
-        
-        /*Acudiente manuel = new Acudiente("5415", "Manuel", "Yarce", "Cedula", 
-                "4545", "3104548", "315181", "Tio", "Cada de manuel", "Miercoles en la ma;ana");
-        Acudiente gabriela = new Acudiente("546", "Gabriela", "Cordoba", "Cedula", 
-                "4455", "32484", "468767", "Mama", "Casa de Gabi", "Miercoles en la ma;ana");
-        
-        Ninno jhoniercito = new Ninno("1452145","Jhoniercito","Cordoba","Registro Civil",
-            2,1,1.1f,20f,"Brutico",'M','T',2000,7,3);
-        Ninno alejito = new Ninno("1455236","Alejandro","Yarce","Registro Civil",
-            3,1,1.2f,25f,"Brutico",'M','M',1998,12,30);*/
-        /*Profesor diana = new Profesor("123456","Diana","Lopez","Cedula","1234","31487965214",
-            "Programacion");
-        Ninno jhoniercito = getNinno("Jhoniercito");
-        Ninno alejito = getNinno("Alejandro");
-        /*alejito.setAcudiente(manuel);
-        jhoniercito.setAcudiente(gabriela);
-        jhoniercito.setProfesor(diana);
-        alejito.setProfesor(diana);*/
-        
-        /*ninnos.add(alejito);
-        ninnos.add(jhoniercito);*/
-        //profesores.add(diana);
     }
     
+    /**
+     * Getter de Admin
+     * @param adminId recibe una identificacion
+     * @return retorna el admin asociado a la id recibida, si no coincide devuelve null
+     */
     public static Admin getAdmin(String adminId) {
         for(Admin admin: admins){
             if(admin.getId().equals(adminId)){
@@ -69,6 +48,10 @@ public class JardinController {
         return null;
     }
     
+    /**
+     * Crea un grupo cero, donde van los ninnos sin grupo
+     * Solo se ejecuta la primera vez que se corre el programa
+     */
     public static void grupoCero(){
         if(grupos.isEmpty()){
             Grupo cero = new Grupo("0",1,'M',null);
@@ -165,24 +148,7 @@ public class JardinController {
         }
         return null;
     }
-    
-    /**
-     * Para borrar
-     */
-    /*public void cargarGrupos(){
-        grupos = new ArrayList<>();
-        for(Ninno ninno: ninnos){
-            //Lambda expresion, pregunta si existe algun grupo con este identificador asociado a un ninno
-            if(!grupos.stream().anyMatch(grupo -> ninno.getGrupo() == grupo.getIdInt())){
-                Grupo grupo = new Grupo(ninno.getGrupo(), 
-                        ninno.getEdad(), 
-                        ninno.getHorario(), 
-                        ninno.getProfesor());
-                grupos.add(grupo);
-            }
-        }
-    }*/
-    
+        
     /**
      * Retorna un grupo de la lista de grupos, especificado por su id
      * @param grupo Entero con el identificador del grupo

@@ -10,7 +10,7 @@ import Model.StringWraper;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Jframe usado para editar la informacion de un acudiente
  * @author Royk
  */
 public class AcudienteEdit extends javax.swing.JFrame {
@@ -23,6 +23,10 @@ public class AcudienteEdit extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor para cuando se quiere editar la informacion de un acudiente
+     * @param acudiente 
+     */
     public AcudienteEdit(Acudiente acudiente){
         initComponents();
         this.permiso = new StringWraper("");
@@ -30,6 +34,10 @@ public class AcudienteEdit extends javax.swing.JFrame {
         llenarInformacion(acudiente);
     }
     
+    /**
+     * Metodo que llena todos los campos, quedan vacios si es un nuevo acudiente o se llenan si se esta editando un acudiente
+     * @param acudiente 
+     */
     private void llenarInformacion(Acudiente acudiente) {
         if(acudiente == null || acudiente.isEmpty()){
             idField.setText("");
@@ -53,7 +61,7 @@ public class AcudienteEdit extends javax.swing.JFrame {
             passwordField2.setText("");
             telefonoField.setText(acudiente.getTelefono());
             celularField.setText(acudiente.getCelular());
-            calidadField.setText(acudiente.getCalidad());
+            calidadField.setText(acudiente.getParentesco());
             direccionField.setText(acudiente.getDireccion()); 
             horarioField.setText(acudiente.getHorario());
             permiso.setText(acudiente.getPermiso());
@@ -333,6 +341,10 @@ public class AcudienteEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para almacenar la informacion guardada y volver a la ventana AdminGUI
+     * @param evt 
+     */
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
         if(java.util.Arrays.equals(passwordField1.getPassword(), passwordField2.getPassword())){
             acudiente.setAllAcudiente(idField.getText(),
@@ -350,6 +362,10 @@ public class AcudienteEdit extends javax.swing.JFrame {
         }else informationLabel.setText("Las contraseñas NO coinciden.");             
     }//GEN-LAST:event_guardarBotonActionPerformed
 
+    /**
+     * Boton para restrablecer todos los campos a su estado inicial
+     * @param evt 
+     */
     private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios?","Restablecer",JOptionPane.YES_NO_OPTION);
         if(confirmacion == 0){
@@ -357,10 +373,18 @@ public class AcudienteEdit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_restablecerBotonActionPerformed
 
+    /**
+     * Boton para volver a la ventana de adminGUI sin hacer cambios
+     * @param evt 
+     */
     private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
         dispose();
     }//GEN-LAST:event_volverBotonActionPerformed
 
+    /**
+     * Boton para abrir una ventana para ingresar un permiso
+     * @param evt 
+     */
     private void permisoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permisoBotonActionPerformed
         TextEdit permisoEdit = new TextEdit(permiso, "Permiso");
         permisoEdit.setVisible(true);

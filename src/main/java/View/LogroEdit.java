@@ -15,7 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * JFrame para agregar logros a un ninno
  * @author Royk
  */
 public class LogroEdit extends javax.swing.JFrame {
@@ -30,6 +30,12 @@ public class LogroEdit extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constrctor para cuando se quiere crear un logro nuevo
+     * @param titulo de la accion a realizar
+     * @param papa la ventana de ProfesorGUI a la que se volvera al terminar
+     * @param ninno El ninno al que se le agregara el logro
+     */
     public LogroEdit(String titulo, ProfesorGUI papa, Ninno ninno) {        
         initComponents();
         titleLabel.setText(titulo);
@@ -40,6 +46,13 @@ public class LogroEdit extends javax.swing.JFrame {
         llenarInformacion();
     }
         
+    /**
+     * Constrctor para cuando se quiere editar un logro 
+     * @param titulo de la accion a realizar
+     * @param papa la ventana de ProfesorGUI a la que se volvera al terminar
+     * @param ninno El ninno al que se le agregara el logro
+     * @param logro que se editara
+     */
     public LogroEdit(String titulo, ProfesorGUI papa, Ninno ninno, Logro logro) {
         initComponents();
         titleLabel.setText(titulo);
@@ -50,6 +63,9 @@ public class LogroEdit extends javax.swing.JFrame {
         llenarInformacion();
     }
     
+    /**
+     * Llena la informacion de los campos, quedan vacios si es un logro nuevo
+     */
     public void llenarInformacion(){
         llenarCombos();
         if(esNuevo){
@@ -67,6 +83,9 @@ public class LogroEdit extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Llena los combos con estados, años y bimestres
+     */
     public void llenarCombos(){
         String[] estados = {"Logrado", "Gran avance", "Poco Avance", "No logrado"}; 
         avanceCombo.setModel(new DefaultComboBoxModel<>(estados));
@@ -247,6 +266,10 @@ public class LogroEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que guarda la informacion y vuelve a la ventana de ProfesorGUI
+     * @param evt 
+     */
     private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
         logro.setAll(nombreField.getText(),
                 bimestreCombo.getSelectedIndex() + 1,
@@ -260,6 +283,10 @@ public class LogroEdit extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_guardarBotonActionPerformed
 
+    /**
+     * Boton que restablece los campos a su estado inicial
+     * @param evt 
+     */
     private void restablecerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBotonActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea restablecer todos los cambios","Restablecer",JOptionPane.YES_NO_OPTION);
         if(confirmacion == 0){
@@ -267,6 +294,10 @@ public class LogroEdit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_restablecerBotonActionPerformed
 
+    /**
+     * Boton para cerrar la ventana y no hacer cambios
+     * @param evt 
+     */
     private void volverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBotonActionPerformed
         dispose();
     }//GEN-LAST:event_volverBotonActionPerformed

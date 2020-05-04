@@ -23,21 +23,32 @@ import org.json.simple.parser.ParseException;
  */
 public class Almacenamiento {
     
-      
+    /**
+     * Metodo estatico que intenta cargar todos los registros almacenados en archivos .json
+     */
     public static void cargarRegistros(){
         JardinController.setNinnos(cargarNinnos(cargarInformacion("Ninnos")));
         JardinController.setProfesores(cargarProfesores(cargarInformacion("Profesores")));
         JardinController.setGrupos(cargarGrupos(cargarInformacion("Grupos")));
     }
     
+    /**
+     * Metodo estatico que almacena los ninnos, profesores y grupos en archivos .json
+     */
     public static void almacenarRegistros(){
         almacenarNinnos(JardinController.getNinnos());
         almacenarProfesores(JardinController.getProfesores());
         almacenarGrupos(JardinController.getGrupos());
     }
     
+    /**
+     * Metodo estatico para almacenar los ninnos en un archivo .json
+     * @param ninnos ArrayList de objetos de la clase Ninno a almacenar
+     */
     public static void almacenarNinnos(ArrayList<Ninno> ninnos){
+        //Se crea un objeto de la clase JSonArray de la libreria json.simple
         JSONArray jsonNinnos = new JSONArray();
+        //Se crean objetos JSONObject para almacenar en el JSONArray, este objeto recibe todos los atributos del ninno
         for(Ninno ninno: ninnos){
             JSONObject campos = new JSONObject();
             campos.put("id", ninno.getId());
@@ -58,6 +69,7 @@ public class Almacenamiento {
             campos.put("Parientes", cifrarParientes(ninno.getParientes()));
             campos.put("Logros", cifrarLogros(ninno.getLogros()));
             String profesorid;
+            //A veces hay problemas con la obtencion del profesor, como cuando no tiene ninguno asociado
             try{
                 profesorid = ninno.getProfesor();
             }catch(NullPointerException nu){
@@ -66,11 +78,17 @@ public class Almacenamiento {
             }
             campos.put("profesorId", profesorid);
             
+            //Todos los campos son puestos en el jsonArray
             jsonNinnos.add(campos);
         }
+        //Se llama al metodo encargado de poner la informacion en archivos .json
         almacenarInformacion("Ninnos", jsonNinnos);
     }
     
+    /**
+     * Metodo estatico que almacena todos los profesores en un archivo json
+     * @param profesores Arraylist con objetos de la clase profesor
+     */
     public static void almacenarProfesores(ArrayList<Profesor> profesores){
         JSONArray jsonProfesores = new JSONArray();
         for(Profesor profesor: profesores){
@@ -89,7 +107,11 @@ public class Almacenamiento {
         }
         almacenarInformacion("Profesores", jsonProfesores);
     }
-        
+    
+    /**
+     * Metodo estatico que almacena todos los grupos en un archivo .json
+     * @param grupos Arraylist de grupos
+     */
     public static void almacenarGrupos(ArrayList<Grupo> grupos){
         JSONArray jsonGrupos = new JSONArray();
         for(Grupo grupo : grupos){
@@ -105,6 +127,11 @@ public class Almacenamiento {
         almacenarInformacion("Grupos", jsonGrupos);
     }
     
+    /**
+     * Metodo estatico que convierte los campos de un acudiente en un JSONObjet
+     * @param acudiente Objeto de la clase acudiente
+     * @return Objeto de la clase JSONObject con la informacion del acudiente
+     */
     public static JSONObject cifrarAcudiente(Acudiente acudiente){
         JSONObject campos = new JSONObject();
         campos.put("id", acudiente.getId());
@@ -114,13 +141,18 @@ public class Almacenamiento {
         campos.put("password", acudiente.getPassword());
         campos.put("telefono", acudiente.getTelefono());
         campos.put("celular", acudiente.getCelular());
-        campos.put("calidad", acudiente.getCalidad());
+        campos.put("calidad", acudiente.getParentesco());
         campos.put("direccion", acudiente.getDireccion());
         campos.put("horario", acudiente.getHorario());
         campos.put("permiso", acudiente.getPermiso());
         return campos;
     }
     
+    /**
+     * Convierte todos los campos de un array de parientes en un JsonArray
+     * @param parientes Arraylist de parientes
+     * @return Objeto de la clase JSONArray con todos los parientes almacenados
+     */
     public static JSONArray cifrarParientes(ArrayList<Pariente> parientes){
         JSONArray jsonParientes = new JSONArray();
         for(Pariente pariente : parientes){
@@ -131,14 +163,19 @@ public class Almacenamiento {
             campos.put("idType", pariente.getIdType());
             campos.put("telefono", pariente.getTelefono());
             campos.put("celular", pariente.getCelular());
-            campos.put("calidad", pariente.getCalidad());
+            campos.put("calidad", pariente.getParentesco());
             campos.put("direccion", pariente.getDireccion());
 
             jsonParientes.add(campos);
         }
         return jsonParientes;
     }
-        
+    
+    /**
+     * Metodo estatico que convierte una lista de logros en un JSONArray
+     * @param logros Arraylist de logros
+     * @return Objeto de la clase JSONArray con los logros almacenados
+     */
     public static JSONArray cifrarLogros(ArrayList<Logro> logros){
         JSONArray jsonLogros = new JSONArray();
         for(Logro logro: logros){
@@ -154,6 +191,11 @@ public class Almacenamiento {
         return jsonLogros;
     }
     
+    /**
+     * Metodo estatico que extrae un acudiente de on JSONObject
+     * @param jsonAcudiente Objeto JSONObject con la informacion del acudiente
+     * @return Objeto de la clase acudiente creado con la inforamcion recibida
+     */
     public static Acudiente descifrarAcudiente(JSONObject jsonAcudiente){
         if(jsonAcudiente !=null){
             Acudiente acudiente = new Acudiente(jsonAcudiente.get("id").toString(),
@@ -172,6 +214,11 @@ public class Almacenamiento {
         return null;
     }
     
+    /**
+     * Metodo estatico que extrae la informacion de un JSONArray y devuelve un Arraylist de parientes
+     * @param jsonParientes JSONArray con la informacion de los parientes
+     * @return ArrayList con los parientes creados apartir de la informacion extraida
+     */
     public static ArrayList<Pariente> descifrarParientes(JSONArray jsonParientes){
         ArrayList<Pariente> parientes = new ArrayList<>();
         if(jsonParientes != null){
@@ -191,6 +238,11 @@ public class Almacenamiento {
         return parientes;
     }
     
+    /**
+     * Metodo estatico que extrae una lista de logros de un JSONArray
+     * @param jsonLogros JSONArray con la informacion de una lista de logros
+     * @return Arraylist de logros creado aparitr de la informacion extraida
+     */
     public static ArrayList<Logro> descifrarLogros(JSONArray jsonLogros){
         ArrayList<Logro> logros = new ArrayList<>();
         if(jsonLogros != null){
@@ -224,15 +276,21 @@ public class Almacenamiento {
         System.out.println("Informacion Almacenada");
     }
     
+    /**
+     * Metodo estatico que extrae la informacion de un JSONArray a un array de ninnos
+     * @param jsonNinnos JSONArray con la informacion de los ninnos
+     * @return Arraylist creado con objetos de la clase ninno creados con la informacion del JSONArray
+     */
     public static ArrayList<Ninno> cargarNinnos(JSONArray jsonNinnos){
         ArrayList<Ninno> ninnos = new ArrayList<>();
         
         if(jsonNinnos!=null){        
             for(Object registro: jsonNinnos){
-
+                //Extraemos todos los objetos dentro del JSONArray
                 JSONObject jsonRegistro = (JSONObject) registro;
                 
-                //problemas con situacion especial
+                //Para luego extraer la informacion de cada uno de esos objetos y ponerlas en un ninno nuevo
+                //problemas con situacion especial, a veces no esta definido
                 String situacionEspecial;
                 try{
                     situacionEspecial = jsonRegistro.get("situacionEspecial").toString();
@@ -258,12 +316,18 @@ public class Almacenamiento {
                     descifrarParientes((JSONArray) jsonRegistro.get("Parientes")),
                     jsonRegistro.get("profesorId").toString(),
                     descifrarLogros((JSONArray) jsonRegistro.get("Logros")));
+                // Finalmente agregando el nuevo ninno al array que sera retornado
                 ninnos.add(ninno);
             }
         }
         return ninnos;
     }
     
+    /**
+     * Metodo estatico que carga la informacion de los profesores de un JSONArray
+     * @param jsonProfesores JSONArray con la informaciond e los profesores
+     * @return Arraylist con objetos de la clase profesor creados apartir de la informacion extraida
+     */
     public static ArrayList<Profesor> cargarProfesores(JSONArray jsonProfesores){
         ArrayList<Profesor> profesores = new ArrayList<>();
         
@@ -285,6 +349,11 @@ public class Almacenamiento {
         return profesores;        
     }
     
+    /**
+     * Metodo estatico que extrae la informacion de los grupos de un JSONArray
+     * @param jsonGrupos JSONArray con la informacion de los grupos
+     * @return Arraylist de grupos creados con la informacion extraida
+     */
     public static ArrayList<Grupo> cargarGrupos(JSONArray jsonGrupos){
         ArrayList<Grupo> grupos = new ArrayList<>();
         

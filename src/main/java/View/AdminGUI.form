@@ -159,23 +159,12 @@
                                           <Component id="grHorarioLabel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="213" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="grCrearGrupoBoton" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEditarGrupoBoton" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grBorrarGrupoBoton" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="grRegistrarNinnoBoton" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEditarNinnoBoton" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEliminarNinnoBoton" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <EmptySpace min="0" pref="293" max="32767" attributes="0"/>
+                                          <Component id="grCrearGrupoBoton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="grEditarGrupoBoton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="grBorrarGrupoBoton" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -218,13 +207,7 @@
                                   <Component id="grNinnoLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="80" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="grEditarNinnoBoton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grRegistrarNinnoBoton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="grEliminarNinnoBoton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <EmptySpace pref="133" max="32767" attributes="0"/>
                                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -313,24 +296,6 @@
                           </SubComponents>
                         </Container>
                         <Component class="javax.swing.JSeparator" name="jSeparator2">
-                        </Component>
-                        <Component class="javax.swing.JButton" name="grEditarNinnoBoton">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Editar Informaci&#xf3;n"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="grEliminarNinnoBoton">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Eliminar Ni&#xf1;o del Grupo"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="grRegistrarNinnoBoton">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Registrar Ni&#xf1;o"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="grRegistrarNinnoBotonActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel4">
                           <Properties>
@@ -445,22 +410,11 @@
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace min="0" pref="223" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="prRegistrarProfesorBoton" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="prEditarProfesorBoton" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="prBorrarProfesorBoton" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="grRegistrarNinnoBoton1" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEditarNinnoBoton1" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="grEliminarNinnoBoton1" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="prRegistrarProfesorBoton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="prEditarProfesorBoton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="prBorrarProfesorBoton" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -510,13 +464,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="197" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="grEditarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="grRegistrarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="grEliminarNinnoBoton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          <EmptySpace pref="250" max="32767" attributes="0"/>
                                           <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -583,27 +531,6 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator3">
-                        </Component>
-                        <Component class="javax.swing.JButton" name="grEditarNinnoBoton1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Cambiar Grupo"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="grEditarNinnoBoton1ActionPerformed"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="grEliminarNinnoBoton1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Quitar Grupo"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="grRegistrarNinnoBoton1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Asignar Grupo"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="grRegistrarNinnoBoton1ActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="prIdTypeLabel">
                           <Properties>
@@ -1149,11 +1076,11 @@
                                               <Component id="adIdTypeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="265" max="32767" attributes="0"/>
+                                          <EmptySpace pref="187" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="adApellidoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                               <Component id="adIdLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="adBorrarBoton" alignment="1" pref="231" max="32767" attributes="0"/>
+                                              <Component id="adBorrarBoton" alignment="1" pref="309" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
@@ -1165,6 +1092,11 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1183,7 +1115,9 @@
                                       <Component id="adIdTypeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="adIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="263" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="96" max="32767" attributes="0"/>
                                   <Component id="adEditarBoton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="adRegistrarBoton" min="-2" max="-2" attributes="0"/>
@@ -1225,7 +1159,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="adNombreLabel">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="nombre"/>
+                            <Property name="text" type="java.lang.String" value="Nombre"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="adApellidoLabel">
@@ -1244,6 +1178,14 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator5">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="36" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Disponible en futura actualizacion"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>

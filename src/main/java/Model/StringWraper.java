@@ -6,24 +6,35 @@
 package Model;
 
 /**
- *
+ * Clase auxiliar para pasar String por referencia
+ * Contiene un objeto de la clase String
  * @author Royk
  */
 public class StringWraper {
     private String str;
     
+    /**
+     * Constructor basico
+     * @param str String a almacenar
+     */
     public StringWraper(String str){
         this.str = str;
     }
 
+    /**
+     * Getter del string almacenado
+     * @return String almacenado
+     */
     @Override
     public String toString() {
         return str;
     }
 
+    /**
+     * Setter del string almacenado
+     * @param str String almacenado
+     */
     public void setText(String str) {
         this.str = str;
-    }
-    
-    
+    }    
 }

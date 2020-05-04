@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * JFrame para la vista del acudiente, donde podra ver la informacion de su ninno
  * @author Royk
  */
 public class AcudienteGUI extends javax.swing.JFrame {
@@ -30,6 +30,11 @@ public class AcudienteGUI extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor basico que recibe el ninno a mostrar y la ventana login padre de esta
+     * @param ninno
+     * @param login 
+     */
     public AcudienteGUI(Ninno ninno, Login login){
         initComponents();
         this.ninno = ninno;
@@ -37,11 +42,17 @@ public class AcudienteGUI extends javax.swing.JFrame {
         llenarInformacion();
     }
     
+    /**
+     * Metodo que llena los la informacion personal de los ninnos y sus logros
+     */
     public void llenarInformacion(){
         llenarDetalles();
         llenarLogros();
     }
     
+    /**
+     * Metodo que llena las etiquetas con informacion personal del ninno
+     */
     public void llenarDetalles(){
         nombreLabel.setText(ninno.getNombreCompleto());
         
@@ -53,6 +64,9 @@ public class AcudienteGUI extends javax.swing.JFrame {
         telefonoLabel.setText(grupo.getProfesor().getTelefono());
     }
     
+    /**
+     * Metodo que llena la tabla de logros del ninno
+     */
     public void llenarLogros(){
         DefaultTableModel table = (DefaultTableModel) logrosTabla.getModel();
         ArrayList<Logro> logros = ninno.getLogros();
@@ -226,6 +240,10 @@ public class AcudienteGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que muestra la descripcion del logro seleccionado
+     * @param evt 
+     */
     private void verLogroBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLogroBotonActionPerformed
         if(logrosTabla.getModel().getRowCount() > 0){
             String logroTitulo = logrosTabla.getModel().getValueAt(logrosTabla.getSelectedRow(), 1).toString();
@@ -237,14 +255,23 @@ public class AcudienteGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_verLogroBotonActionPerformed
 
+    /**
+     * Boton para salir de la ventana de AcudienteGUI y volver al login
+     * @param evt 
+     */
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_salirBotonActionPerformed
 
+    /**
+     * Boton para generar un documento pdf con la informacion del ninno y sus logros
+     * @param evt 
+     */
     private void imprimirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirBotonActionPerformed
         ReportPrinter printer = new ReportPrinter(ninno, "Historico");
         printer.imprimirPDF();
+        JOptionPane.showMessageDialog(this, "Reporte creado, ver Archivo pdf", "Reporte Creado", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_imprimirBotonActionPerformed
 
     /**

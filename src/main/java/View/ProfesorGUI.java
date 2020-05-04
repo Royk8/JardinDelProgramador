@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * JFrame para el rol de profesor, donde se pueden ver los estudiantes y sus logros
  * @author Royk
  */
 public class ProfesorGUI extends javax.swing.JFrame {
@@ -24,6 +25,11 @@ public class ProfesorGUI extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor
+     * @param profesor cuya sesion se inicio
+     * @param login ventana a la que se volvera al cerrar esta
+     */
     public ProfesorGUI(Profesor profesor, Login login) {
         initComponents();
         profesorController = new ProfesorController(profesor);
@@ -31,12 +37,18 @@ public class ProfesorGUI extends javax.swing.JFrame {
         llenarInformacion();
     }
     
+    /**
+     * Llena todas las listas
+     */
     public void llenarInformacion(){
         llenarListado();
         llenarDetalles();
         llenarLogros();
     }
     
+    /**
+     * Llena el listado de ninnos del profesor
+     */
     public void llenarListado(){
         ArrayList<Ninno> ninnos = profesorController.getNinnos();
         DefaultTableModel table = (DefaultTableModel) ninnosTabla.getModel();
@@ -45,6 +57,9 @@ public class ProfesorGUI extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Llena los logros del ninno seleccionado
+     */
     public void llenarLogros(){
         Ninno ninno = getSelectedNinno();
         
@@ -82,6 +97,10 @@ public class ProfesorGUI extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Devuelve el objeto logro que se hace referencia en la selecion de la tabla
+     * @return 
+     */
     public Logro getSelectedLogro(){
         Ninno ninno = getSelectedNinno();
         String logroTitulo = logrosTabla.getModel().getValueAt(logrosTabla.getSelectedRow(), 1).toString();
@@ -89,6 +108,10 @@ public class ProfesorGUI extends javax.swing.JFrame {
         return ninno.getLogro(logroTitulo);
     }
     
+    /**
+     * Devuelve el objeto ninno al que se hace referencia en la seleccion de la tabla
+     * @return 
+     */
     public Ninno getSelectedNinno(){
         DefaultTableModel tablaNinnos = (DefaultTableModel) ninnosTabla.getModel();
         int selection = (ninnosTabla.getSelectedRow() >= 0)? ninnosTabla.getSelectedRow() : 0;        
@@ -500,16 +523,28 @@ public class ProfesorGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo para actualizar los detalles al dar clic en la tabla
+     * @param evt 
+     */
     private void ninnosTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ninnosTablaMouseClicked
         llenarDetalles();
         llenarLogros();
     }//GEN-LAST:event_ninnosTablaMouseClicked
 
+    /**
+     * Boton para abrir ventana donde se agrega un logro
+     * @param evt 
+     */
     private void agregarLogroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLogroActionPerformed
         LogroEdit edit = new LogroEdit("Asignar Logro", this, getSelectedNinno());
         edit.setVisible(true);
     }//GEN-LAST:event_agregarLogroActionPerformed
 
+    /**
+     * Boton para abrir ventana donde se edita un logro
+     * @param evt 
+     */
     private void EditarLogroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarLogroActionPerformed
         Logro logro = getSelectedLogro();
         if(logro != null){
@@ -518,11 +553,19 @@ public class ProfesorGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_EditarLogroActionPerformed
 
+    /**
+     * Boton para cerrar el programa y guardar cambios
+     * @param evt 
+     */
     private void salirBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBotonActionPerformed
         Almacenamiento.almacenarRegistros();
         System.exit(0);
     }//GEN-LAST:event_salirBotonActionPerformed
 
+    /**
+     * Boton para cerrar la sesion, guardar y volver a la ventana de login
+     * @param evt 
+     */
     private void cerrarSesionBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionBotonActionPerformed
         Almacenamiento.almacenarRegistros();        
         login.setVisible(true);
