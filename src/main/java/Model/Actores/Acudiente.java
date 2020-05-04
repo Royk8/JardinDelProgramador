@@ -17,17 +17,17 @@ public class Acudiente extends Pariente {
 
     /**
      * Constructor Completo
-     * @param id
-     * @param nombre
-     * @param apellido
-     * @param idType
-     * @param password
-     * @param telefono
-     * @param celular
-     * @param calidad
-     * @param direccion
-     * @param horario
-     * @param permiso 
+     * @param id String con identificion del acudiente
+     * @param nombre String con nombre del acuddiente
+     * @param apellido String con apellido del acudiente
+     * @param idType String con el tipo de documento
+     * @param password String con el password
+     * @param telefono String con le numero de telefono
+     * @param celular String con el numero de celular
+     * @param calidad String el parentesco
+     * @param direccion String con la direccion
+     * @param horario STring con el horario
+     * @param permiso String con el permiso
      */
     public Acudiente(String id, String nombre, String apellido, String idType, 
             String password, String telefono, String celular, String calidad, 
@@ -42,16 +42,16 @@ public class Acudiente extends Pariente {
     /**
      * Constructor que no requiere del campo de permiso
      * Permiso no es necesario si el acudiente es tambien parte del nucleo familiar
-     * @param id
-     * @param nombre
-     * @param apellido
-     * @param idType
-     * @param password
-     * @param telefono
-     * @param celular
-     * @param calidad
-     * @param direccion
-     * @param horario 
+     * @param id String con identificion del acudiente
+     * @param nombre String con nombre del acuddiente
+     * @param apellido String con apellido del acudiente
+     * @param idType String con el tipo de documento
+     * @param password String con el password
+     * @param telefono String con le numero de telefono
+     * @param celular String con el numero de celular
+     * @param calidad String el parentesco
+     * @param direccion String con la direccion
+     * @param horario STring con el horario
      */
     public Acudiente(String id, String nombre, String apellido, String idType, 
             String password, String telefono, String celular, String calidad, 
@@ -64,17 +64,17 @@ public class Acudiente extends Pariente {
 
     /**
      * Setter que asigna valor a todas los atributos de la clase
-     * @param id
-     * @param nombre
-     * @param apellido
-     * @param idType
-     * @param password
-     * @param telefono
-     * @param celular
-     * @param calidad
-     * @param direccion
-     * @param horario
-     * @param permiso 
+     * @param id String con identificion del acudiente
+     * @param nombre String con nombre del acuddiente
+     * @param apellido String con apellido del acudiente
+     * @param idType String con el tipo de documento
+     * @param password String con el password
+     * @param telefono String con le numero de telefono
+     * @param celular String con el numero de celular
+     * @param calidad String el parentesco
+     * @param direccion String con la direccion
+     * @param horario STring con el horario
+     * @param permiso String con el permiso
      */
     public void setAllAcudiente(String id, String nombre, String apellido, String idType, 
             String password, String telefono, String celular, String calidad, 
