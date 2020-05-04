@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/Asus/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar;C:/Users/Asus/.m2/repository/junit/junit/4.10/junit-4.10.jar;C:/Users/Asus/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar;C:/Users/Asus/.m2/repository/org/slf4j/slf4j-jdk14/1.7.25/slf4j-jdk14-1.7.25.jar;C:/Users/Asus/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar;C:/Users/Asus/.m2/repository/com/itextpdf/kernel/7.1.11/kernel-7.1.11.jar;C:/Users/Asus/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.64/bcpkix-jdk15on-1.64.jar;C:/Users/Asus/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.64/bcprov-jdk15on-1.64.jar;C:/Users/Asus/.m2/repository/com/itextpdf/io/7.1.11/io-7.1.11.jar;C:/Users/Asus/.m2/repository/com/itextpdf/layout/7.1.11/layout-7.1.11.jar;C:/Users/Asus/.m2/repository/com/itextpdf/forms/7.1.11/forms-7.1.11.jar;C:/Users/Asus/.m2/repository/com/itextpdf/pdfa/7.1.11/pdfa-7.1.11.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'D:/Roy/Cosas Udea/Java/JardinProgramador/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2020. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/Roy/Cosas Udea/Java/JardinProgramador/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'JardinProgramador 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'D:/Roy/Cosas Udea/Java/JardinProgramador/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'JardinProgramador 1.0-SNAPSHOT API'
